@@ -8,4 +8,8 @@ https://spangle-prune-66e.notion.site/Proyecto-final-d7d052bce7434ecfa2cb3356894
 ------------------------------------------------------------------------------------
 20 Marzo de 2021
 
-Primeros Pasos (PDF/LateX)
+Primeros Pasos (PDF/LaTex)
+
+9 Octubre de 2021
+
+Informe para los avances del proyecto (PFD/LaTex)
