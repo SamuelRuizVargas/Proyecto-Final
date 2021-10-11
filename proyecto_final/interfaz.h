@@ -1,7 +1,10 @@
 #ifndef INTERFAZ_H
 #define INTERFAZ_H
 
+#include <QGraphicsScene>
 #include <QMainWindow>
+#include <QList>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Interfaz; }
@@ -17,5 +20,8 @@ public:
 
 private:
     Ui::Interfaz *ui;
+    QGraphicsScene *scene;
+
+    QList<QGraphicsRectItem*> logo;
 };
 #endif // INTERFAZ_H
