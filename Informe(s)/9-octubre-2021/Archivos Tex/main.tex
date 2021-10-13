@@ -5,7 +5,18 @@
 \usepackage{graphicx}
 \graphicspath{ {Images/} }
 \usepackage{cite}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
 
+\definecolor{indice}{HTML}{00284F}
+\definecolor{cronograma}{HTML}{3800A0}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=indice,    
+    urlcolor=cronograma,
+    }
+    
 \begin{document}
 
 \begin{titlepage}
@@ -45,29 +56,93 @@
 
 \newpage
 
+\section{Introducción}
+    HACER CUANDO TERMINEMOS EL INFORME 
+
 \section{Planificación y Diseño}
+    \subsection{Cronograma}
         Iniciamos identificando nuestras tareas, una vez hecho esto comenzamos a dividir nuestro trabajo de manera que, pudiéramos trabajar eficientemente, para ello cada uno escogió las tareas con la que se sintiera más cómodo. Posteriormente realizamos un cronograma basándonos en la importancia y el tiempo requerido para cada tarea. El plan fue seguir el cronograma lo más fiel posible sin embargo siempre estuvo sujeto a cambios. 
         
         \vspace{0.3cm}
         
-        Para el diseño decidimos utilizar un estilo similar a Mario Bros, haciendo uso de una pantalla principal en la cual se podrán escoger opciones tales como 1 jugador, multijugador, cargar partidas, nueva partida, etc. Posteriormente se iniciara el juego con una corta y simple historia, la jugabilidad constara de 3 niveles de plataformas comunes en los cuales se enfrentara a enemigos con distintas clases de ataques, además de ir desbloqueando las habilidades básicas con cada nivel completado, finalmente se enfrentara al Boss final del juego, lo cual le dará la conclusión a la historia.
+        \begin{flushleft}
+        \href{https://spangle-prune-66e.notion.site/10b2778c1ce2479b88289a3ae453be1d?v=0732ac7241e9473ebe7c90af682b0ed8}{Clic aquí para ver el cronograma.}
+        \end{flushleft}
+        
+        \subsection{Idea General}
+        Para el diseño decidimos utilizar un estilo similar a Mario Bros en cuanto al apartado jugabilidad, haciendo uso de una pantalla principal en la cual se podrán escoger opciones tales como 1 jugador, multijugador, cargar partidas, nueva partida, etc. Posteriormente se iniciara el juego con una corta y simple historia enfocada en la informática con estética cyberpunk/digital, El juego constara de 3 niveles de plataformas comunes en los cuales se enfrentara a enemigos con distintas clases de ataques, además de ir desbloqueando las habilidades básicas con cada nivel completado, finalmente se enfrentara al Boss final del juego, lo cual le dará la conclusión a la historia.
+        
+        \subsection{Boceto del Guión}
+        La historia comienza con un programador común y corriente llamado "nombre por decidir", trabaja como desarrollador independiente; Un día mientras intenta corregir algunos bugs en su programa se queda mirando a su ventana pensando como seria un mundo futurista, mientras tenia la mente en las nubes pensando en cosas extraordinarias, sin darse cuenta, derrama su bebida sobre su computadora, pero...
+        
+        \begin{flushleft}
+        -¡Que pasa! no, NOOOO...
+        \end{flushleft}
+        
+        Una fuerza extraña lo hace ingresar a su computadora y ahora tendrá que enfrentarse a los bugs y a su reina para poder regresar, lo se, una locura no?.
+         
+        \begin{flushleft}
+        [Luego de completar el juego]
+        
+        *Babeando su mesa*
+        \vspace{0.1cm}
+        
+        -Eh? que paso, yo estaba... oh, solo fue un sueño.
+        \end{flushleft}
+        
+        O quizás no lo fue?...
+        
+        \subsection{Idealización de las Clases}
+            Clases que planeamos introducir y una breve descripción de como funcionara y como interactuara.
+            
+            \subsubsection{Personaje}
+            Clase enfocada a todo lo relacionado con el jugador, puede englobar vidas, movimientos básicos, habilidades desbloqueables, arma, etc. Esta clase se encargara de crear el(los) personaje que el jugador usara en la ejecución del juego, este interactuara con el escenario de la manera que le indiquemos y además tendrá la capacidad de enfrentarse a los enemigos que se le presente durante el recorrido de cualquier nivel.
+            
+            \subsubsection{Enemigo}
+            Esta clase sera modelada teniendo en mente distintos tipos de enemigos y/o ataques, por lo que debe seguir ciertas reglas para todos los enemigos pero debe ser lo suficientemente versátil para ser reutilizable, la forma y tamaño de los enemigos puede variar. En esta clase nos encargaremos de implementar varios sistemas físicos, primordialmente en los ataques de estos enemigos, algunos tendrían disparos simples, otros tipo cañón(parabólicos), etc. Estos enemigos serán desplegados según su complejidad para derrotarlos de manera ascendente por los niveles.
+            
+            \subsubsection{Proyectil}
+            La clase en cuestión sera la encargada de gestionar el apartado relaciona a un ataque/disparo efectuado ya sea por el jugador o por los enemigos. Entrara en acción cada vez que el jugador o un enemigo realicen un ataque y las características de dicho ataque variaran dependiendo de quien lo cause el disparo.
+            
+            \subsubsection{Plataformas}
+            Aquí se realizara el modelamiento base para todos los tipos de plataformas que queramos introducir a los mapas, estas plataformas tendrán distintas características como desaparecer, cambiar su tamaño, cambiar de textura e incluso su capacidad de destruirse según lo necesitemos en la creación del mapa. Las plataformas tendrán posiciones pre-definidas en un txt desde el cual se cargaran todos los datos para desplegarlas en la escena del nivel correspondiente.
+            
+            \subsubsection{Imágenes}
+            Una clase simple que se encarga de cargar todo tipo de imágenes para desplegarlas en las escenas, las tratamos como QGraphicsItem debido a que nos facilita su uso.
 
 \section{Avances Regulares}
     \subsection{9/10/2021}
         Este día fue la apertura del telón para comenzar nuestro proyecto final, aquí nos encargamos de lo relacionado a la planificación del proyecto así como a iniciar este informe. Además de esto creamos una pagina en Notion para mantenernos al tanto de las actividades y siempre estar organizados (Link al Notion en el README del repositorio).
         
     \subsection{11/10/2021}
-        Día de corto trabajo, nos dedicamos a los primeros pasos en la interfaz y pantalla principal (aun falta), en este proceso encontramos varios inconvenientes por lo que intentaremos después haciendo uso de clases. Aun necesitamos investigar como hacer botones push dentro de la escena
+        Día de corto trabajo, nos dedicamos a los primeros pasos en la interfaz y pantalla principal (aun falta), en este proceso encontramos varios inconvenientes por lo que intentaremos después haciendo uso de clases. Aun necesitamos investigar como hacer botones push(pueden ser QGraphicsItem con la capacidad de darles clic) dentro de la escena.
+        
+    \subsection{12/10/2021}
+        Aunque se trabajo poco tiempo nos acercamos a una manera eficiente de hacer un menú completamente funcional en cuanto a la investigación, en términos del código aun tenemos que descubrir cual seria la mejor manera de implementarlo.
+        
+    \subsection{13/10/2021}
+        Procedimos a mejorar nuestro informe debido a que tenia muchas deficiencias(debido a que en su momento no sabíamos que tan detallado debía ser) y así manejarlo de la manera mas prolija posible. Este proceso nos ayudo a aclarar un poco algunas de las ideas que teníamos.
     
 \section{Modelamiento de las Clases}
-    \subsection{}
+    \subsection{Imagen}
+    Es la primera clase que modelamos puesto a que era la mas simple y nos ayuda a darle algo de estética al programa y así no perder de vista nuestro objetivo. La clase cuenta con atributos básicos como altura, ancho y sus coordenadas de posición, esto debido a que su único trabajo es el de desplegar imágenes en una escena y poder moverlas con el setPos(). Los métodos que la componen son los necesarios para usarla como herencia de QGraphicsItem que son el painter y el boundingRect, además de esto nos encargamos de la textura que necesitamos haciendo uso de el constructor y unos cuantos condicionales.
         
         
 \section{Estructura del Código}
-    \subsection{}
-    
+    \subsection{POR HACER}
+    HACER CUANDO TENGAMOS EL CÓDIGO COMPLETO
     
 \section{Problemas Presentados}
-    \subsection{}
+    \subsection{9/10/2021}
+    Este día fue el inicio del proyecto, por lo que los trabajos que tuvimos fueron repartir tareas y organizar nuestro cronograma; El único problema en las etapas previas fue que al organizarnos nos dimos cuenta que la primera semana estaríamos muy ocupados con varios deberes pero aun así pudimos planear de manera correcta.
 
+    \subsection{11/10/2021}
+    Tuvimos problemas puesto que pensamos que hacer el menú inicial seria una tarea en extremo sencilla, pero debido a que queremos obtener buenos resultados intentamos hacer el menú de la manera mas cómoda posible, debido a esto tuvimos que empezar una corta investigación sobre como hacer ciertos procesos que aun no sabíamos hacer.
+    
+    \subsection{12/10/2021}
+    La investigación se realizo de manera satisfactoria y obtuvimos buenos resultados, sin embargo aunque sabemos que debemos hacer, no sabemos como implementarlo en nuestro programa aun, por esto tardaremos un poco mas de lo planeado en primera instancia para la pantalla principal, sin embargo aun no es un problema real del cual preocuparnos.
+    
+    \subsection{13/10/2021}
+    Luego de acomodar el cronograma hemos decidido que la primera semana, debido a su alto nivel de actividades curriculares la tomaremos con calma, esto debido a que luego de ella estaremos completamente libres para dedicarnos a nuestro proyecto y así hacer que sea lo mejor que podamos entregar. Además de esto tuvimos problemas cuando revisaron nuestro informe, por lo que tomamos medidas y lo corregimos de una manera que sea mas aceptable en estas etapas tempranas.
+    
 \end{document}
