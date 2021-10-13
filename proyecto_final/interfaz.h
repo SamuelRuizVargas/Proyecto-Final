@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QList>
 
+#include "imagenes.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Interfaz; }
@@ -22,6 +23,11 @@ private:
     Ui::Interfaz *ui;
     QGraphicsScene *scene;
 
-    QList<QGraphicsRectItem*> logo;
+    QList<Imagenes*> menu;
+
+    void dibujarMenu();
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
 #endif // INTERFAZ_H
