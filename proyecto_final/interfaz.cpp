@@ -25,6 +25,7 @@ Interfaz::~Interfaz()
     delete ui;
 }
 
+//Login de usuarios
 void Interfaz::dibujarMenu()
 {
     menu.append(new Imagenes(250,-100,700,400));
