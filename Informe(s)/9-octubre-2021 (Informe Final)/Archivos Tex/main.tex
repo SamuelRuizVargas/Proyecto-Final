@@ -122,10 +122,16 @@
         
     \subsection{13/10/2021}
         Procedimos a mejorar nuestro informe debido a que tenia muchas deficiencias(debido a que en su momento no sabíamos que tan detallado debía ser) y así manejarlo de la manera mas prolija posible. Este proceso nos ayudo a aclarar un poco algunas de las ideas que teníamos.
+        
+    \subsection{16/10/2021}
+    Avanzamos el modelamiento de los botones e hicimos las primeras pruebas integrándolos en la interfaz, además incluimos lo que seria la primera impresión para nuestros jugadores (menú inicial). Organizamos el código para mayor eficiencia y así mismo terminamos de hacer las texturas de los botones y ponerlos en el lugar correspondiente.
     
 \section{Modelamiento de las Clases}
     \subsection{Imagen}
     Es la primera clase que modelamos puesto a que era la mas simple y nos ayuda a darle algo de estética al programa y así no perder de vista nuestro objetivo. La clase cuenta con atributos básicos como altura, ancho y sus coordenadas de posición, esto debido a que su único trabajo es el de desplegar imágenes en una escena y poder moverlas con el setPos(). Los métodos que la componen son los necesarios para usarla como herencia de QGraphicsItem que son el painter y el boundingRect, además de esto nos encargamos de la textura que necesitamos haciendo uso de el constructor y unos cuantos condicionales.
+    
+    \subsection{Botones}
+    Luego de una investigación descubrimos como configurar un QGraphicsItem para que funciones como un botón, para ello usamos los métodos mousePressEvent y mouseReleaseEvent, dichos métodos nos dan la posibilidad de realizar acciones cuando uno de estos sea presionado sumado les agregamos texturas al botón según lo requerido. 
         
         
 \section{Estructura del Código}
@@ -144,5 +150,8 @@
     
     \subsection{13/10/2021}
     Luego de acomodar el cronograma hemos decidido que la primera semana, debido a su alto nivel de actividades curriculares la tomaremos con calma, esto debido a que luego de ella estaremos completamente libres para dedicarnos a nuestro proyecto y así hacer que sea lo mejor que podamos entregar. Además de esto tuvimos problemas cuando revisaron nuestro informe, por lo que tomamos medidas y lo corregimos de una manera que sea mas aceptable en estas etapas tempranas.
+    
+    \subsection{16/10/2021}
+     Nos enfrentamos a los inconvenientes para elementos al menú inicial, sin embargo todos estos problemas fueron solucionados de manera rápida y eficiente.   
     
 \end{document}
