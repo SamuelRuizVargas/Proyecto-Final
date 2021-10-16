@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>imagenes/icono.png</file>
         <file>imagenes/logo.png</file>
+        <file>imagenes/menu_back.jpg</file>
     </qresource>
 </RCC>
