@@ -6,6 +6,7 @@
 #include <QList>
 
 #include "imagenes.h"
+#include "botones.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Interfaz; }
@@ -22,8 +23,9 @@ public:
 private:
     Ui::Interfaz *ui;
     QGraphicsScene *scene;
-
+    botones *boton_p;
     QList<Imagenes*> menu;
+
 
     void dibujarMenu();
 

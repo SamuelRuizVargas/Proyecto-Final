@@ -28,8 +28,20 @@ Interfaz::~Interfaz()
 //Login de usuarios
 void Interfaz::dibujarMenu()
 {
-    menu.append(new Imagenes(250,-100,700,400));
-    scene->addItem(menu.back());
+
+    menu.append(new Imagenes(-11,0,1281,651,2)); // Background
+    menu.append(new Imagenes(275,-100,700,400,1)); // Logo
+
+    QList<Imagenes*>::iterator it;
+    int cont = 0;
+    for(it = menu.begin(); it!= menu.end(); it++){
+        scene->addItem(menu.at(cont));
+        cont++;
+    }
+    boton_p = new botones;
+    scene->addItem(boton_p);
+
+
 }
 
 void Interfaz::mousePressEvent(QGraphicsSceneMouseEvent *event)

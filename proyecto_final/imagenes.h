@@ -10,8 +10,11 @@ class Imagenes : public QGraphicsItem
     int an;
     int posx;
     int posy;
+    int image;
 public:
-    Imagenes(int,int,int,int);
+    Imagenes(int,int,int,int,int);
+    int get_image();
+
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
     ~Imagenes();
