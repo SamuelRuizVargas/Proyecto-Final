@@ -25,7 +25,7 @@ Interfaz::~Interfaz()
     delete ui;
 }
 
-//Login de usuarios
+//Creación de niveles
 void Interfaz::dibujarMenu()
 {
     //Imagenes
