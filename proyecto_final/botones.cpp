@@ -1,24 +1,33 @@
 #include "botones.h"
 
-botones::botones()
+botones::botones(int x, int y, int _an, int _h, int tex)
 {
+    h=_h;
+    an=_an;
+    posx=x;
+    posy=y;
+    textura=tex;
     Pressed = false;
-
+    setPos(posx,posy);
 }
 
 QRectF botones::boundingRect() const
 {
-    return QRectF(0, 0, 100, 100);
+    return QRectF(0, 0, an, h);
 }
 void botones::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPixmap pixmap;
-
-    if(Pressed){
-        pixmap.load(":/imagenes/logo.png");
-    }
-    else{
-        pixmap.load(":/imagenes/logo.jpg");
+    switch(textura)
+    {
+    case 1://UN JUGADOR
+    {
+        pixmap.load(PATH_1P);
+    }break;
+    case 2://MULTIJUGADOR
+    {
+        pixmap.load(PATH_MULTI);
+    }break;
     }
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
