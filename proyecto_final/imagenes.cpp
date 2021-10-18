@@ -23,14 +23,19 @@ QRectF Imagenes::boundingRect() const
 void Imagenes::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPixmap pixmap;
-    if(image==1){
-        pixmap.load(":/imagenes/logo.png");
-    }
-    else if(image==2){
-        pixmap.load(":/imagenes/menu_back.jpg");
+    switch(image)
+    {
+    case 1://el logo
+    {
+        pixmap.load(PATH_LOGO);
+    }break;
+    case 2://el fondo
+    {
+        pixmap.load(PATH_BACKGROUND);
+    }break;
     }
 
-   painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
+    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
 Imagenes::~Imagenes()
