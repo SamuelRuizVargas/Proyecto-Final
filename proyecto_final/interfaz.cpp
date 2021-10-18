@@ -25,14 +25,36 @@ Interfaz::~Interfaz()
     delete ui;
 }
 
+//Login de usuarios
 void Interfaz::dibujarMenu()
 {
-    menu.append(new Imagenes(250,-100,700,400));
-    scene->addItem(menu.back());
+    //Imagenes
+    menu.append(new Imagenes(-11,0,1281,651,2)); // Background
+    menu.append(new Imagenes(275,-100,700,400,1)); // Logo
+
+    QList<Imagenes*>::iterator it;
+    int cont = 0;
+    for(it = menu.begin(); it!= menu.end(); it++)
+    {
+        scene->addItem(menu.at(cont));
+        cont++;
+    }
+    //Botones
+    buttons.append(new botones(525,275,225,75,1));
+    buttons.append(new botones(525,350,225,75,2));
+
+    QList<botones*>::iterator ite;
+    cont = 0;
+    for(ite = buttons.begin(); ite!= buttons.end(); ite++)
+    {
+        scene->addItem(buttons.at(cont));
+        cont++;
+    }
 }
 
 void Interfaz::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     //mirar donde poner esto
+    //Quizas esto sirva para hacer el cambio de escenas
 }
 

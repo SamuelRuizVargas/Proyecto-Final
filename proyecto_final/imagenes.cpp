@@ -1,12 +1,18 @@
 #include "imagenes.h"
 
-Imagenes::Imagenes(int x, int y, int _an, int _h)
+Imagenes::Imagenes(int x, int y, int _an, int _h, int name_img)
 {
     h=_h;
     an=_an;
     posx=x;
     posy=y;
+    image = name_img;
     setPos(posx,posy);
+}
+
+int Imagenes::get_image()
+{
+    return image;
 }
 
 QRectF Imagenes::boundingRect() const
@@ -16,11 +22,20 @@ QRectF Imagenes::boundingRect() const
 
 void Imagenes::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QImage imagen(":/imagenes/logo.png");
-    QBrush brush_im(imagen);
-    painter->setPen(Qt::NoPen);
-    painter->setBrush(brush_im);
-    painter->drawRect(boundingRect());
+    QPixmap pixmap;
+    switch(image)
+    {
+    case 1://el logo
+    {
+        pixmap.load(PATH_LOGO);
+    }break;
+    case 2://el fondo
+    {
+        pixmap.load(PATH_BACKGROUND);
+    }break;
+    }
+
+    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
 Imagenes::~Imagenes()
