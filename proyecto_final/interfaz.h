@@ -23,9 +23,9 @@ public:
 private:
     Ui::Interfaz *ui;
     QGraphicsScene *scene;
-    botones *boton_p;
-    QList<Imagenes*> menu;
 
+    QList<Imagenes*> menu;
+    QList<botones*> buttons;
 
     void dibujarMenu();
 
