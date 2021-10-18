@@ -1,7 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>imagenes/icono.png</file>
-        <file>imagenes/logo.png</file>
-        <file>imagenes/menu_back.jpg</file>
+        <file>imagenes/Botones/Boton_1p.png</file>
+        <file>imagenes/Botones/Boton_multi.png</file>
+        <file>imagenes/Menu/logo.png</file>
+        <file>imagenes/Menu/menu_back.jpg</file>
     </qresource>
 </RCC>
