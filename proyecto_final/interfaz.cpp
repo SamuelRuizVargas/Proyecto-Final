@@ -261,15 +261,43 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         bool Press = buttons.at(cont)->get_Pressed();
         if(Press)
         {
-//           level_one->setSceneRect(0,0,1281,651);
-//           ui->graphicsView->setScene(level_one);//cambio de escena para probar el lvl 1
+            level_one->setSceneRect(0,0,1281,651);
+            jugador1 = new personaje(0,595,30,30);
+
+            level_one->addItem(jugador1);
+            ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
 
 //           level_two->setSceneRect(0,0,1281,651);
 //           ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
 
-           level_three->setSceneRect(0,0,1281,651);
+           /*level_three->setSceneRect(0,0,1281,651);
            ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
+           */
         }
         cont++;
+    }
+}
+
+void Interfaz::keyPressEvent(QKeyEvent *i)
+{
+
+    int X = jugador1->x(), Y = jugador1->y();
+
+    if(i->key() == Qt::Key_D){
+       jugador1->setX(jugador1->x()+6);
+       //per->set_mov_personaje(false);
+
+    }
+    else if(i->key() == Qt::Key_A){
+       jugador1->setX(jugador1->x()-6);
+       //per->set_mov_personaje(true);
+    }
+    else if(i->key() == Qt::Key_W){
+       jugador1->setY(jugador1->y()-6);
+       //per->set_mov_personaje_arriba_abajo(false);
+    }
+    else if(i->key() == Qt::Key_S){
+       jugador1->setY(jugador1->y()+6);
+       //per->set_mov_personaje_arriba_abajo(true);
     }
 }

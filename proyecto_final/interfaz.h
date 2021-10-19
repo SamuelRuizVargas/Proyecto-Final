@@ -6,10 +6,12 @@
 #include <fstream>
 #include <QMovie>//REVISAR (para poner videitos supongo)
 #include <QList>
+#include <QKeyEvent>
 
 #include "imagenes.h"
 #include "botones.h"
 #include "plataforma.h"
+#include "personaje.h"
 
 using namespace std;
 
@@ -44,7 +46,12 @@ private:
     QGraphicsScene *level_two;
     QGraphicsScene *level_three;
     QGraphicsScene *bossfight;
-    //--------------------------
+    //---------------------------
+
+    //--------OBJETOS------------
+    personaje *jugador1;
+
+    //---------------------------
 
     //-----------Listas---------
                 //MENU
@@ -74,7 +81,9 @@ private:
                 //BOSSFIGHT
     //--------------------------
 
+
 protected:
     void mousePressEvent(QMouseEvent *event);
+    void keyPressEvent(QKeyEvent *i);
 };
 #endif // INTERFAZ_H
