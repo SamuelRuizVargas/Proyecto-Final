@@ -10,6 +10,7 @@ Interfaz::Interfaz(QWidget *parent)
 
     //Se crea la escena
     scene = new QGraphicsScene;
+
     scene->setSceneRect(0,0,1260,650);
 
     //dibujos
@@ -18,7 +19,11 @@ Interfaz::Interfaz(QWidget *parent)
     //mostrar escena
     ui->graphicsView->setScene(scene);
     ui->graphicsView->show();
+
+
+
 }
+
 
 Interfaz::~Interfaz()
 {
@@ -52,9 +57,31 @@ void Interfaz::dibujarMenu()
     }
 }
 
-void Interfaz::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void Interfaz::mousePressEvent(QMouseEvent *event)
 {
-    //mirar donde poner esto
-    //Quizas esto sirva para hacer el cambio de escenas
+
+    QList<botones*>::iterator ite;
+    int cont =0;
+    for(ite = buttons.begin(); ite!= buttons.end(); ite++)
+    {
+    bool Press = buttons.at(cont)->get_Pressed();
+    if(Press){
+       Level_one();
+    }
+
+    cont++;
+   }
+
 }
 
+void Interfaz::Level_one()
+{
+    ui->graphicsView->hide();
+    ui->pushButton->hide();
+    ui->pushButton_2->hide();
+
+    level_one = new QGraphicsScene;
+    ui->graphicsView->setScene(level_one);
+
+    ui->graphicsView->show();
+}

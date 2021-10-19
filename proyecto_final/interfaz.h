@@ -18,11 +18,14 @@ class Interfaz : public QMainWindow
 
 public:
     Interfaz(QWidget *parent = nullptr);
+    void Level_one();
     ~Interfaz();
 
 private:
     Ui::Interfaz *ui;
     QGraphicsScene *scene;
+    QGraphicsScene *level_one;
+
 
     QList<Imagenes*> menu;
     QList<botones*> buttons;
@@ -30,6 +33,6 @@ private:
     void dibujarMenu();
 
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
 };
 #endif // INTERFAZ_H
