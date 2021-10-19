@@ -16,6 +16,12 @@ using namespace std;
 //-----------Rutas nivel 1--------------
 #define PATH_BASE_LVL1 "../proyecto_final/posiciones/lvl1/posi_base_lvl1.txt"
 //--------------------------------------
+//-----------Rutas nivel 2--------------
+#define PATH_BASE_LVL2 "../proyecto_final/posiciones/lvl2/posi_base_lvl2.txt"
+//--------------------------------------
+//-----------Rutas nivel 3--------------
+#define PATH_BASE_LVL3 "../proyecto_final/posiciones/lvl3/posi_base_lvl3.txt"
+//--------------------------------------
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Interfaz; }
@@ -46,8 +52,13 @@ private:
     QList<botones*> buttons;
                 //LVL 1
     QList<plataforma*> base_lvl1;
+    QList<Imagenes*> imagenes_lvl1;
                 //LVL 2
+    QList<plataforma*> base_lvl2;
+    QList<Imagenes*> imagenes_lvl2;
                 //LVL 3
+    QList<plataforma*> base_lvl3;
+    QList<Imagenes*> imagenes_lvl3;
                 //BOSSFIGHT
     //--------------------------
 
@@ -57,7 +68,9 @@ private:
                 //LVL 1
     void crearLevelOne();
                 //LVL 2
+    void crearLevelTwo();
                 //LVL 3
+    void crearLevelThree();
                 //BOSSFIGHT
     //--------------------------
 
