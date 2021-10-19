@@ -12,12 +12,14 @@ SOURCES += \
     botones.cpp \
     imagenes.cpp \
     main.cpp \
-    interfaz.cpp
+    interfaz.cpp \
+    niveluno.cpp
 
 HEADERS += \
     botones.h \
     imagenes.h \
-    interfaz.h
+    interfaz.h \
+    niveluno.h
 
 FORMS += \
     interfaz.ui

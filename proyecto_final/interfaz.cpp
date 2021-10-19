@@ -2,6 +2,7 @@
 #include "ui_interfaz.h"
 
 
+
 Interfaz::Interfaz(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Interfaz)
@@ -22,8 +23,8 @@ Interfaz::Interfaz(QWidget *parent)
 
 
 
-}
 
+}
 
 Interfaz::~Interfaz()
 {
@@ -80,8 +81,8 @@ void Interfaz::Level_one()
     ui->pushButton->hide();
     ui->pushButton_2->hide();
 
+
     level_one = new QGraphicsScene;
     ui->graphicsView->setScene(level_one);
-
     ui->graphicsView->show();
 }
