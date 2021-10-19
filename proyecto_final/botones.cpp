@@ -11,6 +11,11 @@ botones::botones(int x, int y, int _an, int _h, int tex)
     setPos(posx,posy);
 }
 
+bool botones::get_Pressed()
+{
+    return Pressed;
+}
+
 QRectF botones::boundingRect() const
 {
     return QRectF(0, 0, an, h);
