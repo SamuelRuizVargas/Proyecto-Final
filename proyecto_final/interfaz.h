@@ -6,6 +6,7 @@
 #include <fstream>
 #include <QMovie>//REVISAR (para poner videitos supongo)
 #include <QList>
+#include <QTimer>
 #include <QKeyEvent>
 
 #include "imagenes.h"
@@ -37,6 +38,9 @@ public:
     Interfaz(QWidget *parent = nullptr);
     ~Interfaz();
 
+public slots:
+    void actualizar();
+
 private:
     Ui::Interfaz *ui;
 
@@ -47,7 +51,9 @@ private:
     QGraphicsScene *level_three;
     QGraphicsScene *bossfight;
     //---------------------------
-
+    //--------TIMER--------------
+    QTimer *timer;
+    //---------------------------
     //--------OBJETOS------------
     personaje *jugador1;
 
@@ -79,8 +85,9 @@ private:
                 //LVL 3
     void crearLevelThree();
                 //BOSSFIGHT
+                //OTROS
+    bool evaluarColisionJugador(personaje *personaje);
     //--------------------------
-
 
 protected:
     void mousePressEvent(QMouseEvent *event);

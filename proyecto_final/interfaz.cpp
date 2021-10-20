@@ -6,6 +6,7 @@ Interfaz::Interfaz(QWidget *parent)
     , ui(new Ui::Interfaz)
 {
     ui->setupUi(this);
+    //ui->graphicsView->rotate(180);
 
     //----------Escenas----------
             //Principal
@@ -27,11 +28,31 @@ Interfaz::Interfaz(QWidget *parent)
     crearLevelTwo();
     crearLevelThree();
     //---------------------------------
+
+    //----------Timer------------------
+    timer=new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(actualizar()));
+    //---------------------------------
 }
 
 Interfaz::~Interfaz()
 {
     delete ui;
+}
+
+void Interfaz::actualizar()
+{
+    int copy_y=jugador1->getY(),copy_x=jugador1->getX();
+    jugador1->jump(0.1f);
+    jugador1->setPos(jugador1->getX(),jugador1->getY());
+    if(evaluarColisionJugador(jugador1))
+    {
+        timer->stop();
+        jugador1->setposis(copy_x,copy_y);
+        jugador1->setPos(jugador1->getX(),jugador1->getY());
+        jugador1->resetVX();
+        jugador1->resetVY();
+    }
 }
 
 void Interfaz::crearMenu()//Crea y agrega los elementos del menu inicial
@@ -189,7 +210,7 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
     //------------------------------------------------------------
 }
 
-void Interfaz::crearLevelThree()
+void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
 {
     //-------------------Imagenes---------------
     imagenes_lvl3.append(new Imagenes(0,0,1281,651,5)); // Background
@@ -251,6 +272,20 @@ void Interfaz::crearLevelThree()
     //------------------------------------------------------------
 }
 
+bool Interfaz::evaluarColisionJugador(personaje *personaje)
+{
+    QList<plataforma*>::iterator it;
+
+    for(it=base_lvl1.begin();it!=base_lvl1.end();it++)
+    {
+        if(personaje->collidesWithItem(*it))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
 {
     //Si se da click verificar si fue en algun boton (Esto para hacer las pruebas de los mapas)
@@ -262,7 +297,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         if(Press)
         {
             level_one->setSceneRect(0,0,1281,651);
-            jugador1 = new personaje(0,595,30,30);
+            jugador1 = new personaje(35,575,50,50);
 
             level_one->addItem(jugador1);
             ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
@@ -270,9 +305,8 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
 //           level_two->setSceneRect(0,0,1281,651);
 //           ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
 
-           /*level_three->setSceneRect(0,0,1281,651);
-           ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
-           */
+//           level_three->setSceneRect(0,0,1281,651);
+//           ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
         }
         cont++;
     }
@@ -280,24 +314,35 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
 
 void Interfaz::keyPressEvent(QKeyEvent *i)
 {
-
-    int X = jugador1->x(), Y = jugador1->y();
-
-    if(i->key() == Qt::Key_D){
-       jugador1->setX(jugador1->x()+6);
-       //per->set_mov_personaje(false);
-
+    //----------------Movimiento--------------------------
+    if(i->key() == Qt::Key_D)
+    {
+        jugador1->setVX(10);
+        jugador1->moveRight();
+        if(evaluarColisionJugador(jugador1))
+            jugador1->moveLeft();
     }
-    else if(i->key() == Qt::Key_A){
-       jugador1->setX(jugador1->x()-6);
-       //per->set_mov_personaje(true);
+    else if(i->key() == Qt::Key_A)
+    {
+        jugador1->setVX(-10);
+        jugador1->moveLeft();
+        if(evaluarColisionJugador(jugador1))
+        {
+            jugador1->setVX(10);
+            jugador1->moveRight();
+        }
     }
-    else if(i->key() == Qt::Key_W){
-       jugador1->setY(jugador1->y()-6);
-       //per->set_mov_personaje_arriba_abajo(false);
+    else if(i->key() == Qt::Key_W)
+    {
+        jugador1->resetVX();
+        timer->start(16);
     }
-    else if(i->key() == Qt::Key_S){
-       jugador1->setY(jugador1->y()+6);
-       //per->set_mov_personaje_arriba_abajo(true);
+    else if(i->key() == Qt::Key_S)
+    {
+        jugador1->resetVY();
+        jugador1->moveDown();
+        if(evaluarColisionJugador(jugador1))
+            jugador1->moveUp();
     }
+    //----------------------------------------------------
 }
