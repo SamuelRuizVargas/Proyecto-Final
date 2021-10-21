@@ -26,6 +26,7 @@ public:
     void setposis(float x, float y);
     float getX();
     float getY();
+    float getVY();
     void moveUp();
     void moveDown();
     void moveLeft();

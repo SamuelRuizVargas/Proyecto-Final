@@ -25,9 +25,15 @@ QRectF plataforma::boundingRect() const
 
 void plataforma::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QPixmap pixmap;
-    pixmap.load(PATH_TEXTURA_PRUEBA);
-    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
+//    QPixmap pixmap;
+//    pixmap.load(PATH_TEXTURA_PRUEBA);
+//    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
+
+    QImage bloq_esta(PATH_TEXTURA_PRUEBA);
+    QBrush brush_im(bloq_esta);
+    painter->setPen(Qt::NoPen);
+    painter->setBrush(brush_im);
+    painter->drawRect(boundingRect());
 }
 
 plataforma::~plataforma()

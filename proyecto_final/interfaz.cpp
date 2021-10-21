@@ -45,7 +45,8 @@ void Interfaz::actualizar()
     int copy_y=jugador1->getY(),copy_x=jugador1->getX();
     jugador1->jump(0.1f);
     jugador1->setPos(jugador1->getX(),jugador1->getY());
-    if(evaluarColisionJugador(jugador1))
+    int veye=jugador1->getVY();
+    if(evaluarColisionJugador(jugador1)) //and veye<=-40)
     {
         timer->stop();
         jugador1->setposis(copy_x,copy_y);
@@ -89,7 +90,7 @@ void Interfaz::crearMenu()//Crea y agrega los elementos del menu inicial
 void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
 {
     //-------------------Imagenes---------------
-    imagenes_lvl1.append(new Imagenes(0,0,1281,651,3)); // Background
+    //imagenes_lvl1.append(new Imagenes(0,-300,1281,1200,3)); // Background
 
     QList<Imagenes*>::iterator it;
     int cont = 0;
@@ -151,7 +152,7 @@ void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
 void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
 {
     //-------------------Imagenes---------------
-    imagenes_lvl2.append(new Imagenes(0,0,1281,651,4)); // Background
+    //imagenes_lvl2.append(new Imagenes(0,-200,2500,1200,4)); // Background
 
     QList<Imagenes*>::iterator it;
     int cont = 0;
@@ -213,7 +214,7 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
 void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
 {
     //-------------------Imagenes---------------
-    imagenes_lvl3.append(new Imagenes(0,0,1281,651,5)); // Background
+    //imagenes_lvl3.append(new Imagenes(0,-300,2500,1200,5)); // Background
 
     QList<Imagenes*>::iterator it;
     int cont = 0;
@@ -296,17 +297,18 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         bool Press = buttons.at(cont)->get_Pressed();
         if(Press)
         {
-            level_one->setSceneRect(0,0,1281,651);
             jugador1 = new personaje(35,575,50,50);
+//            level_one->setSceneRect(0,0,1281,651);
+//            level_one->addItem(jugador1
+//            ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
 
-            level_one->addItem(jugador1);
-            ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
+//            level_two->setSceneRect(0,0,1281,651);
+//            level_two->addItem(jugador1);
+//            ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
 
-//           level_two->setSceneRect(0,0,1281,651);
-//           ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
-
-//           level_three->setSceneRect(0,0,1281,651);
-//           ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
+            level_three->setSceneRect(0,0,1281,651);
+            level_three->addItem(jugador1);
+            ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
         }
         cont++;
     }

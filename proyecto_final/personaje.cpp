@@ -30,6 +30,11 @@ float personaje::getY()
     return posy;
 }
 
+float personaje::getVY()
+{
+    return vy;
+}
+
 void personaje::moveUp()
 {
     posy-=vy;
