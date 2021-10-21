@@ -10,5 +10,6 @@
         <file>imagenes/LVLS/lvl1/background.png</file>
         <file>imagenes/LVLS/lvl2/background.jpg</file>
         <file>imagenes/LVLS/lvl3/background.jpg</file>
+        <file>imagenes/player1.png</file>
     </qresource>
 </RCC>

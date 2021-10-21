@@ -3,11 +3,12 @@
 
 #include <QGraphicsScene>
 #include <QMainWindow>
+#include <QKeyEvent>
+#include <iostream>
 #include <fstream>
-#include <QMovie>//REVISAR (para poner videitos supongo)
+//#include <QMediaPlayer>
 #include <QList>
 #include <QTimer>
-#include <QKeyEvent>
 
 #include "imagenes.h"
 #include "botones.h"
@@ -24,6 +25,7 @@ using namespace std;
 //--------------------------------------
 //-----------Rutas nivel 3--------------
 #define PATH_BASE_LVL3 "../proyecto_final/posiciones/lvl3/posi_base_lvl3.txt"
+#define PATH_PARED_LVL3 "../proyecto_final/posiciones/lvl3/posi_pared_lvl3.txt"
 //--------------------------------------
 
 QT_BEGIN_NAMESPACE
@@ -51,12 +53,13 @@ private:
     QGraphicsScene *level_three;
     QGraphicsScene *bossfight;
     //---------------------------
+
     //--------TIMER--------------
     QTimer *timer;
     //---------------------------
+
     //--------OBJETOS------------
     personaje *jugador1;
-
     //---------------------------
 
     //-----------Listas---------
@@ -71,6 +74,7 @@ private:
     QList<Imagenes*> imagenes_lvl2;
                 //LVL 3
     QList<plataforma*> base_lvl3;
+    QList<plataforma*> pared_lvl3;
     QList<Imagenes*> imagenes_lvl3;
                 //BOSSFIGHT
     //--------------------------
@@ -87,6 +91,7 @@ private:
                 //BOSSFIGHT
                 //OTROS
     bool evaluarColisionJugador(personaje *personaje);
+    int evaluarColisionSalto(personaje *personaje);
     //--------------------------
 
 protected:

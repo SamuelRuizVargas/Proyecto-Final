@@ -44,13 +44,18 @@ void personaje::moveUp()
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPixmap pixmap;
-    pixmap.load(PATH);
+    pixmap.load(PATH_P1);
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
 void personaje::setVX(float velocidadx)
 {
     vx=velocidadx;
+}
+
+void personaje::setVY(float velocidady)
+{
+    vy=velocidady;
 }
 
 void personaje::resetVX()

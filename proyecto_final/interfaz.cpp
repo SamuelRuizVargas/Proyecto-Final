@@ -46,7 +46,13 @@ void Interfaz::actualizar()
     jugador1->jump(0.1f);
     jugador1->setPos(jugador1->getX(),jugador1->getY());
     int veye=jugador1->getVY();
-    if(evaluarColisionJugador(jugador1)) //and veye<=-40)
+    if(evaluarColisionSalto(jugador1))
+    {
+        jugador1->resetVX();
+        jugador1->setposis(copy_x,copy_y);
+        jugador1->setPos(jugador1->getX(),jugador1->getY());
+    }
+    else if(evaluarColisionJugador(jugador1)) //and veye<=-40)
     {
         timer->stop();
         jugador1->setposis(copy_x,copy_y);
@@ -225,51 +231,102 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
     }
     //------------------------------------------
 
-    //-----------------Se saca la base del mapa------------------
-    ifstream archivo;
-    string coorde,numero,int1,int2,int3,int4,digi;
-    int ente1,ente2,ente3,ente4,len,conta;
-    archivo.open(PATH_BASE_LVL3, ios::in);
-    while(!archivo.eof())
+    //---------Se saca las paredes del mapa----------
     {
-        if (archivo.eof())
-            break;
-        getline(archivo,coorde);
-        len=coorde.length();
-        conta=0;
-        for (int i=0; i<=len;i++)
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_PARED_LVL3, ios::in);
+        while(!archivo.eof())
         {
-            digi=coorde[i];
-            if (digi!="," and digi[0]!='\000' )
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
             {
-                numero+=digi;
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
             }
-            else
-            {
-                conta+=1;
-                if(conta==1)
-                    int1+=numero;
-                else if(conta==2)
-                    int2+=numero;
-                else if(conta==3)
-                    int3+=numero;
-                else if(conta==4)
-                    int4+=numero;
-                numero.erase();
-            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            pared_lvl3.append(new plataforma(ente1,ente2,ente3,ente4));
+            level_three->addItem(pared_lvl3.back());
         }
-        ente1=atoi(int1.c_str());
-        ente2=atoi(int2.c_str());
-        ente3=atoi(int3.c_str());
-        ente4=atoi(int4.c_str());
-        int1.erase();
-        int2.erase();
-        int3.erase();
-        int4.erase();
-        base_lvl3.append(new plataforma(ente1,ente2,ente3,ente4));
-        level_three->addItem(base_lvl3.back());
+        archivo.close();
     }
-    archivo.close();
+    //------------------------------------------------------------
+
+    //-----------------Se saca la base del mapa------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_BASE_LVL3, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            base_lvl3.append(new plataforma(ente1,ente2,ente3,ente4));
+            level_three->addItem(base_lvl3.back());
+        }
+        archivo.close();
+    }
     //------------------------------------------------------------
 }
 
@@ -277,7 +334,7 @@ bool Interfaz::evaluarColisionJugador(personaje *personaje)
 {
     QList<plataforma*>::iterator it;
 
-    for(it=base_lvl1.begin();it!=base_lvl1.end();it++)
+    for(it=base_lvl3.begin();it!=base_lvl3.end();it++)
     {
         if(personaje->collidesWithItem(*it))
         {
@@ -285,6 +342,20 @@ bool Interfaz::evaluarColisionJugador(personaje *personaje)
         }
     }
     return false;
+}
+
+int Interfaz::evaluarColisionSalto(personaje *personaje)
+{
+    QList<plataforma*>::iterator it;
+
+    for(it=pared_lvl3.begin();it!=pared_lvl3.end();it++)
+    {
+        if(personaje->collidesWithItem(*it))
+        {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
@@ -297,7 +368,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         bool Press = buttons.at(cont)->get_Pressed();
         if(Press)
         {
-            jugador1 = new personaje(35,575,50,50);
+            jugador1 = new personaje(35,585,28,40);
 //            level_one->setSceneRect(0,0,1281,651);
 //            level_one->addItem(jugador1
 //            ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
@@ -319,18 +390,23 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
     //----------------Movimiento--------------------------
     if(i->key() == Qt::Key_D)
     {
-        jugador1->setVX(10);
+        jugador1->setVX(7);
         jugador1->moveRight();
         if(evaluarColisionJugador(jugador1))
+        {
+            jugador1->setVX(-7);
             jugador1->moveLeft();
+        }
     }
-    else if(i->key() == Qt::Key_A)
+    else if(i->key() == Qt::Key_A and i->key() != Qt::Key_W)
     {
-        jugador1->setVX(-10);
+        jugador1->setVY(0);
+        timer->start(16);
+        jugador1->setVX(-7);
         jugador1->moveLeft();
         if(evaluarColisionJugador(jugador1))
         {
-            jugador1->setVX(10);
+            jugador1->setVX(7);
             jugador1->moveRight();
         }
     }

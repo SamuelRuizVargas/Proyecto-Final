@@ -4,7 +4,7 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-#define PATH ":/imagenes/icono.png"
+#define PATH_P1 ":/imagenes/player1.png"
 #define g -9.8f
 class personaje  : public QGraphicsItem
 {
@@ -21,6 +21,7 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
     void setVX(float velocidadx);
+    void setVY(float velocidady);
     void resetVX();
     void resetVY();
     void setposis(float x, float y);
