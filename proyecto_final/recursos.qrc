@@ -6,8 +6,9 @@
         <file>imagenes/Menu/logo.png</file>
         <file>imagenes/Menu/menu_back.jpg</file>
         <file>imagenes/LVLS/lvl1/bloque.png</file>
-        <file>imagenes/LVLS/lvl1/background.jpg</file>
-        <file>imagenes/LVLS/lvl2/background.png</file>
-        <file>imagenes/LVLS/lvl3/background.png</file>
+        <file>imagenes/LVLS/bossfight/background.jpg</file>
+        <file>imagenes/LVLS/lvl1/background.png</file>
+        <file>imagenes/LVLS/lvl2/background.jpg</file>
+        <file>imagenes/LVLS/lvl3/background.jpg</file>
     </qresource>
 </RCC>
