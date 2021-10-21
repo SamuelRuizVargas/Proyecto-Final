@@ -132,6 +132,9 @@
     \subsection{19/10/2021}
     Nos dedicamos a ordenar el código de manera que podamos orientarnos de manera sencilla mientras vamos implementando nuevos fragmentos de código, adicionalmente realizamos unas bases para los 3 niveles y de esta manera poder comenzar el modelamiento y las pruebas de los personajes y enemigos.
     
+    \subsection{20/10/2021}
+    Este día fue completamente dedicado a la movilidad del personaje, para esto aplicamos formulas físicas para darle un movimiento fluido, sin embargo aun faltan detalles tales como la caída sin salto y arreglar algunas colisiones aun imperfectas, etc; Para realizar el modelamiento del salto nos basamos en el vídeo \cite{video_jump} el cual nos brindo apoyo lógico sobre como implementarlo.
+    
 \section{Modelamiento de las Clases}
     \subsection{Imagen}
     Es la primera clase que modelamos puesto a que era la mas simple y nos ayuda a darle algo de estética al programa y así no perder de vista nuestro objetivo. La clase cuenta con atributos básicos como altura, ancho y sus coordenadas de posición, esto debido a que su único trabajo es el de desplegar imágenes en una escena y poder moverlas con el setPos(). Los métodos que la componen son los necesarios para usarla como herencia de QGraphicsItem que son el painter y el boundingRect, además de esto nos encargamos de la textura que necesitamos haciendo uso de el constructor y unos cuantos condicionales.
@@ -165,5 +168,13 @@
     
     \subsection{19/10/2021}    
     Hasta el momento se nos ha presentado un problema con el mousePressEvent, ya que nos está creando nuevos personajes, sin embargo esto hace parte del proceso de desarrollo que estamos tomando, por lo que esta dentro de lo calculado y sera corregido en próximos avances.
+    
+    \subsection{20/10/2021}
+    En el desarrollo de la movilidad del personaje se presentaron muchos problemas de distintas índoles, inicialmente tuvimos algunos inconvenientes a la hora de realizar los movimientos, luego para graficarlos tuvimos que implementar un timer y finalmente tuvimos problemas con respecto a las colisiones luego de los saltos los cuales aun no han sido resueltos para esta fecha.
+    
+\vfill
+\vspace*{0.5cm}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
     
 \end{document}
