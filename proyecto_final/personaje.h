@@ -8,15 +8,15 @@
 #define g -15.0f
 class personaje  : public QGraphicsItem
 {
-    int h;
-    int an;
+    int h=40;
+    int an=28;
     float posx;
     float posy;
     float vx=0;
     float vy=40;
 
 public:
-    personaje(int,int,int,int);
+    personaje(int,int);
     ~personaje();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);

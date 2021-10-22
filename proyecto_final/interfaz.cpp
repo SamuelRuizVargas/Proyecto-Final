@@ -220,7 +220,7 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
 void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
 {
     //-------------------Imagenes---------------
-    //imagenes_lvl3.append(new Imagenes(0,-300,2500,1200,5)); // Background
+    imagenes_lvl3.append(new Imagenes(0,0,2500,681,5)); // Background
 
     QList<Imagenes*>::iterator it;
     int cont = 0;
@@ -368,7 +368,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         bool Press = buttons.at(cont)->get_Pressed();
         if(Press)
         {
-            jugador1 = new personaje(35,585,28,40);
+            jugador1 = new personaje(35,585);
 //            level_one->setSceneRect(0,0,1281,651);
 //            level_one->addItem(jugador1
 //            ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1

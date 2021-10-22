@@ -1,9 +1,7 @@
 #include "personaje.h"
 
-personaje::personaje(int x, int y, int _an, int _h)
+personaje::personaje(int x, int y)
 {
-    h=_h;
-    an=_an;
     posx=x;
     posy=y;
     setPos(posx,posy);
