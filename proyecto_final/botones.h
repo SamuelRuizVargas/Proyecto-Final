@@ -5,6 +5,8 @@
 
 #define PATH_1P ":/imagenes/Botones/Boton_1p.png"
 #define PATH_MULTI ":/imagenes/Botones/Boton_multi.png"
+#define PATH_CARG ":/imagenes/Botones/Boton_cargar.png"
+#define PATH_NUEV ":/imagenes/Botones/Boton_nueva.png"
 
 class botones: public QGraphicsItem
 {

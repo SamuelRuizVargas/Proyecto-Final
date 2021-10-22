@@ -25,14 +25,22 @@ void botones::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     QPixmap pixmap;
     switch(textura)
     {
-    case 1://UN JUGADOR
-    {
-        pixmap.load(PATH_1P);
-    }break;
-    case 2://MULTIJUGADOR
-    {
-        pixmap.load(PATH_MULTI);
-    }break;
+        case 1://UN JUGADOR
+        {
+            pixmap.load(PATH_1P);
+        }break;
+        case 2://MULTIJUGADOR
+        {
+            pixmap.load(PATH_MULTI);
+        }break;
+        case 3://NUEVA PARTIDA
+        {
+            pixmap.load(PATH_NUEV);
+        }break;
+        case 4://CARGAR PARTIDA
+        {
+            pixmap.load(PATH_CARG);
+        }break;
     }
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
