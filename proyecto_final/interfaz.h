@@ -2,11 +2,12 @@
 #define INTERFAZ_H
 
 #include <QGraphicsScene>
+#include <QMediaPlayer>
+#include <QVideoWidget>
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <iostream>
 #include <fstream>
-//#include <QMediaPlayer>
 #include <QList>
 #include <QTimer>
 
@@ -47,7 +48,7 @@ private:
     Ui::Interfaz *ui;
 
     //---------Escenas----------
-    QGraphicsScene *scene;
+    QGraphicsScene *menu_princi;
     QGraphicsScene *level_one;
     QGraphicsScene *level_two;
     QGraphicsScene *level_three;
@@ -60,6 +61,9 @@ private:
 
     //--------OBJETOS------------
     personaje *jugador1;
+
+    QMediaPlayer *fondo;
+    QVideoWidget *vw;
     //---------------------------
 
     //-----------Listas---------

@@ -6,12 +6,11 @@ Interfaz::Interfaz(QWidget *parent)
     , ui(new Ui::Interfaz)
 {
     ui->setupUi(this);
-    //ui->graphicsView->rotate(180);
 
     //----------Escenas----------
             //Principal
-    scene = new QGraphicsScene;
-    scene->setSceneRect(0,0,1260,650);
+    menu_princi = new QGraphicsScene;
+    menu_princi->setSceneRect(0,0,1260,650);
             //Nivel 1
     level_one = new QGraphicsScene;
             //Nivel 2
@@ -45,7 +44,6 @@ void Interfaz::actualizar()
     int copy_y=jugador1->getY(),copy_x=jugador1->getX();
     jugador1->jump(0.1f);
     jugador1->setPos(jugador1->getX(),jugador1->getY());
-    int veye=jugador1->getVY();
     if(evaluarColisionSalto(jugador1))
     {
         jugador1->resetVX();
@@ -72,31 +70,41 @@ void Interfaz::crearMenu()//Crea y agrega los elementos del menu inicial
     int cont = 0;
     for(it = menu.begin(); it!= menu.end(); it++)
     {
-        scene->addItem(menu.at(cont));
+        menu_princi->addItem(menu.at(cont));
         cont++;
     }
+    //------------------------------------------
+
+    //-------------------Fondo------------------
+//    fondo = new QMediaPlayer;
+//    vw = new QVideoWidget;
+
+//    fondo->setVideoOutput(vw);
+//    fondo->setMedia();
+
+//    vw->setGeometry(0,0,1280,720);
+//    fondo->play();
+//    menu_princi->addWidget(vw);
     //------------------------------------------
 
     //------------------Botones-----------------
     buttons.append(new botones(525,275,225,75,1));
     buttons.append(new botones(525,350,225,75,2));
+    buttons.append(new botones(525,275,225,75,3));
+    buttons.append(new botones(525,350,225,75,3));
+    buttons.append(new botones(525,425,225,75,3));
 
-    QList<botones*>::iterator ite;
-    cont = 0;
-    for(ite = buttons.begin(); ite!= buttons.end(); ite++)
-    {
-        scene->addItem(buttons.at(cont));
-        cont++;
-    }
+    menu_princi->addItem(buttons.at(0));
+    menu_princi->addItem(buttons.at(1));
     //------------------------------------------
     //Set Scene para el menu inicial
-    ui->graphicsView->setScene(scene);
+    ui->graphicsView->setScene(menu_princi);
 }
 
 void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
 {
     //-------------------Imagenes---------------
-    //imagenes_lvl1.append(new Imagenes(0,-300,1281,1200,3)); // Background
+    imagenes_lvl1.append(new Imagenes(0,0,2500,1200,3)); // Background
 
     QList<Imagenes*>::iterator it;
     int cont = 0;
@@ -158,7 +166,7 @@ void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
 void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
 {
     //-------------------Imagenes---------------
-    //imagenes_lvl2.append(new Imagenes(0,-200,2500,1200,4)); // Background
+    imagenes_lvl2.append(new Imagenes(0,0,2500,1200,4)); // Background
 
     QList<Imagenes*>::iterator it;
     int cont = 0;
@@ -360,29 +368,45 @@ int Interfaz::evaluarColisionSalto(personaje *personaje)
 
 void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
 {
-    //Si se da click verificar si fue en algun boton (Esto para hacer las pruebas de los mapas)
-    QList<botones*>::iterator ite;
-    int cont =0;
-    for(ite = buttons.begin(); ite!= buttons.end(); ite++)
+    //---------------Menu Principal--------------
+    if(buttons.at(0)->get_Pressed())
     {
-        bool Press = buttons.at(cont)->get_Pressed();
-        if(Press)
-        {
-            jugador1 = new personaje(35,585);
-//            level_one->setSceneRect(0,0,1281,651);
-//            level_one->addItem(jugador1
-//            ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
+        menu_princi->removeItem(buttons.at(0));
+        menu_princi->removeItem(buttons.at(1));
 
-//            level_two->setSceneRect(0,0,1281,651);
-//            level_two->addItem(jugador1);
-//            ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
-
-            level_three->setSceneRect(0,0,1281,651);
-            level_three->addItem(jugador1);
-            ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
-        }
-        cont++;
+        menu_princi->addItem(buttons.at(2));
+        menu_princi->addItem(buttons.at(3));
+        menu_princi->addItem(buttons.at(4));
     }
+    else if(buttons.at(1)->get_Pressed())
+    {
+        //hacer botones para partidas (pensar luego)
+    }
+    //-------------------------------------------
+
+    //----------Partidas un jugador--------------USANDO PARA PROBAR NIVELES
+    if(buttons.at(2)->get_Pressed())
+    {
+        jugador1 = new personaje(35,585);
+        level_one->setSceneRect(0,0,1281,651);
+        level_one->addItem(jugador1);
+        ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
+    }
+    if(buttons.at(3)->get_Pressed())
+    {
+        jugador1 = new personaje(35,585);
+        level_two->setSceneRect(0,0,1281,651);
+        level_two->addItem(jugador1);
+        ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
+    }
+    if(buttons.at(4)->get_Pressed())
+    {
+        jugador1 = new personaje(35,585);
+        level_three->setSceneRect(0,0,1281,651);
+        level_three->addItem(jugador1);
+        ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
+    }
+    //-------------------------------------------
 }
 
 void Interfaz::keyPressEvent(QKeyEvent *i)
