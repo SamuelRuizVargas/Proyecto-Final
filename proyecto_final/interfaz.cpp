@@ -398,10 +398,8 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
             jugador1->moveLeft();
         }
     }
-    else if(i->key() == Qt::Key_A and i->key() != Qt::Key_W)
+    else if(i->key() == Qt::Key_A)
     {
-        jugador1->setVY(0);
-        timer->start(16);
         jugador1->setVX(-7);
         jugador1->moveLeft();
         if(evaluarColisionJugador(jugador1))

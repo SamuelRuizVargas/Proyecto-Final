@@ -5,7 +5,7 @@
 #include <QPainter>
 
 #define PATH_P1 ":/imagenes/player1.png"
-#define g -9.8f
+#define g -15.0f
 class personaje  : public QGraphicsItem
 {
     int h;
