@@ -114,11 +114,14 @@
             Una clase simple que se encarga de cargar todo tipo de imágenes para desplegarlas en las escenas, las tratamos como QGraphicsItem debido a que nos facilita su uso.
     
 \section{Modelamiento de las Clases}
-    \subsection{Imagen}
+    \subsection{Imagenes}
     Es la primera clase que modelamos puesto a que era la mas simple y nos ayuda a darle algo de estética al programa y así no perder de vista nuestro objetivo. La clase cuenta con atributos básicos como altura, ancho y sus coordenadas de posición, esto debido a que su único trabajo es el de desplegar imágenes en una escena y poder moverlas con el setPos(). Los métodos que la componen son los necesarios para usarla como herencia de QGraphicsItem que son el painter y el boundingRect, además de esto nos encargamos de la textura que necesitamos haciendo uso de el constructor y unos cuantos condicionales.
     
     \subsection{Botones}
     Luego de una investigación descubrimos como configurar un QGraphicsItem para que funciones como un botón, para ello usamos los métodos mousePressEvent y mouseReleaseEvent, dichos métodos nos dan la posibilidad de realizar acciones cuando uno de estos sea presionado sumado les agregamos texturas al botón según lo requerido. 
+    
+    \subsection{Plataforma}
+    Esta clase nació de la necesidad de darle una forma a las plataformas, tanto para sus colisiones como para darles textura y posición. Esta clase consta con atributos de posición y de ancho y alto, al igual que las imágenes, sin embargo estas, además de que pueden interactuar con el personaje de la manera implementada en la interfaz, tiene la capacidad de cambiar su textura según sea requerido.
     
     \subsection{Personaje}
     El modelamiento del personaje se basa en la herencia, al igual que otras de nuestras clases, en QGraphicsItem; Esta clase tiene un ancho y alto predefinido e invariable el cual se definió en base a mantener un buen tamaño para el personaje y no perder su relación de aspecto para que se mantuviera lo mas estético posible, tambien se le otorgo unas velocidades en el eje X y el eje Y para que de esta manera pudiera realizar sus saltos y otros movimientos básicos, su textura es variable para que se puedan distinguir el jugador 1 del jugador 2
@@ -156,6 +159,7 @@
     El enfoque fue completamente dedicado a corregir errores de movimiento, logramos encontrar una manera de que las colisiones funciones de mejor manera, sin embargo aun queda el problema de que el personaje tiene que caer constantemente.
     
     \subsection{22/10/2021}
+    Principalmente fue dedicado a la semi-terminación del menú inicial para que sea mas practico, además de esto agregamos momentáneamente una forma de ver los distintos mapas para ir haciendo pruebas; Por ultimo tratamos de agregar un vídeo de fondo al menú pero no fue posible de momento.
     
 \section{Problemas Presentados}
     \subsection{9/10/2021}
@@ -186,6 +190,7 @@
     La problemática que tenemos actualmente es la de la caída libre del personaje, debido a que debemos pensar como integrar dicha caída constante (gravedad constante) sin que estropee todo el trabajo realizado para lograr el resto de movimientos.
     
     \subsection{22/10/2021}
+    Haciendo un reordena miento del menú nos topamos con el problema para reproducir un vídeo en el fondo, para esto tratamos de hacer uso del QMediaPlayer y el QVideoWidget sin embargo de momento no fue posible entregarle la ruta del vídeo, trataremos de arreglar esto mas adelante.
     
 \vfill
 \vspace*{0.5cm}
