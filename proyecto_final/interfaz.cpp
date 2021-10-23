@@ -21,6 +21,8 @@ Interfaz::Interfaz(QWidget *parent)
     bossfight = new QGraphicsScene;
     //----------------------------
 
+
+
     //----Crear objetos en escenas-----
     crearMenu();
     crearLevelOne();
@@ -32,6 +34,7 @@ Interfaz::Interfaz(QWidget *parent)
     timer=new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizar()));
     //---------------------------------
+
 }
 
 Interfaz::~Interfaz()
@@ -366,11 +369,26 @@ int Interfaz::evaluarColisionSalto(personaje *personaje)
     return 0;
 }
 
+void Interfaz::validacion()
+{
+
+    ven2 = new QMainWindow();
+
+
+    QString x = letra(":/imagenes/bug.ttf");
+    QFont y(x);
+    y.setPointSize(16);
+    ven2->show();
+}
+
 void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
 {
     //---------------Menu Principal--------------
+    cont++;
     if(buttons.at(0)->get_Pressed())
     {
+        if(cont==1)validacion();
+
         menu_princi->removeItem(buttons.at(0));
         menu_princi->removeItem(buttons.at(1));
 
@@ -382,7 +400,10 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
     {
         //hacer botones para partidas (pensar luego)
     }
-    //-------------------------------------------
+
+
+
+
 
     //----------Partidas un jugador--------------USANDO PARA PROBAR NIVELES
     if(buttons.at(2)->get_Pressed())
@@ -408,6 +429,18 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
     }
     //-------------------------------------------
 }
+
+QString Interfaz::letra(QString x)
+{
+    int id;
+    id = QFontDatabase::addApplicationFont(x);
+
+    QStringList letra = QFontDatabase::applicationFontFamilies(id);
+    letra = letra.takeLast().split('.');
+
+    return letra[0];
+}
+
 
 void Interfaz::keyPressEvent(QKeyEvent *i)
 {

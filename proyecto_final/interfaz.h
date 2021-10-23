@@ -2,9 +2,13 @@
 #define INTERFAZ_H
 
 #include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QMainWindow>
+#include <QLabel>
+#include <QFontDatabase>
+
 #include <QMediaPlayer>
 #include <QVideoWidget>
-#include <QMainWindow>
 #include <QKeyEvent>
 #include <iostream>
 #include <fstream>
@@ -53,6 +57,7 @@ private:
     QGraphicsScene *level_two;
     QGraphicsScene *level_three;
     QGraphicsScene *bossfight;
+    QGraphicsScene *scene2;
     //---------------------------
 
     //--------TIMER--------------
@@ -61,6 +66,8 @@ private:
 
     //--------OBJETOS------------
     personaje *jugador1;
+
+    QMainWindow *ven2;
 
     QMediaPlayer *fondo;
     QVideoWidget *vw;
@@ -94,8 +101,11 @@ private:
     void crearLevelThree();
                 //BOSSFIGHT
                 //OTROS
+    QString letra(QString x);
     bool evaluarColisionJugador(personaje *personaje);
     int evaluarColisionSalto(personaje *personaje);
+    void validacion();
+    int cont=0;
     //--------------------------
 
 protected:
