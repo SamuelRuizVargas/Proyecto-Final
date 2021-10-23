@@ -24,7 +24,8 @@ HEADERS += \
     plataforma.h
 
 FORMS += \
-    interfaz.ui
+    interfaz.ui \
+    ven2.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -32,4 +33,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    letras.qrc \
     recursos.qrc

@@ -4,7 +4,6 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QMainWindow>
-#include <QLabel>
 #include <QFontDatabase>
 
 #include <QMediaPlayer>

@@ -373,6 +373,7 @@ void Interfaz::validacion()
 {
 
     ven2 = new QMainWindow();
+    ven2->setGeometry(0,0,500,500);
 
 
     QString x = letra(":/imagenes/bug.ttf");
