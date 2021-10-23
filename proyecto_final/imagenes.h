@@ -8,7 +8,7 @@
 #define PATH_LOGO ":/imagenes/Menu/logo.png"
 #define PATH_BACKGROUND ":/imagenes/Menu/menu_back.jpg"
                     //level 1
-#define PATH_BACK_1 ":/imagenes/LVLS/lvl1/background.png"
+#define PATH_BACK_1 ":/imagenes/LVLS/lvl1/background.jpg"
                     //level 2
 #define PATH_BACK_2 ":/imagenes/LVLS/lvl2/background.jpg"
                     //level 3

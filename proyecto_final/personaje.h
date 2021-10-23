@@ -13,7 +13,9 @@ class personaje  : public QGraphicsItem
     float posx;
     float posy;
     float vx=0;
-    float vy=40;
+    float vy=80;
+    float vy2=0;
+    bool caida=true;
 
 public:
     personaje(int,int);
@@ -22,8 +24,12 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
     void setVX(float velocidadx);
     void setVY(float velocidady);
+    void free(float dt);
     void resetVX();
     void resetVY();
+    void resetVY2();
+    void changedown();
+    bool getcaida();
     void setposis(float x, float y);
     float getX();
     float getY();
@@ -34,5 +40,6 @@ public:
     void moveRight();
     void jump(float dt);
 };
+
 
 #endif // PERSONAJE_H

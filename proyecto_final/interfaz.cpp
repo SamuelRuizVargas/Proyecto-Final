@@ -1,6 +1,7 @@
 #include "interfaz.h"
 #include "ui_interfaz.h"
 
+int listabase;
 Interfaz::Interfaz(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Interfaz)
@@ -44,23 +45,47 @@ Interfaz::~Interfaz()
 
 void Interfaz::actualizar()
 {
-    int copy_y=jugador1->getY(),copy_x=jugador1->getX();
-    jugador1->jump(0.1f);
-    jugador1->setPos(jugador1->getX(),jugador1->getY());
-    if(evaluarColisionSalto(jugador1))
-    {
-        jugador1->resetVX();
-        jugador1->setposis(copy_x,copy_y);
+    if(jugador1->getcaida()){
+        int copy_y=jugador1->getY(),copy_x=jugador1->getX();
+        jugador1->free(0.1f);
         jugador1->setPos(jugador1->getX(),jugador1->getY());
+        if(evaluarColisionSalto(jugador1, listabase))
+        {
+            jugador1->resetVX();
+            jugador1->setposis(copy_x,copy_y);
+            jugador1->setPos(jugador1->getX(),jugador1->getY());
+        }
+        else if(evaluarColisionJugador(jugador1, listabase)) //and veye<=-40)
+        {
+            timer->stop();
+            jugador1->setposis(copy_x,copy_y);
+            jugador1->setPos(jugador1->getX(),jugador1->getY());
+            jugador1->resetVX();
+            jugador1->resetVY();
+            jugador1->resetVY2();
+        }
     }
-    else if(evaluarColisionJugador(jugador1)) //and veye<=-40)
-    {
-        timer->stop();
-        jugador1->setposis(copy_x,copy_y);
+    else{
+        int copy_y=jugador1->getY(),copy_x=jugador1->getX();
+        jugador1->jump(0.1f);
         jugador1->setPos(jugador1->getX(),jugador1->getY());
-        jugador1->resetVX();
-        jugador1->resetVY();
+        if(evaluarColisionSalto(jugador1, listabase))
+        {
+            jugador1->resetVX();
+            jugador1->setposis(copy_x,copy_y);
+            jugador1->setPos(jugador1->getX(),jugador1->getY());
+        }
+        else if(evaluarColisionJugador(jugador1, listabase)) //and veye<=-40)
+        {
+            timer->stop();
+            jugador1->setposis(copy_x,copy_y);
+            jugador1->setPos(jugador1->getX(),jugador1->getY());
+            jugador1->resetVX();
+            jugador1->resetVY();
+            jugador1->changedown();
+        }
     }
+
 }
 
 void Interfaz::crearMenu()//Crea y agrega los elementos del menu inicial
@@ -341,21 +366,46 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
     //------------------------------------------------------------
 }
 
-bool Interfaz::evaluarColisionJugador(personaje *personaje)
+bool Interfaz::evaluarColisionJugador(personaje *personaje, int lista)
 {
     QList<plataforma*>::iterator it;
 
-    for(it=base_lvl3.begin();it!=base_lvl3.end();it++)
-    {
-        if(personaje->collidesWithItem(*it))
+    switch (lista) {
+        case 1:
+        for(it=base_lvl1.begin();it!=base_lvl1.end();it++)
         {
-            return true;
+            if(personaje->collidesWithItem(*it))
+            {
+                return true;
+            }
         }
+        break;
+        case 2:
+        for(it=base_lvl2.begin();it!=base_lvl2.end();it++)
+        {
+            if(personaje->collidesWithItem(*it))
+            {
+                return true;
+            }
+        }
+        break;
+        case 3:
+        for(it=base_lvl3.begin();it!=base_lvl3.end();it++)
+        {
+            if(personaje->collidesWithItem(*it))
+            {
+                return true;
+            }
+        }
+        break;
+
     }
+
+
     return false;
 }
 
-int Interfaz::evaluarColisionSalto(personaje *personaje)
+int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)
 {
     QList<plataforma*>::iterator it;
 
@@ -374,7 +424,7 @@ void Interfaz::validacion()
 
     ven2 = new QMainWindow();
     ven2->setGeometry(0,0,500,500);
-
+    //Terminar
 
     QString x = letra(":/imagenes/bug.ttf");
     QFont y(x);
@@ -413,6 +463,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         level_one->setSceneRect(0,0,1281,651);
         level_one->addItem(jugador1);
         ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
+        listabase = 1;
     }
     if(buttons.at(3)->get_Pressed())
     {
@@ -420,6 +471,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         level_two->setSceneRect(0,0,1281,651);
         level_two->addItem(jugador1);
         ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
+        listabase = 2;
     }
     if(buttons.at(4)->get_Pressed())
     {
@@ -427,6 +479,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         level_three->setSceneRect(0,0,1281,651);
         level_three->addItem(jugador1);
         ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
+        listabase = 3;
     }
     //-------------------------------------------
 }
@@ -449,8 +502,9 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
     if(i->key() == Qt::Key_D)
     {
         jugador1->setVX(7);
+        timer->start(16);
         jugador1->moveRight();
-        if(evaluarColisionJugador(jugador1))
+        if(evaluarColisionJugador(jugador1, listabase))
         {
             jugador1->setVX(-7);
             jugador1->moveLeft();
@@ -459,8 +513,9 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
     else if(i->key() == Qt::Key_A)
     {
         jugador1->setVX(-7);
+        timer->start(16);
         jugador1->moveLeft();
-        if(evaluarColisionJugador(jugador1))
+        if(evaluarColisionJugador(jugador1, listabase))
         {
             jugador1->setVX(7);
             jugador1->moveRight();
@@ -468,15 +523,10 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
     }
     else if(i->key() == Qt::Key_W)
     {
+        jugador1->changedown();
         jugador1->resetVX();
         timer->start(16);
-    }
-    else if(i->key() == Qt::Key_S)
-    {
-        jugador1->resetVY();
-        jugador1->moveDown();
-        if(evaluarColisionJugador(jugador1))
-            jugador1->moveUp();
+
     }
     //----------------------------------------------------
 }

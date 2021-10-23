@@ -101,10 +101,11 @@ private:
                 //BOSSFIGHT
                 //OTROS
     QString letra(QString x);
-    bool evaluarColisionJugador(personaje *personaje);
-    int evaluarColisionSalto(personaje *personaje);
+    bool evaluarColisionJugador(personaje *personaje, int lista);
+    int evaluarColisionSalto(personaje *personaje, int lista);
     void validacion();
-    int cont=0;
+    int cont=0; // borrar
+
     //--------------------------
 
 protected:

@@ -56,6 +56,14 @@ void personaje::setVY(float velocidady)
     vy=velocidady;
 }
 
+void personaje::free(float dt)
+{
+
+    posx=posx+vx*dt;
+    posy-=vy2*dt+(g*dt*dt)/2.0f;
+    vy2=vy2+g*dt;
+}
+
 void personaje::resetVX()
 {
     vx=0;
@@ -63,7 +71,23 @@ void personaje::resetVX()
 
 void personaje::resetVY()
 {
-    vy=40;
+    vy=80;
+}
+
+void personaje::resetVY2()
+{
+    vy2=0;
+}
+
+void personaje::changedown()
+{
+    if(caida)caida = false;
+    else caida = true;
+}
+
+bool personaje::getcaida()
+{
+    return caida;
 }
 
 void personaje::setposis(float x, float y)
