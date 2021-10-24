@@ -594,7 +594,7 @@ bool Interfaz::evaluarColisionEnemies(int lista)
 int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)
 {
     QList<plataforma*>::iterator it;
-
+    //cambiar esta parte para que sirva de manera general
     for(it=pared_lvl3.begin();it!=pared_lvl3.end();it++)
     {
         if(personaje->collidesWithItem(*it))
