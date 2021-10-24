@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,19 +10,24 @@ CONFIG += c++11
 
 SOURCES += \
     botones.cpp \
+    enemigo.cpp \
     imagenes.cpp \
     main.cpp \
     interfaz.cpp \
+    personaje.cpp \
     plataforma.cpp
 
 HEADERS += \
     botones.h \
+    enemigo.h \
     imagenes.h \
     interfaz.h \
+    personaje.h \
     plataforma.h
 
 FORMS += \
-    interfaz.ui
+    interfaz.ui \
+    ven2.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -31,3 +36,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     recursos.qrc
+
+DISTFILES +=

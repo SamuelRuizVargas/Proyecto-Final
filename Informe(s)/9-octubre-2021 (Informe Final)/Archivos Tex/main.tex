@@ -2,6 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{listings}
+\usepackage{multicol}
+\setlength{\columnsep}{2cm}
 \usepackage{graphicx}
 \graphicspath{ {Images/} }
 \usepackage{cite}
@@ -51,8 +53,9 @@
     \end{center}
 \end{titlepage}
 
+\begin{multicols}{2}
 \tableofcontents
-\vspace*{1.2cm}
+\end{multicols}
 
 \newpage
 
@@ -109,7 +112,24 @@
             
             \subsubsection{Imágenes}
             Una clase simple que se encarga de cargar todo tipo de imágenes para desplegarlas en las escenas, las tratamos como QGraphicsItem debido a que nos facilita su uso.
-
+    
+\section{Modelamiento de las Clases}
+    \subsection{Imagenes}
+    Es la primera clase que modelamos puesto a que era la mas simple y nos ayuda a darle algo de estética al programa y así no perder de vista nuestro objetivo. La clase cuenta con atributos básicos como altura, ancho y sus coordenadas de posición, esto debido a que su único trabajo es el de desplegar imágenes en una escena y poder moverlas con el setPos(). Los métodos que la componen son los necesarios para usarla como herencia de QGraphicsItem que son el painter y el boundingRect, además de esto nos encargamos de la textura que necesitamos haciendo uso de el constructor y unos cuantos condicionales.
+    
+    \subsection{Botones}
+    Luego de una investigación descubrimos como configurar un QGraphicsItem para que funciones como un botón, para ello usamos los métodos mousePressEvent y mouseReleaseEvent, dichos métodos nos dan la posibilidad de realizar acciones cuando uno de estos sea presionado sumado les agregamos texturas al botón según lo requerido. 
+    
+    \subsection{Plataforma}
+    Esta clase nació de la necesidad de darle una forma a las plataformas, tanto para sus colisiones como para darles textura y posición. Esta clase consta con atributos de posición y de ancho y alto, al igual que las imágenes, sin embargo estas, además de que pueden interactuar con el personaje de la manera implementada en la interfaz, tiene la capacidad de cambiar su textura según sea requerido.
+    
+    \subsection{Personaje}
+    El modelamiento del personaje se basa en la herencia, al igual que otras de nuestras clases, en QGraphicsItem; Esta clase tiene un ancho y alto predefinido e invariable el cual se definió en base a mantener un buen tamaño para el personaje y no perder su relación de aspecto para que se mantuviera lo mas estético posible, tambien se le otorgo unas velocidades en el eje X y el eje Y para que de esta manera pudiera realizar sus saltos y otros movimientos básicos, su textura es variable para que se puedan distinguir el jugador 1 del jugador 2
+        
+\section{Estructura del Código}
+    \subsection{POR HACER}
+    HACER CUANDO TENGAMOS EL CÓDIGO COMPLETO
+    
 \section{Avances Regulares}
     \subsection{9/10/2021}
         Este día fue la apertura del telón para comenzar nuestro proyecto final, aquí nos encargamos de lo relacionado a la planificación del proyecto así como a iniciar este informe. Además de esto creamos una pagina en Notion para mantenernos al tanto de las actividades y siempre estar organizados (Link al Notion en el README del repositorio).
@@ -129,17 +149,17 @@
     \subsection{18/10/2021}
     Concluimos lo referente al menú inicial, además de esto comenzamos a hacer una corta investigación para realizar los cambios de escena y comenzar a hacer los mapas, esto nos trajo algunos inconvenientes pero al final se pudo realizar esta tarea de manera satisfactoria.
     
-\section{Modelamiento de las Clases}
-    \subsection{Imagen}
-    Es la primera clase que modelamos puesto a que era la mas simple y nos ayuda a darle algo de estética al programa y así no perder de vista nuestro objetivo. La clase cuenta con atributos básicos como altura, ancho y sus coordenadas de posición, esto debido a que su único trabajo es el de desplegar imágenes en una escena y poder moverlas con el setPos(). Los métodos que la componen son los necesarios para usarla como herencia de QGraphicsItem que son el painter y el boundingRect, además de esto nos encargamos de la textura que necesitamos haciendo uso de el constructor y unos cuantos condicionales.
+    \subsection{19/10/2021}
+    Nos dedicamos a ordenar el código de manera que podamos orientarnos de manera sencilla mientras vamos implementando nuevos fragmentos de código, adicionalmente realizamos unas bases para los 3 niveles y de esta manera poder comenzar el modelamiento y las pruebas de los personajes y enemigos.
     
-    \subsection{Botones}
-    Luego de una investigación descubrimos como configurar un QGraphicsItem para que funciones como un botón, para ello usamos los métodos mousePressEvent y mouseReleaseEvent, dichos métodos nos dan la posibilidad de realizar acciones cuando uno de estos sea presionado sumado les agregamos texturas al botón según lo requerido. 
-        
-        
-\section{Estructura del Código}
-    \subsection{POR HACER}
-    HACER CUANDO TENGAMOS EL CÓDIGO COMPLETO
+    \subsection{20/10/2021}
+    Este día fue completamente dedicado a la movilidad del personaje, para esto aplicamos formulas físicas para darle un movimiento fluido, sin embargo aun faltan detalles tales como la caída sin salto y arreglar algunas colisiones aun imperfectas, etc; Para realizar el modelamiento del salto nos basamos en el vídeo \cite{video_jump} el cual nos brindo apoyo lógico sobre como implementarlo.
+    
+    \subsection{21/10/2021}
+    El enfoque fue completamente dedicado a corregir errores de movimiento, logramos encontrar una manera de que las colisiones funciones de mejor manera, sin embargo aun queda el problema de que el personaje tiene que caer constantemente.
+    
+    \subsection{22/10/2021}
+    Principalmente fue dedicado a la semi-terminación del menú inicial para que sea mas practico, además de esto agregamos momentáneamente una forma de ver los distintos mapas para ir haciendo pruebas; Por ultimo tratamos de agregar un vídeo de fondo al menú pero no fue posible de momento.
     
 \section{Problemas Presentados}
     \subsection{9/10/2021}
@@ -155,9 +175,26 @@
     Luego de acomodar el cronograma hemos decidido que la primera semana, debido a su alto nivel de actividades curriculares la tomaremos con calma, esto debido a que luego de ella estaremos completamente libres para dedicarnos a nuestro proyecto y así hacer que sea lo mejor que podamos entregar. Además de esto tuvimos problemas cuando revisaron nuestro informe, por lo que tomamos medidas y lo corregimos de una manera que sea mas aceptable en estas etapas tempranas.
     
     \subsection{16/10/2021}
-     Nos enfrentamos a los inconvenientes para elementos al menú inicial, sin embargo todos estos problemas fueron solucionados de manera rápida y eficiente.   
+    Nos enfrentamos a los inconvenientes para elementos al menú inicial, sin embargo todos estos problemas fueron solucionados de manera rápida y eficiente.   
      
     \subsection{18/10/2021}
     El problema mas grande que tuvimos a la hora de hacer el menú inicial fueron los botones, esto debido a que requeríamos que dichos botones sirvieran como botones push para hacer cambios de escena o de menú; Para resolver este problema dimos con varias soluciones de las cuales elegimos una posteriormente.
+    
+    \subsection{19/10/2021}    
+    Hasta el momento se nos ha presentado un problema con el mousePressEvent, ya que nos está creando nuevos personajes, sin embargo esto hace parte del proceso de desarrollo que estamos tomando, por lo que esta dentro de lo calculado y sera corregido en próximos avances.
+    
+    \subsection{20/10/2021}
+    En el desarrollo de la movilidad del personaje se presentaron muchos problemas de distintas índoles, inicialmente tuvimos algunos inconvenientes a la hora de realizar los movimientos, luego para graficarlos tuvimos que implementar un timer y finalmente tuvimos problemas con respecto a las colisiones luego de los saltos los cuales aun no han sido resueltos para esta fecha.
+    
+    \subsection{21/10/2021}
+    La problemática que tenemos actualmente es la de la caída libre del personaje, debido a que debemos pensar como integrar dicha caída constante (gravedad constante) sin que estropee todo el trabajo realizado para lograr el resto de movimientos.
+    
+    \subsection{22/10/2021}
+    Haciendo un reordena miento del menú nos topamos con el problema para reproducir un vídeo en el fondo, para esto tratamos de hacer uso del QMediaPlayer y el QVideoWidget sin embargo de momento no fue posible entregarle la ruta del vídeo, trataremos de arreglar esto mas adelante.
+    
+\vfill
+\vspace*{0.5cm}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
     
 \end{document}

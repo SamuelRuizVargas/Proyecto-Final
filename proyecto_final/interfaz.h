@@ -2,14 +2,22 @@
 #define INTERFAZ_H
 
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QMainWindow>
+#include <QFontDatabase>
+#include <QMediaPlayer>
+#include <QVideoWidget>
+#include <QKeyEvent>
+#include <iostream>
 #include <fstream>
-#include <QMovie>//REVISAR (para poner videitos supongo)
 #include <QList>
+#include <QTimer>
 
 #include "imagenes.h"
 #include "botones.h"
 #include "plataforma.h"
+#include "personaje.h"
+#include "enemigo.h"
 
 using namespace std;
 
@@ -21,6 +29,9 @@ using namespace std;
 //--------------------------------------
 //-----------Rutas nivel 3--------------
 #define PATH_BASE_LVL3 "../proyecto_final/posiciones/lvl3/posi_base_lvl3.txt"
+#define PATH_PARED_LVL3 "../proyecto_final/posiciones/lvl3/posi_pared_lvl3.txt"
+#define PATH_ENE_LVL3 "../proyecto_final/posiciones/lvl3/posi_ene_lvl3.txt"
+#define PATH_LIMITS_LVL3 "../proyecto_final/posiciones/lvl3/posi_limit_ene_lvl3.txt"
 //--------------------------------------
 
 QT_BEGIN_NAMESPACE
@@ -35,16 +46,41 @@ public:
     Interfaz(QWidget *parent = nullptr);
     ~Interfaz();
 
+public slots:
+    void actualizar();
+    void standard();
+
 private:
     Ui::Interfaz *ui;
 
     //---------Escenas----------
-    QGraphicsScene *scene;
+    QGraphicsScene *menu_princi;
     QGraphicsScene *level_one;
     QGraphicsScene *level_two;
     QGraphicsScene *level_three;
     QGraphicsScene *bossfight;
-    //--------------------------
+    QGraphicsScene *scene2;
+    //---------------------------
+
+    //--------TIMERS--------------
+    QTimer *timer;
+    QTimer *timer_standard;
+    //---------------------------
+
+    //--------OBJETOS------------
+            //MENU
+    QMainWindow *ven2;
+
+    QMediaPlayer *fondo;
+    QVideoWidget *vw;
+            //LVL 1
+            //LVL 2
+            //LVL 3
+            //BOSSFIGHT
+            //OTROS
+    personaje *jugador1;
+    enemigo *enemigo_act;
+    //---------------------------
 
     //-----------Listas---------
                 //MENU
@@ -58,7 +94,10 @@ private:
     QList<Imagenes*> imagenes_lvl2;
                 //LVL 3
     QList<plataforma*> base_lvl3;
+    QList<plataforma*> pared_lvl3;
+    QList<plataforma*> limites_lvl3;
     QList<Imagenes*> imagenes_lvl3;
+    QList<enemigo*> enemigos_lvl3;
                 //BOSSFIGHT
     //--------------------------
 
@@ -72,9 +111,17 @@ private:
                 //LVL 3
     void crearLevelThree();
                 //BOSSFIGHT
+                //OTROS
+    QString letra(QString x);
+    bool evaluarColisionJugador(personaje *personaje, int lista);
+    bool evaluarColisionEnemies(int lista);
+    int evaluarColisionSalto(personaje *personaje, int lista);
+    void validacion();
+    int cont=0; // borrar
     //--------------------------
 
 protected:
     void mousePressEvent(QMouseEvent *event);
+    void keyPressEvent(QKeyEvent *i);
 };
 #endif // INTERFAZ_H

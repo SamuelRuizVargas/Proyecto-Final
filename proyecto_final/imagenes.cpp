@@ -25,26 +25,26 @@ void Imagenes::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     QPixmap pixmap;
     switch(image)
     {
-    case 1://el logo MENU
-    {
-        pixmap.load(PATH_LOGO);
-    }break;
-    case 2://el fondo MENU
-    {
-        pixmap.load(PATH_BACKGROUND);
-    }break;
-    case 3://el fondo LVL1
-    {
-        pixmap.load(PATH_BACK_1);
-    }break;
-    case 4://el fondo LVL2
-    {
-        pixmap.load(PATH_BACK_2);
-    }break;
-    case 5://el fondo LVL3
-    {
-        pixmap.load(PATH_BACK_3);
-    }break;
+        case 1://el logo MENU
+        {
+            pixmap.load(PATH_LOGO);
+        }break;
+        case 2://el fondo MENU
+        {
+            pixmap.load(PATH_BACKGROUND);
+        }break;
+        case 3://el fondo LVL1
+        {
+            pixmap.load(PATH_BACK_1);
+        }break;
+        case 4://el fondo LVL2
+        {
+            pixmap.load(PATH_BACK_2);
+        }break;
+        case 5://el fondo LVL3
+        {
+            pixmap.load(PATH_BACK_3);
+        }break;
     }
 
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
