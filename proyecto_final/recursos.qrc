@@ -14,5 +14,9 @@
         <file>imagenes/Botones/Boton_cargar.png</file>
         <file>imagenes/Botones/Boton_nueva.png</file>
         <file>videos/fondiu.mp4</file>
+        <file>imagenes/bug.ttf</file>
+        <file>imagenes/Enemigos/enemigo_base.png</file>
+        <file>imagenes/Enemigos/enemigo_distancia.png</file>
+        <file>imagenes/Enemigos/enemigo_volador.png</file>
     </qresource>
 </RCC>
