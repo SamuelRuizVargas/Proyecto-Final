@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     botones.cpp \
+    enemigo.cpp \
     imagenes.cpp \
     main.cpp \
     interfaz.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     botones.h \
+    enemigo.h \
     imagenes.h \
     interfaz.h \
     personaje.h \
@@ -33,5 +35,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    letras.qrc \
     recursos.qrc
+
+DISTFILES +=
