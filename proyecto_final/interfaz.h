@@ -5,7 +5,6 @@
 #include <QGraphicsView>
 #include <QMainWindow>
 #include <QFontDatabase>
-
 #include <QMediaPlayer>
 #include <QVideoWidget>
 #include <QKeyEvent>
@@ -18,6 +17,7 @@
 #include "botones.h"
 #include "plataforma.h"
 #include "personaje.h"
+#include "enemigo.h"
 
 using namespace std;
 
@@ -30,6 +30,8 @@ using namespace std;
 //-----------Rutas nivel 3--------------
 #define PATH_BASE_LVL3 "../proyecto_final/posiciones/lvl3/posi_base_lvl3.txt"
 #define PATH_PARED_LVL3 "../proyecto_final/posiciones/lvl3/posi_pared_lvl3.txt"
+#define PATH_ENE_LVL3 "../proyecto_final/posiciones/lvl3/posi_ene_lvl3.txt"
+#define PATH_LIMITS_LVL3 "../proyecto_final/posiciones/lvl3/posi_limit_ene_lvl3.txt"
 //--------------------------------------
 
 QT_BEGIN_NAMESPACE
@@ -46,6 +48,7 @@ public:
 
 public slots:
     void actualizar();
+    void standard();
 
 private:
     Ui::Interfaz *ui;
@@ -59,17 +62,24 @@ private:
     QGraphicsScene *scene2;
     //---------------------------
 
-    //--------TIMER--------------
+    //--------TIMERS--------------
     QTimer *timer;
+    QTimer *timer_standard;
     //---------------------------
 
     //--------OBJETOS------------
-    personaje *jugador1;
-
+            //MENU
     QMainWindow *ven2;
 
     QMediaPlayer *fondo;
     QVideoWidget *vw;
+            //LVL 1
+            //LVL 2
+            //LVL 3
+            //BOSSFIGHT
+            //OTROS
+    personaje *jugador1;
+    enemigo *enemigo_act;
     //---------------------------
 
     //-----------Listas---------
@@ -85,7 +95,9 @@ private:
                 //LVL 3
     QList<plataforma*> base_lvl3;
     QList<plataforma*> pared_lvl3;
+    QList<plataforma*> limites_lvl3;
     QList<Imagenes*> imagenes_lvl3;
+    QList<enemigo*> enemigos_lvl3;
                 //BOSSFIGHT
     //--------------------------
 
@@ -102,10 +114,10 @@ private:
                 //OTROS
     QString letra(QString x);
     bool evaluarColisionJugador(personaje *personaje, int lista);
+    bool evaluarColisionEnemies(int lista);
     int evaluarColisionSalto(personaje *personaje, int lista);
     void validacion();
     int cont=0; // borrar
-
     //--------------------------
 
 protected:

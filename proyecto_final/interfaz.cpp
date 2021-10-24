@@ -22,8 +22,6 @@ Interfaz::Interfaz(QWidget *parent)
     bossfight = new QGraphicsScene;
     //----------------------------
 
-
-
     //----Crear objetos en escenas-----
     crearMenu();
     crearLevelOne();
@@ -31,9 +29,13 @@ Interfaz::Interfaz(QWidget *parent)
     crearLevelThree();
     //---------------------------------
 
-    //----------Timer------------------
+    //----------Timers------------------
     timer=new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizar()));
+
+    timer_standard=new QTimer(this);
+    connect(timer_standard,SIGNAL(timeout()),this,SLOT(standard()));
+    timer_standard->start(20);
     //---------------------------------
 
 }
@@ -43,7 +45,7 @@ Interfaz::~Interfaz()
     delete ui;
 }
 
-void Interfaz::actualizar()
+void Interfaz::actualizar()//se encarga de los movimientos del personaje
 {
     if(jugador1->getcaida()){
         int copy_y=jugador1->getY(),copy_x=jugador1->getX();
@@ -55,7 +57,7 @@ void Interfaz::actualizar()
             jugador1->setposis(copy_x,copy_y);
             jugador1->setPos(jugador1->getX(),jugador1->getY());
         }
-        else if(evaluarColisionJugador(jugador1, listabase)) //and veye<=-40)
+        else if(evaluarColisionJugador(jugador1, listabase))
         {
             timer->stop();
             jugador1->setposis(copy_x,copy_y);
@@ -75,7 +77,7 @@ void Interfaz::actualizar()
             jugador1->setposis(copy_x,copy_y);
             jugador1->setPos(jugador1->getX(),jugador1->getY());
         }
-        else if(evaluarColisionJugador(jugador1, listabase)) //and veye<=-40)
+        else if(evaluarColisionJugador(jugador1, listabase))
         {
             timer->stop();
             jugador1->setposis(copy_x,copy_y);
@@ -86,6 +88,47 @@ void Interfaz::actualizar()
         }
     }
 
+}
+
+void Interfaz::standard()//se encarga de todo lo que necesite un timer
+{
+    //---------------Mover enemigos---------------
+    QList<enemigo*>::iterator ite;
+
+    int contador=0;
+    for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+    {
+        int taip=enemigos_lvl3[contador]->getTipo();
+        if(taip==1 or taip==3)
+        {
+            enemigo_act=enemigos_lvl3[contador];
+            bool moverse=enemigo_act->getMov();
+            if(moverse==true)
+            {
+                enemigo_act->moveLeft();
+                if(evaluarColisionEnemies(listabase))
+                {
+                    enemigos_lvl3[contador]->movOriginal();
+                    enemigos_lvl3[contador]->moveRight();
+                    enemigos_lvl3[contador]->moveRight();
+                }
+                enemigos_lvl3[contador]->moveLeft();
+            }
+            else
+            {
+                enemigo_act->moveRight();
+                if(evaluarColisionEnemies(listabase))
+                {
+                    enemigos_lvl3[contador]->movOriginal();
+                    enemigos_lvl3[contador]->moveLeft();
+                    enemigos_lvl3[contador]->moveLeft();
+                }
+                enemigos_lvl3[contador]->moveRight();
+            }
+        }
+        contador++;
+    }
+    //--------------------------------------------
 }
 
 void Interfaz::crearMenu()//Crea y agrega los elementos del menu inicial
@@ -255,6 +298,55 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
 
 void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
 {
+    //-----------------------Limites enemigos---------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_LIMITS_LVL3, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            limites_lvl3.append(new plataforma(ente1,ente2,ente3,ente4));
+            level_three->addItem(limites_lvl3.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
+
     //-------------------Imagenes---------------
     imagenes_lvl3.append(new Imagenes(0,0,2500,681,5)); // Background
 
@@ -267,7 +359,7 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
     }
     //------------------------------------------
 
-    //---------Se saca las paredes del mapa----------
+    //-----------------------Paredes del mapa---------------------
     {
         ifstream archivo;
         string coorde,numero,int1,int2,int3,int4,digi;
@@ -316,7 +408,7 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
     }
     //------------------------------------------------------------
 
-    //-----------------Se saca la base del mapa------------------
+    //------------------------Base del mapa-----------------------
     {
         ifstream archivo;
         string coorde,numero,int1,int2,int3,int4,digi;
@@ -364,44 +456,138 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
         archivo.close();
     }
     //------------------------------------------------------------
+
+    //--------------------------Enemigos--------------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,int5,digi;
+        int ente1,ente2,ente3,ente4,ente5,len,conta;
+        archivo.open(PATH_ENE_LVL3, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    else if(conta==5)
+                        int5+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            ente5=atoi(int5.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            int5.erase();
+            enemigos_lvl3.append(new enemigo(ente1,ente2,ente3,ente4,ente5));
+            level_three->addItem(enemigos_lvl3.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
 }
 
 bool Interfaz::evaluarColisionJugador(personaje *personaje, int lista)
 {
     QList<plataforma*>::iterator it;
 
-    switch (lista) {
+    switch (lista)
+    {
         case 1:
-        for(it=base_lvl1.begin();it!=base_lvl1.end();it++)
         {
-            if(personaje->collidesWithItem(*it))
+            for(it=base_lvl1.begin();it!=base_lvl1.end();it++)
             {
-                return true;
+                if(personaje->collidesWithItem(*it))
+                {
+                    return true;
+                }
             }
-        }
-        break;
+        }break;
         case 2:
-        for(it=base_lvl2.begin();it!=base_lvl2.end();it++)
         {
-            if(personaje->collidesWithItem(*it))
+            for(it=base_lvl2.begin();it!=base_lvl2.end();it++)
             {
-                return true;
+                if(personaje->collidesWithItem(*it))
+                {
+                    return true;
+                }
             }
-        }
-        break;
+        }break;
         case 3:
-        for(it=base_lvl3.begin();it!=base_lvl3.end();it++)
         {
-            if(personaje->collidesWithItem(*it))
+            for(it=base_lvl3.begin();it!=base_lvl3.end();it++)
             {
-                return true;
+                if(personaje->collidesWithItem(*it))
+                {
+                    return true;
+                }
             }
-        }
-        break;
-
+        }break;
     }
+    return false;
+}
 
+bool Interfaz::evaluarColisionEnemies(int lista)
+{
+    QList<plataforma*>::iterator it;
 
+    switch (lista)
+    {
+        case 1:
+        {
+//            for(it=limites_lvl1.begin();it!=limites_lvl1.end();it++)
+//            {
+//                if(enemigo_act->collidesWithItem(*it))
+//                {
+//                    return true;
+//                }
+//            }
+        }break;
+        case 2:
+        {
+//            for(it=limites_lvl2.begin();it!=limites_lvl2.end();it++)
+//            {
+//                if(enemigo_act->collidesWithItem(*it))
+//                {
+//                    return true;
+//                }
+//            }
+        }break;
+        case 3:
+        {
+            for(it=limites_lvl3.begin();it!=limites_lvl3.end();it++)
+            {
+                if(enemigo_act->collidesWithItem(*it))
+                {
+                    return true;
+                }
+            }
+        }break;
+    }
     return false;
 }
 
@@ -421,7 +607,6 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)
 
 void Interfaz::validacion()
 {
-
     ven2 = new QMainWindow();
     ven2->setGeometry(0,0,500,500);
     //Terminar
@@ -435,10 +620,10 @@ void Interfaz::validacion()
 void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
 {
     //---------------Menu Principal--------------
-    cont++;
+    //cont++;
     if(buttons.at(0)->get_Pressed())
     {
-        if(cont==1)validacion();
+        //if(cont==1)validacion();
 
         menu_princi->removeItem(buttons.at(0));
         menu_princi->removeItem(buttons.at(1));
@@ -451,10 +636,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
     {
         //hacer botones para partidas (pensar luego)
     }
-
-
-
-
+    //-------------------------------------------
 
     //----------Partidas un jugador--------------USANDO PARA PROBAR NIVELES
     if(buttons.at(2)->get_Pressed())
@@ -495,7 +677,6 @@ QString Interfaz::letra(QString x)
     return letra[0];
 }
 
-
 void Interfaz::keyPressEvent(QKeyEvent *i)
 {
     //----------------Movimiento--------------------------
@@ -523,10 +704,10 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
     }
     else if(i->key() == Qt::Key_W)
     {
-        jugador1->changedown();
+        if(jugador1->getcaida())
+            jugador1->changedown();
         jugador1->resetVX();
         timer->start(16);
-
     }
     //----------------------------------------------------
 }
