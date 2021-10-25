@@ -604,26 +604,19 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)
     }
     return 0;
 }
-
+/*
 void Interfaz::validacion()
 {
-    ven2 = new QMainWindow();
-    ven2->setGeometry(0,0,500,500);
-    //Terminar
 
-    QString x = letra(":/imagenes/bug.ttf");
-    QFont y(x);
-    y.setPointSize(16);
-    ven2->show();
 }
-
+*/
 void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
 {
     //---------------Menu Principal--------------
-    //cont++;
+    cont++;
     if(buttons.at(0)->get_Pressed())
     {
-        //if(cont==1)validacion();
+        if(cont==1)validacion();
 
         menu_princi->removeItem(buttons.at(0));
         menu_princi->removeItem(buttons.at(1));
@@ -711,3 +704,4 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
     }
     //----------------------------------------------------
 }
+
