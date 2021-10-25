@@ -18,6 +18,7 @@
 #include "plataforma.h"
 #include "personaje.h"
 #include "enemigo.h"
+#include "validacion.h"
 
 using namespace std;
 
@@ -69,7 +70,7 @@ private:
 
     //--------OBJETOS------------
             //MENU
-    QMainWindow *ven2;
+    validacion *pass;
 
     QMediaPlayer *fondo;
     QVideoWidget *vw;
