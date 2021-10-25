@@ -16,6 +16,7 @@ SOURCES += \
     interfaz.cpp \
     personaje.cpp \
     plataforma.cpp \
+    proyectil.cpp \
     validacion.cpp
 
 HEADERS += \
@@ -25,6 +26,7 @@ HEADERS += \
     interfaz.h \
     personaje.h \
     plataforma.h \
+    proyectil.h \
     validacion.h
 
 FORMS += \

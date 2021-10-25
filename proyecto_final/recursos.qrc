@@ -5,7 +5,6 @@
         <file>imagenes/Botones/Boton_multi.png</file>
         <file>imagenes/Menu/logo.png</file>
         <file>imagenes/Menu/menu_back.jpg</file>
-        <file>imagenes/LVLS/lvl1/bloque.png</file>
         <file>imagenes/LVLS/bossfight/background.jpg</file>
         <file>imagenes/player1.png</file>
         <file>imagenes/LVLS/lvl3/background.jpg</file>
@@ -16,7 +15,9 @@
         <file>videos/fondiu.mp4</file>
         <file>imagenes/bug.ttf</file>
         <file>imagenes/Enemigos/enemigo_base.png</file>
-        <file>imagenes/Enemigos/enemigo_distancia.png</file>
         <file>imagenes/Enemigos/enemigo_volador.png</file>
+        <file>imagenes/Enemigos/enemigo_distancia.png</file>
+        <file>imagenes/bloque.png</file>
+        <file>imagenes/proyectil.png</file>
     </qresource>
 </RCC>
