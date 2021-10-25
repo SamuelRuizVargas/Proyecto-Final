@@ -595,12 +595,38 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)
 {
     QList<plataforma*>::iterator it;
     //cambiar esta parte para que sirva de manera general
-    for(it=pared_lvl3.begin();it!=pared_lvl3.end();it++)
+    switch (lista)
     {
-        if(personaje->collidesWithItem(*it))
+        case 1:
         {
-            return 1;
-        }
+//            for(it=pared_lvl1.begin();it!=pared_lvl1.end();it++)
+//            {
+//                if(personaje->collidesWithItem(*it))
+//                {
+//                    return ;
+//                }
+//            }
+        }break;
+        case 2:
+        {
+//            for(it=pared_lvl2.begin();it!=pared_lvl2.end();it++)
+//            {
+//                if(personaje->collidesWithItem(*it))
+//                {
+//                    return ;
+//                }
+//            }
+        }break;
+        case 3:
+        {
+            for(it=pared_lvl3.begin();it!=pared_lvl3.end();it++)
+            {
+                if(personaje->collidesWithItem(*it))
+                {
+                    return 1;
+                }
+            }
+        }break;
     }
     return 0;
 }
@@ -616,7 +642,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
     cont++;
     if(buttons.at(0)->get_Pressed())
     {
-        if(cont==1)validacion();
+//        if(cont==1)validacion();
 
         menu_princi->removeItem(buttons.at(0));
         menu_princi->removeItem(buttons.at(1));

@@ -69,7 +69,7 @@ void personaje::resetVX()
 
 void personaje::resetVY()
 {
-    vy=80;
+    vy=60;
 }
 
 void personaje::resetVY2()
