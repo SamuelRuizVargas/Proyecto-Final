@@ -96,39 +96,116 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
     //---------------Mover enemigos---------------
     {
         QList<enemigo*>::iterator ite;
-
-        int contador=0;
-        for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+        switch (listabase)
         {
-            int taip=enemigos_lvl3[contador]->getTipo();
-            if(taip==1 or taip==3)
+            case 1:
             {
-                enemigo_act=enemigos_lvl3[contador];
-                bool moverse=enemigo_act->getMov();
-                if(moverse==true)
+                int contador=0;
+                for(ite=enemigos_lvl1.begin();ite!=enemigos_lvl1.end();ite++)
                 {
-                    enemigo_act->moveLeft();
-                    if(evaluarColisionEnemies(listabase))
+                    int taip=enemigos_lvl1[contador]->getTipo();
+                    if(taip==1 or taip==3)
                     {
-                        enemigos_lvl3[contador]->movOriginal();
-                        enemigos_lvl3[contador]->moveRight();
-                        enemigos_lvl3[contador]->moveRight();
+                        enemigo_act=enemigos_lvl1[contador];
+                        bool moverse=enemigo_act->getMov();
+                        if(moverse==true)
+                        {
+                            enemigo_act->moveLeft();
+                            if(evaluarColisionEnemies(listabase))
+                            {
+                                enemigos_lvl1[contador]->movOriginal();
+                                enemigos_lvl1[contador]->moveRight();
+                                enemigos_lvl1[contador]->moveRight();
+                            }
+                            enemigos_lvl1[contador]->moveLeft();
+                        }
+                        else
+                        {
+                            enemigo_act->moveRight();
+                            if(evaluarColisionEnemies(listabase))
+                            {
+                                enemigos_lvl1[contador]->movOriginal();
+                                enemigos_lvl1[contador]->moveLeft();
+                                enemigos_lvl1[contador]->moveLeft();
+                            }
+                            enemigos_lvl1[contador]->moveRight();
+                        }
                     }
-                    enemigos_lvl3[contador]->moveLeft();
+                    contador++;
                 }
-                else
+            }break;
+            case 2:
+            {
+                int contador=0;
+                for(ite=enemigos_lvl2.begin();ite!=enemigos_lvl2.end();ite++)
                 {
-                    enemigo_act->moveRight();
-                    if(evaluarColisionEnemies(listabase))
+                    int taip=enemigos_lvl2[contador]->getTipo();
+                    if(taip==1 or taip==3)
                     {
-                        enemigos_lvl3[contador]->movOriginal();
-                        enemigos_lvl3[contador]->moveLeft();
-                        enemigos_lvl3[contador]->moveLeft();
+                        enemigo_act=enemigos_lvl2[contador];
+                        bool moverse=enemigo_act->getMov();
+                        if(moverse==true)
+                        {
+                            enemigo_act->moveLeft();
+                            if(evaluarColisionEnemies(listabase))
+                            {
+                                enemigos_lvl2[contador]->movOriginal();
+                                enemigos_lvl2[contador]->moveRight();
+                                enemigos_lvl2[contador]->moveRight();
+                            }
+                            enemigos_lvl2[contador]->moveLeft();
+                        }
+                        else
+                        {
+                            enemigo_act->moveRight();
+                            if(evaluarColisionEnemies(listabase))
+                            {
+                                enemigos_lvl2[contador]->movOriginal();
+                                enemigos_lvl2[contador]->moveLeft();
+                                enemigos_lvl2[contador]->moveLeft();
+                            }
+                            enemigos_lvl2[contador]->moveRight();
+                        }
                     }
-                    enemigos_lvl3[contador]->moveRight();
+                    contador++;
                 }
-            }
-            contador++;
+            }break;
+            case 3:
+            {
+                int contador=0;
+                for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+                {
+                    int taip=enemigos_lvl3[contador]->getTipo();
+                    if(taip==1 or taip==3)
+                    {
+                        enemigo_act=enemigos_lvl3[contador];
+                        bool moverse=enemigo_act->getMov();
+                        if(moverse==true)
+                        {
+                            enemigo_act->moveLeft();
+                            if(evaluarColisionEnemies(listabase))
+                            {
+                                enemigos_lvl3[contador]->movOriginal();
+                                enemigos_lvl3[contador]->moveRight();
+                                enemigos_lvl3[contador]->moveRight();
+                            }
+                            enemigos_lvl3[contador]->moveLeft();
+                        }
+                        else
+                        {
+                            enemigo_act->moveRight();
+                            if(evaluarColisionEnemies(listabase))
+                            {
+                                enemigos_lvl3[contador]->movOriginal();
+                                enemigos_lvl3[contador]->moveLeft();
+                                enemigos_lvl3[contador]->moveLeft();
+                            }
+                            enemigos_lvl3[contador]->moveRight();
+                        }
+                    }
+                    contador++;
+                }
+            }break;
         }
     }
     //--------------------------------------------
@@ -180,26 +257,78 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
         {
             QList<enemigo*>::iterator ite;
 
-            int contador=0;
-            for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+            switch (listabase)
             {
-                if(enemigos_lvl3[contador]->getTipo()==3)
+                case 1:
                 {
-                    int postionx=enemigos_lvl3[contador]->getX(), postiony=enemigos_lvl3[contador]->getY();
-                    bool side=enemigos_lvl3[contador]->getMov();
-                    if(side==true)
+                    int contador=0;
+                    for(ite=enemigos_lvl1.begin();ite!=enemigos_lvl1.end();ite++)
                     {
-                        balas_enemigos.append(new proyectil(postionx,postiony+20,-10,0,20,20,1));
+                        if(enemigos_lvl1[contador]->getTipo()==3)
+                        {
+                            int postionx=enemigos_lvl1[contador]->getX(), postiony=enemigos_lvl1[contador]->getY();
+                            bool side=enemigos_lvl1[contador]->getMov();
+                            if(side==true)
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony+20,-10,0,20,20,1));
+                            }
+                            else
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony+20,10,0,20,20,1));
+                            }
+                            level_one->addItem(balas_enemigos.back());
+                        }
+                        contador++;
                     }
-                    else
+                    conta_avispa=0;
+                }break;
+                case 2:
+                {
+                    int contador=0;
+                    for(ite=enemigos_lvl2.begin();ite!=enemigos_lvl2.end();ite++)
                     {
-                        balas_enemigos.append(new proyectil(postionx,postiony+20,10,0,20,20,1));
+                        if(enemigos_lvl2[contador]->getTipo()==3)
+                        {
+                            int postionx=enemigos_lvl2[contador]->getX(), postiony=enemigos_lvl2[contador]->getY();
+                            bool side=enemigos_lvl2[contador]->getMov();
+                            if(side==true)
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony+20,-10,0,20,20,1));
+                            }
+                            else
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony+20,10,0,20,20,1));
+                            }
+                            level_two->addItem(balas_enemigos.back());
+                        }
+                        contador++;
                     }
-                    level_three->addItem(balas_enemigos.back());
-                }
-                contador++;
+                    conta_avispa=0;
+                }break;
+                case 3:
+                {
+                    int contador=0;
+                    for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+                    {
+                        if(enemigos_lvl3[contador]->getTipo()==3)
+                        {
+                            int postionx=enemigos_lvl3[contador]->getX(), postiony=enemigos_lvl3[contador]->getY();
+                            bool side=enemigos_lvl3[contador]->getMov();
+                            if(side==true)
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony+20,-10,0,20,20,1));
+                            }
+                            else
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony+20,10,0,20,20,1));
+                            }
+                            level_three->addItem(balas_enemigos.back());
+                        }
+                        contador++;
+                    }
+                    conta_avispa=0;
+                }break;
             }
-            conta_avispa=0;
         }
 
         conta_bombardero+=20;
@@ -207,26 +336,78 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
         {
             QList<enemigo*>::iterator ite;
 
-            int contador=0;
-            for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+            switch (listabase)
             {
-                if(enemigos_lvl3[contador]->getTipo()==2)
+                case 1:
                 {
-                    int postionx=enemigos_lvl3[contador]->getX(), postiony=enemigos_lvl3[contador]->getY();
-                    int pox=jugador1->getX();
-                    if(pox>=enemigos_lvl3[contador]->getX())
+                    int contador=0;
+                    for(ite=enemigos_lvl1.begin();ite!=enemigos_lvl1.end();ite++)
                     {
-                        balas_enemigos.append(new proyectil(postionx,postiony-20,80,80,40,40,1));
+                        if(enemigos_lvl1[contador]->getTipo()==2)
+                        {
+                            int postionx=enemigos_lvl1[contador]->getX(), postiony=enemigos_lvl1[contador]->getY();
+                            int pox=jugador1->getX();
+                            if(pox>=enemigos_lvl1[contador]->getX())
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony-20,80,80,40,40,1));
+                            }
+                            else
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony-20,-80,80,40,40,1));
+                            }
+                            level_one->addItem(balas_enemigos.back());
+                        }
+                        contador++;
                     }
-                    else
+                    conta_bombardero=0;
+                }break;
+                case 2:
+                {
+                    int contador=0;
+                    for(ite=enemigos_lvl2.begin();ite!=enemigos_lvl2.end();ite++)
                     {
-                        balas_enemigos.append(new proyectil(postionx,postiony-20,-80,80,40,40,1));
+                        if(enemigos_lvl2[contador]->getTipo()==2)
+                        {
+                            int postionx=enemigos_lvl2[contador]->getX(), postiony=enemigos_lvl2[contador]->getY();
+                            int pox=jugador1->getX();
+                            if(pox>=enemigos_lvl2[contador]->getX())
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony-20,80,80,40,40,1));
+                            }
+                            else
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony-20,-80,80,40,40,1));
+                            }
+                            level_two->addItem(balas_enemigos.back());
+                        }
+                        contador++;
                     }
-                    level_three->addItem(balas_enemigos.back());
-                }
-                contador++;
+                    conta_bombardero=0;
+                }break;
+                case 3:
+                {
+                    int contador=0;
+                    for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+                    {
+                        if(enemigos_lvl3[contador]->getTipo()==2)
+                        {
+                            int postionx=enemigos_lvl3[contador]->getX(), postiony=enemigos_lvl3[contador]->getY();
+                            int pox=jugador1->getX();
+                            if(pox>=enemigos_lvl3[contador]->getX())
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony-20,80,80,40,40,1));
+                            }
+                            else
+                            {
+                                balas_enemigos.append(new proyectil(postionx,postiony-20,-80,80,40,40,1));
+                            }
+                            level_three->addItem(balas_enemigos.back());
+                        }
+                        contador++;
+                    }
+                    conta_bombardero=0;
+                }break;
             }
-            conta_bombardero=0;
         }
 
         QList<proyectil*>::iterator ite;
@@ -283,18 +464,6 @@ void Interfaz::crearMenu()//Crea y agrega los elementos del menu inicial
     }
     //------------------------------------------
 
-    //-------------------Fondo------------------
-//    fondo = new QMediaPlayer;
-//    vw = new QVideoWidget;
-
-//    fondo->setVideoOutput(vw);
-//    fondo->setMedia();
-
-//    vw->setGeometry(0,0,1280,720);
-//    fondo->play();
-//    menu_princi->addWidget(vw);
-    //------------------------------------------
-
     //------------------Botones-----------------
     buttons.append(new botones(525,275,225,75,1));
     buttons.append(new botones(525,350,225,75,2));
@@ -311,125 +480,133 @@ void Interfaz::crearMenu()//Crea y agrega los elementos del menu inicial
 
 void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
 {
-    //-------------------Imagenes---------------
-    imagenes_lvl1.append(new Imagenes(0,0,2500,1200,3)); // Background
-
-    QList<Imagenes*>::iterator it;
-    int cont = 0;
-    for(it = imagenes_lvl1.begin(); it!= imagenes_lvl1.end(); it++)
+    //---------------------------Imagenes-------------------------
     {
-        level_one->addItem(imagenes_lvl1.at(cont));
-        cont++;
-    }
-    //------------------------------------------
+        imagenes_lvl1.append(new Imagenes(0,0,2500,1200,3)); // Background
 
-    //-----------------Se saca la base del mapa------------------
-    ifstream archivo;
-    string coorde,numero,int1,int2,int3,int4,digi;
-    int ente1,ente2,ente3,ente4,len,conta;
-    archivo.open(PATH_BASE_LVL1, ios::in);
-    while(!archivo.eof())
-    {
-        if (archivo.eof())
-            break;
-        getline(archivo,coorde);
-        len=coorde.length();
-        conta=0;
-        for (int i=0; i<=len;i++)
+        QList<Imagenes*>::iterator it;
+        int cont = 0;
+        for(it = imagenes_lvl1.begin(); it!= imagenes_lvl1.end(); it++)
         {
-            digi=coorde[i];
-            if (digi!="," and digi[0]!='\000' )
-            {
-                numero+=digi;
-            }
-            else
-            {
-                conta+=1;
-                if(conta==1)
-                    int1+=numero;
-                else if(conta==2)
-                    int2+=numero;
-                else if(conta==3)
-                    int3+=numero;
-                else if(conta==4)
-                    int4+=numero;
-                numero.erase();
-            }
+            level_one->addItem(imagenes_lvl1.at(cont));
+            cont++;
         }
-        ente1=atoi(int1.c_str());
-        ente2=atoi(int2.c_str());
-        ente3=atoi(int3.c_str());
-        ente4=atoi(int4.c_str());
-        int1.erase();
-        int2.erase();
-        int3.erase();
-        int4.erase();
-        base_lvl1.append(new plataforma(ente1,ente2,ente3,ente4));
-        level_one->addItem(base_lvl1.back());
     }
-    archivo.close();
+    //------------------------------------------------------------
+
+    //-----------------Se saca la base del mapa-------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_BASE_LVL1, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            base_lvl1.append(new plataforma(ente1,ente2,ente3,ente4));
+            level_one->addItem(base_lvl1.back());
+        }
+        archivo.close();
+    }
     //------------------------------------------------------------
 }
 
 void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
 {
-    //-------------------Imagenes---------------
-    imagenes_lvl2.append(new Imagenes(0,0,2500,1200,4)); // Background
-
-    QList<Imagenes*>::iterator it;
-    int cont = 0;
-    for(it = imagenes_lvl2.begin(); it!= imagenes_lvl2.end(); it++)
+    //---------------------------Imagenes-------------------------
     {
-        level_two->addItem(imagenes_lvl2.at(cont));
-        cont++;
-    }
-    //------------------------------------------
+        imagenes_lvl2.append(new Imagenes(0,0,2500,1200,4)); // Background
 
-    //-----------------Se saca la base del mapa------------------
-    ifstream archivo;
-    string coorde,numero,int1,int2,int3,int4,digi;
-    int ente1,ente2,ente3,ente4,len,conta;
-    archivo.open(PATH_BASE_LVL2, ios::in);
-    while(!archivo.eof())
-    {
-        if (archivo.eof())
-            break;
-        getline(archivo,coorde);
-        len=coorde.length();
-        conta=0;
-        for (int i=0; i<=len;i++)
+        QList<Imagenes*>::iterator it;
+        int cont = 0;
+        for(it = imagenes_lvl2.begin(); it!= imagenes_lvl2.end(); it++)
         {
-            digi=coorde[i];
-            if (digi!="," and digi[0]!='\000' )
-            {
-                numero+=digi;
-            }
-            else
-            {
-                conta+=1;
-                if(conta==1)
-                    int1+=numero;
-                else if(conta==2)
-                    int2+=numero;
-                else if(conta==3)
-                    int3+=numero;
-                else if(conta==4)
-                    int4+=numero;
-                numero.erase();
-            }
+            level_two->addItem(imagenes_lvl2.at(cont));
+            cont++;
         }
-        ente1=atoi(int1.c_str());
-        ente2=atoi(int2.c_str());
-        ente3=atoi(int3.c_str());
-        ente4=atoi(int4.c_str());
-        int1.erase();
-        int2.erase();
-        int3.erase();
-        int4.erase();
-        base_lvl2.append(new plataforma(ente1,ente2,ente3,ente4));
-        level_two->addItem(base_lvl2.back());
     }
-    archivo.close();
+    //------------------------------------------------------------
+
+    //-----------------Se saca la base del mapa-------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_BASE_LVL2, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            base_lvl2.append(new plataforma(ente1,ente2,ente3,ente4));
+            level_two->addItem(base_lvl2.back());
+        }
+        archivo.close();
+    }
     //------------------------------------------------------------
 }
 
@@ -484,17 +661,19 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
     }
     //------------------------------------------------------------
 
-    //-------------------Imagenes---------------
-    imagenes_lvl3.append(new Imagenes(0,0,2500,681,5)); // Background
-
-    QList<Imagenes*>::iterator it;
-    int cont = 0;
-    for(it = imagenes_lvl3.begin(); it!= imagenes_lvl3.end(); it++)
+    //---------------------------Imagenes-------------------------
     {
-        level_three->addItem(imagenes_lvl3.at(cont));
-        cont++;
+        imagenes_lvl3.append(new Imagenes(0,0,2500,681,5)); // Background
+
+        QList<Imagenes*>::iterator it;
+        int cont = 0;
+        for(it = imagenes_lvl3.begin(); it!= imagenes_lvl3.end(); it++)
+        {
+            level_three->addItem(imagenes_lvl3.at(cont));
+            cont++;
+        }
     }
-    //------------------------------------------
+    //------------------------------------------------------------
 
     //-----------------------Paredes del mapa---------------------
     {
@@ -648,7 +827,7 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
     //------------------------------------------------------------
 }
 
-bool Interfaz::evaluarColisionJugador(personaje *personaje, int lista)
+bool Interfaz::evaluarColisionJugador(personaje *personaje, int lista)//Evalua si el jugador choca caminando
 {
     QList<plataforma*>::iterator it;
 
@@ -688,7 +867,7 @@ bool Interfaz::evaluarColisionJugador(personaje *personaje, int lista)
     return false;
 }
 
-bool Interfaz::evaluarColisionEnemies(int lista)
+bool Interfaz::evaluarColisionEnemies(int lista)//Evalua las colisiones de los enemigos con sus limites de movimiento
 {
     QList<plataforma*>::iterator it;
 
@@ -696,23 +875,23 @@ bool Interfaz::evaluarColisionEnemies(int lista)
     {
         case 1:
         {
-//            for(it=limites_lvl1.begin();it!=limites_lvl1.end();it++)
-//            {
-//                if(enemigo_act->collidesWithItem(*it))
-//                {
-//                    return true;
-//                }
-//            }
+            for(it=limites_lvl1.begin();it!=limites_lvl1.end();it++)
+            {
+                if(enemigo_act->collidesWithItem(*it))
+                {
+                    return true;
+                }
+            }
         }break;
         case 2:
         {
-//            for(it=limites_lvl2.begin();it!=limites_lvl2.end();it++)
-//            {
-//                if(enemigo_act->collidesWithItem(*it))
-//                {
-//                    return true;
-//                }
-//            }
+            for(it=limites_lvl2.begin();it!=limites_lvl2.end();it++)
+            {
+                if(enemigo_act->collidesWithItem(*it))
+                {
+                    return true;
+                }
+            }
         }break;
         case 3:
         {
@@ -736,23 +915,23 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)
     {
         case 1:
         {
-//            for(it=pared_lvl1.begin();it!=pared_lvl1.end();it++)
-//            {
-//                if(personaje->collidesWithItem(*it))
-//                {
-//                    return ;
-//                }
-//            }
+            for(it=pared_lvl1.begin();it!=pared_lvl1.end();it++)
+            {
+                if(personaje->collidesWithItem(*it))
+                {
+                    return 1;
+                }
+            }
         }break;
         case 2:
         {
-//            for(it=pared_lvl2.begin();it!=pared_lvl2.end();it++)
-//            {
-//                if(personaje->collidesWithItem(*it))
-//                {
-//                    return ;
-//                }
-//            }
+            for(it=pared_lvl2.begin();it!=pared_lvl2.end();it++)
+            {
+                if(personaje->collidesWithItem(*it))
+                {
+                    return 1;
+                }
+            }
         }break;
         case 3:
         {
@@ -807,6 +986,12 @@ bool Interfaz::evaluarColisionBullet(proyectil *bala, int lista)
     }
     return false;
 }
+
+void Interfaz::changeTeclas()
+{
+    if(teclas==false)teclas=true;
+    else teclas=false;
+}
 /*
 void Interfaz::validacion()
 {
@@ -843,6 +1028,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
         timer_standard->start(20);
         listabase = 1;
+        changeTeclas();
     }
     if(buttons.at(3)->get_Pressed())
     {
@@ -852,6 +1038,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
         timer_standard->start(20);
         listabase = 2;
+        changeTeclas();
     }
     if(buttons.at(4)->get_Pressed())
     {
@@ -861,6 +1048,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
         timer_standard->start(20);
         listabase = 3;
+        changeTeclas();
     }
     //-------------------------------------------
 }
@@ -879,54 +1067,91 @@ QString Interfaz::letra(QString x)
 void Interfaz::keyPressEvent(QKeyEvent *i)
 {
     //----------------Movimiento--------------------------
-    if(i->key() == Qt::Key_D)
+    if(teclas==true)
     {
-        jugador1->setVX(7);
-        timer->start(16);
-        jugador1->moveRight();
-        if(evaluarColisionJugador(jugador1, listabase))
-        {
-            jugador1->setVX(-7);
-            jugador1->moveLeft();
-        }
-        else
-            jugador1->setside(true);
-    }
-    else if(i->key() == Qt::Key_A)
-    {
-        jugador1->setVX(-7);
-        timer->start(16);
-        jugador1->moveLeft();
-        if(evaluarColisionJugador(jugador1, listabase))
+        if(i->key() == Qt::Key_D)
         {
             jugador1->setVX(7);
+            timer->start(16);
             jugador1->moveRight();
-        }
-        else
-            jugador1->setside(false);
-    }
-    else if(i->key() == Qt::Key_W)
-    {
-        if(jugador1->getcaida())
-            jugador1->changedown();
-        jugador1->resetVX();
-        timer->start(16);
-    }
-    else if(i->key() == Qt::Key_Space)
-    {
-        if(balas_jugador1.count()<5)
-        {
-            float postionx=jugador1->getX(),postiony=jugador1->getY();
-            bool side=jugador1->getSide();
-            if(side==true)
+            if(evaluarColisionJugador(jugador1, listabase))
             {
-                balas_jugador1.append(new proyectil(postionx+5,postiony+18,5,0,15,15,2));
+                jugador1->setVX(-7);
+                jugador1->moveLeft();
             }
             else
+                jugador1->setside(true);
+        }
+        else if(i->key() == Qt::Key_A)
+        {
+            jugador1->setVX(-7);
+            timer->start(16);
+            jugador1->moveLeft();
+            if(evaluarColisionJugador(jugador1, listabase))
             {
-                balas_jugador1.append(new proyectil(postionx+5,postiony+18,-5,0,15,15,2));
+                jugador1->setVX(7);
+                jugador1->moveRight();
             }
-            level_three->addItem(balas_jugador1.back());
+            else
+                jugador1->setside(false);
+        }
+        else if(i->key() == Qt::Key_W)
+        {
+            if(jugador1->getcaida())
+                jugador1->changedown();
+            jugador1->resetVX();
+            timer->start(16);
+        }
+        else if(i->key() == Qt::Key_Space)
+        {
+            if(balas_jugador1.count()<5)
+            {
+                switch (listabase)
+                {
+                    case 1:
+                    {
+                        float postionx=jugador1->getX(),postiony=jugador1->getY();
+                        bool side=jugador1->getSide();
+                        if(side==true)
+                        {
+                            balas_jugador1.append(new proyectil(postionx+5,postiony+18,5,0,15,15,2));
+                        }
+                        else
+                        {
+                            balas_jugador1.append(new proyectil(postionx+5,postiony+18,-5,0,15,15,2));
+                        }
+                        level_one->addItem(balas_jugador1.back());
+                    }break;
+                    case 2:
+                    {
+                        float postionx=jugador1->getX(),postiony=jugador1->getY();
+                        bool side=jugador1->getSide();
+                        if(side==true)
+                        {
+                            balas_jugador1.append(new proyectil(postionx+5,postiony+18,5,0,15,15,2));
+                        }
+                        else
+                        {
+                            balas_jugador1.append(new proyectil(postionx+5,postiony+18,-5,0,15,15,2));
+                        }
+                        level_two->addItem(balas_jugador1.back());
+                    }break;
+                    case 3:
+                    {
+                        float postionx=jugador1->getX(),postiony=jugador1->getY();
+                        bool side=jugador1->getSide();
+                        if(side==true)
+                        {
+                            balas_jugador1.append(new proyectil(postionx+5,postiony+18,5,0,15,15,2));
+                        }
+                        else
+                        {
+                            balas_jugador1.append(new proyectil(postionx+5,postiony+18,-5,0,15,15,2));
+                        }
+                        level_three->addItem(balas_jugador1.back());
+                    }break;
+                }
+            }
         }
     }
     //----------------------------------------------------

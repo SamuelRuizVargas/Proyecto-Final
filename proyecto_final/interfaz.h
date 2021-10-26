@@ -72,9 +72,6 @@ private:
     //--------OBJETOS------------
             //MENU
     validacion *pass;
-
-    QMediaPlayer *fondo;
-    QVideoWidget *vw;
             //LVL 1
             //LVL 2
             //LVL 3
@@ -82,6 +79,7 @@ private:
             //OTROS
     personaje *jugador1;
     enemigo *enemigo_act;
+    bool teclas=false;
     //---------------------------
 
     //-----------Listas---------
@@ -90,10 +88,16 @@ private:
     QList<botones*> buttons;
                 //LVL 1
     QList<plataforma*> base_lvl1;
+    QList<plataforma*> pared_lvl1;
+    QList<plataforma*> limites_lvl1;
     QList<Imagenes*> imagenes_lvl1;
+    QList<enemigo*> enemigos_lvl1;
                 //LVL 2
     QList<plataforma*> base_lvl2;
+    QList<plataforma*> pared_lvl2;
+    QList<plataforma*> limites_lvl2;
     QList<Imagenes*> imagenes_lvl2;
+    QList<enemigo*> enemigos_lvl2;
                 //LVL 3
     QList<plataforma*> base_lvl3;
     QList<plataforma*> pared_lvl3;
@@ -122,6 +126,7 @@ private:
     bool evaluarColisionEnemies(int lista);
     int evaluarColisionSalto(personaje *personaje, int lista);
     bool evaluarColisionBullet(proyectil *bala, int lista);
+    void changeTeclas();
     void validacion();
     int cont=0; // borrar
     //--------------------------
