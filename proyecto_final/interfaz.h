@@ -80,6 +80,7 @@ private:
     personaje *jugador1;
     enemigo *enemigo_act;
     bool teclas=false;
+    bool izquierda_map=true;
     //---------------------------
 
     //-----------Listas---------
@@ -127,6 +128,7 @@ private:
     int evaluarColisionSalto(personaje *personaje, int lista);
     bool evaluarColisionBullet(proyectil *bala, int lista);
     void changeTeclas();
+    void changeMapLocation();
     void validacion();
     int cont=0; // borrar
     //--------------------------

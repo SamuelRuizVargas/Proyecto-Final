@@ -992,6 +992,48 @@ void Interfaz::changeTeclas()
     if(teclas==false)teclas=true;
     else teclas=false;
 }
+
+void Interfaz::changeMapLocation()
+{
+    if(izquierda_map==true)
+    {
+        switch (listabase)
+        {
+            case 1:
+            {
+                level_one->setSceneRect(1220,0,1281,651);
+            }break;
+            case 2:
+            {
+                level_two->setSceneRect(1220,0,1281,651);
+            }break;
+            case 3:
+            {
+                level_three->setSceneRect(1220,0,1281,651);
+            }break;
+        }
+        izquierda_map=false;
+    }
+    else if(izquierda_map==false)
+    {
+        switch (listabase)
+        {
+            case 1:
+            {
+                level_one->setSceneRect(0,0,1281,651);
+            }break;
+            case 2:
+            {
+                level_two->setSceneRect(0,0,1281,651);
+            }break;
+            case 3:
+            {
+                level_three->setSceneRect(0,0,1281,651);
+            }break;
+        }
+        izquierda_map=true;
+    }
+}
 /*
 void Interfaz::validacion()
 {
@@ -1071,6 +1113,11 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
     {
         if(i->key() == Qt::Key_D)
         {
+            float poxixion=jugador1->getX();
+            if(poxixion>=1260 and izquierda_map==true)
+                changeMapLocation();
+            else if(poxixion<1260 and izquierda_map==false)
+                changeMapLocation();
             jugador1->setVX(7);
             timer->start(16);
             jugador1->moveRight();
@@ -1084,6 +1131,11 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
         }
         else if(i->key() == Qt::Key_A)
         {
+            float poxixion=jugador1->getX();
+            if(poxixion>=1260 and izquierda_map==true)
+                changeMapLocation();
+            else if(poxixion<1260 and izquierda_map==false)
+                changeMapLocation();
             jugador1->setVX(-7);
             timer->start(16);
             jugador1->moveLeft();
