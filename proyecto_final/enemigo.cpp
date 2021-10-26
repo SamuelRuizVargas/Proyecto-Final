@@ -28,7 +28,7 @@ void enemigo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
         {
             pixmap.load(PATH_TIRA_ENE);
         }break;
-        case 3:
+        case 3://Enemigos voladores
         {
             pixmap.load(PATH_VOLA_ENE);
         }break;
@@ -64,6 +64,16 @@ void enemigo::moveRight()
 int enemigo::getTipo()
 {
     return tipo;
+}
+
+int enemigo::getX()
+{
+    return posx;
+}
+
+int enemigo::getY()
+{
+    return posy;
 }
 
 enemigo::~enemigo()

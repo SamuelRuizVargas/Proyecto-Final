@@ -89,6 +89,7 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
 
 }
 
+int conta_avispa=0;
 void Interfaz::standard()//se encarga de todo lo que necesite un timer
 {
     //---------------Mover enemigos---------------
@@ -135,42 +136,120 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
     {
         QList<proyectil*>::iterator ite;
 
-        int contador=0;
-        for(ite=balas_jugador1.begin();ite!=balas_jugador1.end();ite++)
+        if(!balas_jugador1.empty())
         {
-            if(!balas_jugador1.empty())
+            int contador=0;
+            for(ite=balas_jugador1.begin();ite!=balas_jugador1.end();ite++)
             {
-                int taip=balas_jugador1[contador]->getTipo();
-                if(taip==2)
+                if(!balas_jugador1.empty())
                 {
-                    balas_jugador1[contador]->disparo();
-                    balas_jugador1[contador]->setPos(balas_jugador1[contador]->getX(),balas_jugador1[contador]->getY());
-                    if(balas_jugador1[contador]->getTempo()>=3)
-                    {
-                        switch (listabase)
+                        balas_jugador1[contador]->disparo();
+                        balas_jugador1[contador]->setPos(balas_jugador1[contador]->getX(),balas_jugador1[contador]->getY());
+                        double tiempo=balas_jugador1[contador]->getTempo();
+                        bool colide=evaluarColisionBullet(balas_jugador1[contador],listabase);
+                        if(tiempo>=3 or colide==true)
                         {
-                            case 1:
+                            switch (listabase)
                             {
-                                level_one->removeItem(balas_jugador1.at(contador));
-                                balas_jugador1.removeAt(contador);
-                                contador-=1;
-                            }break;
-                            case 2:
-                            {
-                                level_two->removeItem(balas_jugador1.at(contador));
-                                balas_jugador1.removeAt(contador);
-                                contador-=1;
-                            }break;
-                            case 3:
-                            {
-                                level_three->removeItem(balas_jugador1.at(contador));
-                                balas_jugador1.removeAt(contador);
-                                contador-=1;
-                            }break;
+                                case 1:
+                                {
+                                    level_one->removeItem(balas_jugador1.at(contador));
+                                    balas_jugador1.removeAt(contador);
+                                    contador=-1;
+                                }break;
+                                case 2:
+                                {
+                                    level_two->removeItem(balas_jugador1.at(contador));
+                                    balas_jugador1.removeAt(contador);
+                                    contador=-1;
+                                }break;
+                                case 3:
+                                {
+                                    level_three->removeItem(balas_jugador1.at(contador));
+                                    balas_jugador1.removeAt(contador);
+                                    contador=-1;
+                                }break;
+                            }
                         }
+                    contador++;
+                }
+                else
+                    break;
+            }
+        }
+    }
+    //--------------------------------------------
+
+    //------------Disparos enemigos---------------
+    {
+        conta_avispa+=20;
+        if(conta_avispa==1000)
+        {
+            QList<enemigo*>::iterator ite;
+
+            int contador=0;
+            for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+            {
+                if(enemigos_lvl3[contador]->getTipo()==3)
+                {
+                    int postionx=enemigos_lvl3[contador]->getX(), postiony=enemigos_lvl3[contador]->getY();
+                    bool side=enemigos_lvl3[contador]->getMov();
+                    if(side==true)
+                    {
+                        balas_enemigos.append(new proyectil(postionx,postiony+20,-10,0,20,20,1));
                     }
+                    else
+                    {
+                        balas_enemigos.append(new proyectil(postionx,postiony+20,10,0,20,20,1));
+                    }
+                    level_three->addItem(balas_enemigos.back());
                 }
                 contador++;
+            }
+            conta_avispa=0;
+        }
+
+        QList<proyectil*>::iterator ite;
+
+        if(!balas_enemigos.empty())
+        {
+            int contador=0;
+            for(ite=balas_enemigos.begin();ite!=balas_enemigos.end();ite++)
+            {
+                if(!balas_enemigos.empty())
+                {
+                        balas_enemigos[contador]->disparo();
+                        balas_enemigos[contador]->setPos(balas_enemigos[contador]->getX(),balas_enemigos[contador]->getY());
+                        double tiempo=balas_enemigos[contador]->getTempo();
+                        bool colide=evaluarColisionBullet(balas_enemigos[contador],listabase);
+                        if(tiempo>=3 or colide==true)
+                        {
+                            switch (listabase)
+                            {
+                                case 1:
+                                {
+                                    level_one->removeItem(balas_enemigos.at(contador));
+                                    balas_enemigos.removeAt(contador);
+                                    contador=-1;
+                                }break;
+                                case 2:
+                                {
+                                    level_two->removeItem(balas_enemigos.at(contador));
+                                    balas_enemigos.removeAt(contador);
+                                    contador=-1;
+                                }break;
+                                case 3:
+                                {
+                                    level_three->removeItem(balas_enemigos.at(contador));
+                                    balas_enemigos.removeAt(contador);
+                                    contador=-1;
+                                }break;
+                            }
+                        }
+                    contador++;
+                }
+                else
+                    break;
             }
         }
     }
@@ -676,6 +755,46 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)
     }
     return 0;
 }
+
+bool Interfaz::evaluarColisionBullet(proyectil *bala, int lista)
+{
+    QList<plataforma*>::iterator it;
+
+    switch (lista)
+    {
+        case 1:
+        {
+            for(it=base_lvl1.begin();it!=base_lvl1.end();it++)
+            {
+                if(bala->collidesWithItem(*it))
+                {
+                    return true;
+                }
+            }
+        }break;
+        case 2:
+        {
+            for(it=base_lvl2.begin();it!=base_lvl2.end();it++)
+            {
+                if(bala->collidesWithItem(*it))
+                {
+                    return true;
+                }
+            }
+        }break;
+        case 3:
+        {
+            for(it=base_lvl3.begin();it!=base_lvl3.end();it++)
+            {
+                if(bala->collidesWithItem(*it))
+                {
+                    return true;
+                }
+            }
+        }break;
+    }
+    return false;
+}
 /*
 void Interfaz::validacion()
 {
@@ -758,6 +877,8 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
             jugador1->setVX(-7);
             jugador1->moveLeft();
         }
+        else
+            jugador1->setside(true);
     }
     else if(i->key() == Qt::Key_A)
     {
@@ -769,6 +890,8 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
             jugador1->setVX(7);
             jugador1->moveRight();
         }
+        else
+            jugador1->setside(false);
     }
     else if(i->key() == Qt::Key_W)
     {
@@ -782,7 +905,15 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
         if(balas_jugador1.count()<5)
         {
             float postionx=jugador1->getX(),postiony=jugador1->getY();
-            balas_jugador1.append(new proyectil(postionx+5,postiony+18,5,0,15,15,2));
+            bool side=jugador1->getSide();
+            if(side==true)
+            {
+                balas_jugador1.append(new proyectil(postionx+5,postiony+18,5,0,15,15,2));
+            }
+            else
+            {
+                balas_jugador1.append(new proyectil(postionx+5,postiony+18,-5,0,15,15,2));
+            }
             level_three->addItem(balas_jugador1.back());
         }
     }

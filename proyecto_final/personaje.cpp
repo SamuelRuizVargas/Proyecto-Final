@@ -83,6 +83,16 @@ void personaje::changedown()
     else caida = true;
 }
 
+void personaje::setside(bool lado)
+{
+    derecha=lado;
+}
+
+bool personaje::getSide()
+{
+    return derecha;
+}
+
 bool personaje::getcaida()
 {
     return caida;

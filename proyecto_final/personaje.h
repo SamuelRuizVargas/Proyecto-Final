@@ -16,6 +16,7 @@ class personaje  : public QGraphicsItem
     float vy=60;
     float vy2=0;
     bool caida=true;
+    bool derecha=true;
 
 public:
     personaje(int,int);
@@ -29,6 +30,8 @@ public:
     void resetVY();
     void resetVY2();
     void changedown();
+    void setside(bool lado);
+    bool getSide();
     bool getcaida();
     void setposis(float x, float y);
     float getX();

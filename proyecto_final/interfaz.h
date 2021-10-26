@@ -103,6 +103,7 @@ private:
                 //BOSSFIGHT
                 //OTROS
     QList<proyectil*> balas_jugador1;
+    QList<proyectil*> balas_enemigos;
     //--------------------------
 
     //----------Metodos---------
@@ -120,6 +121,7 @@ private:
     bool evaluarColisionJugador(personaje *personaje, int lista);
     bool evaluarColisionEnemies(int lista);
     int evaluarColisionSalto(personaje *personaje, int lista);
+    bool evaluarColisionBullet(proyectil *bala, int lista);
     void validacion();
     int cont=0; // borrar
     //--------------------------

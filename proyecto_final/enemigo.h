@@ -26,6 +26,8 @@ public:
     void moveLeft();
     void moveRight();
     int getTipo();
+    int getX();
+    int getY();
     ~enemigo();
 };
 
