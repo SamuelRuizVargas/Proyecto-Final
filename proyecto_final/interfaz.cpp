@@ -480,6 +480,55 @@ void Interfaz::crearMenu()//Crea y agrega los elementos del menu inicial
 
 void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
 {
+    //-----------------------Limites enemigos---------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_LIMITS_LVL1, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            limites_lvl1.append(new plataforma(ente1,ente2,ente3,ente4));
+            level_one->addItem(limites_lvl1.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
+
     //---------------------------Imagenes-------------------------
     {
         imagenes_lvl1.append(new Imagenes(0,0,2500,1200,3)); // Background
@@ -491,6 +540,55 @@ void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
             level_one->addItem(imagenes_lvl1.at(cont));
             cont++;
         }
+    }
+    //------------------------------------------------------------
+
+    //-----------------------Paredes del mapa---------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_PARED_LVL1, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            pared_lvl1.append(new plataforma(ente1,ente2,ente3,ente4));
+            level_one->addItem(pared_lvl1.back());
+        }
+        archivo.close();
     }
     //------------------------------------------------------------
 
@@ -542,10 +640,112 @@ void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
         archivo.close();
     }
     //------------------------------------------------------------
+
+    //--------------------------Enemigos--------------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,int5,digi;
+        int ente1,ente2,ente3,ente4,ente5,len,conta;
+        archivo.open(PATH_ENE_LVL1, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    else if(conta==5)
+                        int5+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            ente5=atoi(int5.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            int5.erase();
+            enemigos_lvl1.append(new enemigo(ente1,ente2,ente3,ente4,ente5));
+            level_one->addItem(enemigos_lvl1.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
 }
 
 void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
 {
+    //-----------------------Limites enemigos---------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_LIMITS_LVL2, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            limites_lvl2.append(new plataforma(ente1,ente2,ente3,ente4));
+            level_two->addItem(limites_lvl2.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
+
     //---------------------------Imagenes-------------------------
     {
         imagenes_lvl2.append(new Imagenes(0,0,2500,1200,4)); // Background
@@ -557,6 +757,55 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
             level_two->addItem(imagenes_lvl2.at(cont));
             cont++;
         }
+    }
+    //------------------------------------------------------------
+
+    //-----------------------Paredes del mapa---------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_PARED_LVL2, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            pared_lvl2.append(new plataforma(ente1,ente2,ente3,ente4));
+            level_two->addItem(pared_lvl2.back());
+        }
+        archivo.close();
     }
     //------------------------------------------------------------
 
@@ -604,6 +853,59 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
             int4.erase();
             base_lvl2.append(new plataforma(ente1,ente2,ente3,ente4));
             level_two->addItem(base_lvl2.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
+
+    //--------------------------Enemigos--------------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,int5,digi;
+        int ente1,ente2,ente3,ente4,ente5,len,conta;
+        archivo.open(PATH_ENE_LVL2, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    else if(conta==5)
+                        int5+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            ente5=atoi(int5.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            int5.erase();
+            enemigos_lvl2.append(new enemigo(ente1,ente2,ente3,ente4,ente5));
+            level_two->addItem(enemigos_lvl2.back());
         }
         archivo.close();
     }
@@ -907,7 +1209,7 @@ bool Interfaz::evaluarColisionEnemies(int lista)//Evalua las colisiones de los e
     return false;
 }
 
-int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)
+int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)//revisa las colisiones al saltar
 {
     QList<plataforma*>::iterator it;
     //cambiar esta parte para que sirva de manera general
@@ -947,7 +1249,7 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)
     return 0;
 }
 
-bool Interfaz::evaluarColisionBullet(proyectil *bala, int lista)
+bool Interfaz::evaluarColisionBullet(proyectil *bala, int lista)//revisa las colisiones de los proyectiles
 {
     QList<plataforma*>::iterator it;
 
@@ -987,13 +1289,13 @@ bool Interfaz::evaluarColisionBullet(proyectil *bala, int lista)
     return false;
 }
 
-void Interfaz::changeTeclas()
+void Interfaz::changeTeclas()//cambia el estado de la posibilidad de capturar teclas
 {
     if(teclas==false)teclas=true;
     else teclas=false;
 }
 
-void Interfaz::changeMapLocation()
+void Interfaz::changeMapLocation()//cambia el focus del mapa
 {
     if(izquierda_map==true)
     {

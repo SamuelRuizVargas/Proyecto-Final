@@ -25,9 +25,15 @@ using namespace std;
 
 //-----------Rutas nivel 1--------------
 #define PATH_BASE_LVL1 "../proyecto_final/posiciones/lvl1/posi_base_lvl1.txt"
+#define PATH_PARED_LVL1 "../proyecto_final/posiciones/lvl1/posi_pared_lvl1.txt"
+#define PATH_ENE_LVL1 "../proyecto_final/posiciones/lvl1/posi_ene_lvl1.txt"
+#define PATH_LIMITS_LVL1 "../proyecto_final/posiciones/lvl1/posi_limit_ene_lvl1.txt"
 //--------------------------------------
 //-----------Rutas nivel 2--------------
 #define PATH_BASE_LVL2 "../proyecto_final/posiciones/lvl2/posi_base_lvl2.txt"
+#define PATH_PARED_LVL2 "../proyecto_final/posiciones/lvl2/posi_pared_lvl2.txt"
+#define PATH_ENE_LVL2 "../proyecto_final/posiciones/lvl2/posi_ene_lvl2.txt"
+#define PATH_LIMITS_LVL2 "../proyecto_final/posiciones/lvl2/posi_limit_ene_lvl2.txt"
 //--------------------------------------
 //-----------Rutas nivel 3--------------
 #define PATH_BASE_LVL3 "../proyecto_final/posiciones/lvl3/posi_base_lvl3.txt"
