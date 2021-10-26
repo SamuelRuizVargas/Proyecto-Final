@@ -35,7 +35,6 @@ Interfaz::Interfaz(QWidget *parent)
 
     timer_standard=new QTimer(this);
     connect(timer_standard,SIGNAL(timeout()),this,SLOT(standard()));
-    timer_standard->start(20);
     //---------------------------------
 
 }
@@ -93,40 +92,87 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
 void Interfaz::standard()//se encarga de todo lo que necesite un timer
 {
     //---------------Mover enemigos---------------
-    QList<enemigo*>::iterator ite;
-
-    int contador=0;
-    for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
     {
-        int taip=enemigos_lvl3[contador]->getTipo();
-        if(taip==1 or taip==3)
+        QList<enemigo*>::iterator ite;
+
+        int contador=0;
+        for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
         {
-            enemigo_act=enemigos_lvl3[contador];
-            bool moverse=enemigo_act->getMov();
-            if(moverse==true)
+            int taip=enemigos_lvl3[contador]->getTipo();
+            if(taip==1 or taip==3)
             {
-                enemigo_act->moveLeft();
-                if(evaluarColisionEnemies(listabase))
+                enemigo_act=enemigos_lvl3[contador];
+                bool moverse=enemigo_act->getMov();
+                if(moverse==true)
                 {
-                    enemigos_lvl3[contador]->movOriginal();
-                    enemigos_lvl3[contador]->moveRight();
+                    enemigo_act->moveLeft();
+                    if(evaluarColisionEnemies(listabase))
+                    {
+                        enemigos_lvl3[contador]->movOriginal();
+                        enemigos_lvl3[contador]->moveRight();
+                        enemigos_lvl3[contador]->moveRight();
+                    }
+                    enemigos_lvl3[contador]->moveLeft();
+                }
+                else
+                {
+                    enemigo_act->moveRight();
+                    if(evaluarColisionEnemies(listabase))
+                    {
+                        enemigos_lvl3[contador]->movOriginal();
+                        enemigos_lvl3[contador]->moveLeft();
+                        enemigos_lvl3[contador]->moveLeft();
+                    }
                     enemigos_lvl3[contador]->moveRight();
                 }
-                enemigos_lvl3[contador]->moveLeft();
             }
-            else
+            contador++;
+        }
+    }
+    //--------------------------------------------
+
+    //------------Mover balas jugador-------------
+    {
+        QList<proyectil*>::iterator ite;
+
+        int contador=0;
+        for(ite=balas_jugador1.begin();ite!=balas_jugador1.end();ite++)
+        {
+            if(!balas_jugador1.empty())
             {
-                enemigo_act->moveRight();
-                if(evaluarColisionEnemies(listabase))
+                int taip=balas_jugador1[contador]->getTipo();
+                if(taip==2)
                 {
-                    enemigos_lvl3[contador]->movOriginal();
-                    enemigos_lvl3[contador]->moveLeft();
-                    enemigos_lvl3[contador]->moveLeft();
+                    balas_jugador1[contador]->disparo();
+                    balas_jugador1[contador]->setPos(balas_jugador1[contador]->getX(),balas_jugador1[contador]->getY());
+                    if(balas_jugador1[contador]->getTempo()>=3)
+                    {
+                        switch (listabase)
+                        {
+                            case 1:
+                            {
+                                level_one->removeItem(balas_jugador1.at(contador));
+                                balas_jugador1.removeAt(contador);
+                                contador-=1;
+                            }break;
+                            case 2:
+                            {
+                                level_two->removeItem(balas_jugador1.at(contador));
+                                balas_jugador1.removeAt(contador);
+                                contador-=1;
+                            }break;
+                            case 3:
+                            {
+                                level_three->removeItem(balas_jugador1.at(contador));
+                                balas_jugador1.removeAt(contador);
+                                contador-=1;
+                            }break;
+                        }
+                    }
                 }
-                enemigos_lvl3[contador]->moveRight();
+                contador++;
             }
         }
-        contador++;
     }
     //--------------------------------------------
 }
@@ -664,6 +710,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         level_one->setSceneRect(0,0,1281,651);
         level_one->addItem(jugador1);
         ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
+        timer_standard->start(20);
         listabase = 1;
     }
     if(buttons.at(3)->get_Pressed())
@@ -672,6 +719,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         level_two->setSceneRect(0,0,1281,651);
         level_two->addItem(jugador1);
         ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
+        timer_standard->start(20);
         listabase = 2;
     }
     if(buttons.at(4)->get_Pressed())
@@ -680,6 +728,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         level_three->setSceneRect(0,0,1281,651);
         level_three->addItem(jugador1);
         ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
+        timer_standard->start(20);
         listabase = 3;
     }
     //-------------------------------------------
@@ -727,6 +776,15 @@ void Interfaz::keyPressEvent(QKeyEvent *i)
             jugador1->changedown();
         jugador1->resetVX();
         timer->start(16);
+    }
+    else if(i->key() == Qt::Key_Space)
+    {
+        if(balas_jugador1.count()<5)
+        {
+            float postionx=jugador1->getX(),postiony=jugador1->getY();
+            balas_jugador1.append(new proyectil(postionx+5,postiony+18,5,0,15,15,2));
+            level_three->addItem(balas_jugador1.back());
+        }
     }
     //----------------------------------------------------
 }

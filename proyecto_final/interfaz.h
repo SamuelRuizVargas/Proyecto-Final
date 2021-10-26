@@ -19,6 +19,7 @@
 #include "personaje.h"
 #include "enemigo.h"
 #include "validacion.h"
+#include "proyectil.h"
 
 using namespace std;
 
@@ -100,6 +101,8 @@ private:
     QList<Imagenes*> imagenes_lvl3;
     QList<enemigo*> enemigos_lvl3;
                 //BOSSFIGHT
+                //OTROS
+    QList<proyectil*> balas_jugador1;
     //--------------------------
 
     //----------Metodos---------
