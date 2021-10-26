@@ -22,11 +22,11 @@ void proyectil::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     QPixmap pixmap;
     switch(tipo)
     {
-        case 1://Enemigos basicos
+        case 1://Enemigos
         {
-            pixmap.load(PATH_PROY);
+            pixmap.load(PATH_PROY2);
         }break;
-        case 2://Enemigos a distancia
+        case 2://Jugador
         {
             pixmap.load(PATH_PROY);
         }break;

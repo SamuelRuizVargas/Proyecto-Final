@@ -19,5 +19,6 @@
         <file>imagenes/Enemigos/enemigo_distancia.png</file>
         <file>imagenes/bloque.png</file>
         <file>imagenes/proyectil.png</file>
+        <file>imagenes/proyectil2.png</file>
     </qresource>
 </RCC>

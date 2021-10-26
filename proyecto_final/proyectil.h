@@ -6,6 +6,7 @@
 #include <ctime>
 
 #define PATH_PROY ":/imagenes/proyectil.png"
+#define PATH_PROY2 ":/imagenes/proyectil2.png"
 #define g -15.0f
 
 class proyectil : public QGraphicsItem
