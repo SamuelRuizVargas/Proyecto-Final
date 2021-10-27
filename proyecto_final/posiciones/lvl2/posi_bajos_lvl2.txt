@@ -1,0 +1,23 @@
+350,564,200,1//plataforma 1
+
+600,474,150,1//plataforma 2
+
+800,394,150,1//plataforma 3
+
+750,274,100,1//plataforma 4
+
+250,174,475,1//plataforma alta
+
+900,564,300,1//base estructura
+
+1050,324,50,1//techo palo estructura
+
+1000,474,125,1//medio estructura
+
+1150,394,75,1//plataforma base derecha
+
+1550,574,250,1//plataforma baja
+
+1600,474,150,1//plataforma alta
+
+2400,524,100,1//plataforma final

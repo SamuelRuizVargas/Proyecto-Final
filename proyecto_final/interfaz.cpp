@@ -750,6 +750,7 @@ void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
 
 void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
 {
+
     //-----------------------Limites enemigos---------------------
     {
         ifstream archivo;
@@ -862,55 +863,6 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
     }
     //------------------------------------------------------------
 
-    //-----------------Se saca la base del mapa-------------------
-    {
-        ifstream archivo;
-        string coorde,numero,int1,int2,int3,int4,digi;
-        int ente1,ente2,ente3,ente4,len,conta;
-        archivo.open(PATH_BASE_LVL2, ios::in);
-        while(!archivo.eof())
-        {
-            if (archivo.eof())
-                break;
-            getline(archivo,coorde);
-            len=coorde.length();
-            conta=0;
-            for (int i=0; i<=len;i++)
-            {
-                digi=coorde[i];
-                if (digi!="," and digi[0]!='\000' )
-                {
-                    numero+=digi;
-                }
-                else
-                {
-                    conta+=1;
-                    if(conta==1)
-                        int1+=numero;
-                    else if(conta==2)
-                        int2+=numero;
-                    else if(conta==3)
-                        int3+=numero;
-                    else if(conta==4)
-                        int4+=numero;
-                    numero.erase();
-                }
-            }
-            ente1=atoi(int1.c_str());
-            ente2=atoi(int2.c_str());
-            ente3=atoi(int3.c_str());
-            ente4=atoi(int4.c_str());
-            int1.erase();
-            int2.erase();
-            int3.erase();
-            int4.erase();
-            base_lvl2.append(new plataforma(ente1,ente2,ente3,ente4,1));
-            level_two->addItem(base_lvl2.back());
-        }
-        archivo.close();
-    }
-    //------------------------------------------------------------
-
     //-----------------------Bajos del mapa-----------------------
     {
         ifstream archivo;
@@ -955,6 +907,55 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
             int4.erase();
             bajos_lvl2.append(new plataforma(ente1,ente2,ente3,ente4,2));
             level_two->addItem(bajos_lvl2.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
+
+    //-----------------Se saca la base del mapa-------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_BASE_LVL2, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            base_lvl2.append(new plataforma(ente1,ente2,ente3,ente4,1));
+            level_two->addItem(base_lvl2.back());
         }
         archivo.close();
     }
