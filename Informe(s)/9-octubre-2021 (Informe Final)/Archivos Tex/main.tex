@@ -124,7 +124,14 @@
     Esta clase nació de la necesidad de darle una forma a las plataformas, tanto para sus colisiones como para darles textura y posición. Esta clase consta con atributos de posición y de ancho y alto, al igual que las imágenes, sin embargo estas, además de que pueden interactuar con el personaje de la manera implementada en la interfaz, tiene la capacidad de cambiar su textura según sea requerido.
     
     \subsection{Personaje}
-    El modelamiento del personaje se basa en la herencia, al igual que otras de nuestras clases, en QGraphicsItem; Esta clase tiene un ancho y alto predefinido e invariable el cual se definió en base a mantener un buen tamaño para el personaje y no perder su relación de aspecto para que se mantuviera lo mas estético posible, tambien se le otorgo unas velocidades en el eje X y el eje Y para que de esta manera pudiera realizar sus saltos y otros movimientos básicos, su textura es variable para que se puedan distinguir el jugador 1 del jugador 2
+    El modelamiento del personaje se basa en la herencia, al igual que otras de nuestras clases, en QGraphicsItem; Esta clase tiene un ancho y alto predefinido e invariable el cual se definió en base a mantener un buen tamaño para el personaje y no perder su relación de aspecto para que se mantuviera lo mas estético posible, también se le otorgo unas velocidades en el eje X y el eje Y para que de esta manera pudiera realizar sus saltos y otros movimientos básicos, su textura es variable para que se puedan distinguir el jugador 1 del jugador 2.
+    
+    \subsection{Enemigo}
+    Los enemigos los pensamos para que hubieran de 3 tipos, básico, tirador(volador) y bombardero. Estos objetos cuentan con atributos básicos como ancho y alto y sus respectivas posiciones; Adicionalmente tienen atributos que nos ayudan a darles movimiento tanto a los enemigos como a sus proyectiles y el atributo que define que tipo de enemigo serán. Entre sus métodos se encuentra el que le da su textura según el tipo y el que define como sera su movimiento, además de algunos otros métodos que usamos para poder sustraer información del objeto que creemos y cambiar sus patrones de movimiento.
+    
+    \subsection{Proyectil}
+    Los proyectiles los pensamos para que tomaran distintos tipos de movimiento según quien sea el que efectué el disparo. Esta clase cuenta con atributos básicos como ancho y alto y sus respectivas posiciones; Además de esto lleva una cuenta de cuanto tiempo lleva activo el objeto, cualidad que se usa para eliminarlo de la escena en cierto tiempo y no saturar la escena. Sus métodos principales son el que le da su textura según quien efectué el disparo y el tipo de disparo que sera (parabólico, tipo láser) también tomando en cuenta quien efectúa el disparo, finalmente hay algunos métodos para sustraer información del objeto para fines de ejecución.
+    
         
 \section{Estructura del Código}
     \subsection{POR HACER}
@@ -161,6 +168,18 @@
     \subsection{22/10/2021}
     Principalmente fue dedicado a la semi-terminación del menú inicial para que sea mas practico, además de esto agregamos momentáneamente una forma de ver los distintos mapas para ir haciendo pruebas; Por ultimo tratamos de agregar un vídeo de fondo al menú pero no fue posible de momento.
     
+    \subsection{23/10/2021}
+    Este día fue dedicado a perfeccionar el movimiento del personaje para que fuera lo mas natural que fuéramos capaces de conseguir. Corregimos casi todos los errores con respecto al movimiento, y aunque de momento no es perfecto, esta muy cerca de ser el ideal.
+    
+    \subsection{24/10/2021}
+    Para este día continuamos modelando al personaje de tal manera que se adapte al diseño y a las situaciones planteadas con anterioridad, también comenzamos a modelar una parte de lo que serán los enemigos, aparte construimos lo que será el ingreso y registro de usuarios.  
+    
+    \subsection{25/10/2021}
+    Nos encontramos ahora con la creación de una nueva rama, la cual estaremos alimentando con los diseños, las texturas y acciones de los enemigos, además de incluimos algunas actualizaciones a la interfaz, donde a su vez cambiamos las plataformas correspondiente a los niveles, también estuvimos verificando las posiciones de los enemigos con respecto al personaje. Aparte construimos el modelamiento de lo que serán los  proyectiles. 
+    
+    \subsection{26/10/2021}
+    Nos concentramos en el modelamiento del proyectil para el jugador  y enemigos, teniendo en cuenta las físicas para cada de personaje planteado. Para esto tuvimos en cuenta las habilidades ya planteadas, al igual que probamos diferentes proyectiles para los enemigos y personajes. También evaluamos algunas condiciones para las colisiones de los proyectiles con el entorno, esto nos genero algún contratiempo pero luego de analizarlo un tiempo encontramos una solución. Comenzamos a plantear el entorno y los limites para el nivel uno y la interacción con el jugador. 
+    
 \section{Problemas Presentados}
     \subsection{9/10/2021}
     Este día fue el inicio del proyecto, por lo que los trabajos que tuvimos fueron repartir tareas y organizar nuestro cronograma; El único problema en las etapas previas fue que al organizarnos nos dimos cuenta que la primera semana estaríamos muy ocupados con varios deberes pero aun así pudimos planear de manera correcta.
@@ -192,9 +211,17 @@
     \subsection{22/10/2021}
     Haciendo un reordena miento del menú nos topamos con el problema para reproducir un vídeo en el fondo, para esto tratamos de hacer uso del QMediaPlayer y el QVideoWidget sin embargo de momento no fue posible entregarle la ruta del vídeo, trataremos de arreglar esto mas adelante.
     
+    \subsection{23/10/2021}
+    Nos encontramos con varios problemas a la hora de pulir el movimiento, desde reinicios en la velocidad hasta teletransportes, sin embargo al final pudimos idear maneras para que el movimiento se sienta natural, aun es mejorable pero solo el tiempo dirá si logramos mejorarlo, de momento tenemos que enfocarnos en otros aspectos.
+    
+    \subsection{24/10/2021}
+    Nos deshicimos de la idea de poner un vídeo en la parte del menú, tuvimos algunos problemas a la hora de hacer el frenado de algunos personajes en sus movimientos, los cuales fueron solucionados con facilidad posteriormente.
+    
+    \subsection{26/10/2021}
+    A la hora de la implementación de los proyectiles tuvimos unos cuantos dolores de cabeza para administrarlos todos sin que se dañara el programa, finalmente nos iluminamos y logramos encontrar una solución; Además tuvimos que pensar en como mover el mapa para que el jugador se sienta cómodo en el, y finalmente optamos por un mapa dividido en 2 partes las cuales se muestran según donde este el jugador.
+    
 \vfill
 \vspace*{0.5cm}
 \bibliographystyle{IEEEtran}
 \bibliography{references}
-    
 \end{document}
