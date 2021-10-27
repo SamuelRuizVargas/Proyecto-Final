@@ -1,0 +1,20 @@
+149,590,1,40//gusano piso 
+750,590,1,40
+
+249,490,1,40//gusano plataforma 1
+450,490,1,40
+
+1399,490,1,40//gusano plataforma izquierda
+1600,490,1,40
+
+2099,490,1,40//gusano plataforma derecha
+2300,490,1,40
+
+1699,290,1,40//gusano plataforma centro
+2000,290,1,40
+
+1299,225,1,40//avispa izquierda
+1700,225,1,40
+
+1999,225,1,40//avispa derecha
+2400,225,1,40
