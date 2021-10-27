@@ -28,6 +28,7 @@ public:
     void free(float dt);
     void resetVX();
     void resetVY();
+    void zeroVY();
     void resetVY2();
     void changedown();
     void setside(bool lado);

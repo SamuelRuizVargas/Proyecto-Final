@@ -48,7 +48,7 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
         int copy_y=jugador1->getY(),copy_x=jugador1->getX();
         jugador1->free(0.1f);
         jugador1->setPos(jugador1->getX(),jugador1->getY());
-        if(evaluarColisionSalto(jugador1, listabase))
+        if(evaluarColisionSalto(jugador1, listabase)==1)
         {
             jugador1->resetVX();
             jugador1->setposis(copy_x,copy_y);
@@ -68,9 +68,15 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
         int copy_y=jugador1->getY(),copy_x=jugador1->getX();
         jugador1->jump(0.1f);
         jugador1->setPos(jugador1->getX(),jugador1->getY());
-        if(evaluarColisionSalto(jugador1, listabase))
+        if(evaluarColisionSalto(jugador1, listabase)==1)
         {
             jugador1->resetVX();
+            jugador1->setposis(copy_x,copy_y);
+            jugador1->setPos(jugador1->getX(),jugador1->getY());
+        }
+        else if(evaluarColisionSalto(jugador1, listabase)==2)
+        {
+            jugador1->zeroVY();
             jugador1->setposis(copy_x,copy_y);
             jugador1->setPos(jugador1->getX(),jugador1->getY());
         }
@@ -520,7 +526,7 @@ void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
             int2.erase();
             int3.erase();
             int4.erase();
-            limites_lvl1.append(new plataforma(ente1,ente2,ente3,ente4));
+            limites_lvl1.append(new plataforma(ente1,ente2,ente3,ente4,2));
             level_one->addItem(limites_lvl1.back());
         }
         archivo.close();
@@ -583,8 +589,57 @@ void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
             int2.erase();
             int3.erase();
             int4.erase();
-            pared_lvl1.append(new plataforma(ente1,ente2,ente3,ente4));
+            pared_lvl1.append(new plataforma(ente1,ente2,ente3,ente4,2));
             level_one->addItem(pared_lvl1.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
+
+    //-----------------------Bajos del mapa-----------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_BAJOS_LVL1, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            bajos_lvl1.append(new plataforma(ente1,ente2,ente3,ente4,2));
+            level_one->addItem(bajos_lvl1.back());
         }
         archivo.close();
     }
@@ -632,7 +687,7 @@ void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
             int2.erase();
             int3.erase();
             int4.erase();
-            base_lvl1.append(new plataforma(ente1,ente2,ente3,ente4));
+            base_lvl1.append(new plataforma(ente1,ente2,ente3,ente4,1));
             level_one->addItem(base_lvl1.back());
         }
         archivo.close();
@@ -737,7 +792,7 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
             int2.erase();
             int3.erase();
             int4.erase();
-            limites_lvl2.append(new plataforma(ente1,ente2,ente3,ente4));
+            limites_lvl2.append(new plataforma(ente1,ente2,ente3,ente4,2));
             level_two->addItem(limites_lvl2.back());
         }
         archivo.close();
@@ -800,7 +855,7 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
             int2.erase();
             int3.erase();
             int4.erase();
-            pared_lvl2.append(new plataforma(ente1,ente2,ente3,ente4));
+            pared_lvl2.append(new plataforma(ente1,ente2,ente3,ente4,2));
             level_two->addItem(pared_lvl2.back());
         }
         archivo.close();
@@ -849,8 +904,57 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
             int2.erase();
             int3.erase();
             int4.erase();
-            base_lvl2.append(new plataforma(ente1,ente2,ente3,ente4));
+            base_lvl2.append(new plataforma(ente1,ente2,ente3,ente4,1));
             level_two->addItem(base_lvl2.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
+
+    //-----------------------Bajos del mapa-----------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_BAJOS_LVL2, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            bajos_lvl2.append(new plataforma(ente1,ente2,ente3,ente4,2));
+            level_two->addItem(bajos_lvl2.back());
         }
         archivo.close();
     }
@@ -954,7 +1058,7 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
             int2.erase();
             int3.erase();
             int4.erase();
-            limites_lvl3.append(new plataforma(ente1,ente2,ente3,ente4));
+            limites_lvl3.append(new plataforma(ente1,ente2,ente3,ente4,2));
             level_three->addItem(limites_lvl3.back());
         }
         archivo.close();
@@ -1017,7 +1121,7 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
             int2.erase();
             int3.erase();
             int4.erase();
-            pared_lvl3.append(new plataforma(ente1,ente2,ente3,ente4));
+            pared_lvl3.append(new plataforma(ente1,ente2,ente3,ente4,2));
             level_three->addItem(pared_lvl3.back());
         }
         archivo.close();
@@ -1066,8 +1170,57 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
             int2.erase();
             int3.erase();
             int4.erase();
-            base_lvl3.append(new plataforma(ente1,ente2,ente3,ente4));
+            base_lvl3.append(new plataforma(ente1,ente2,ente3,ente4,1));
             level_three->addItem(base_lvl3.back());
+        }
+        archivo.close();
+    }
+    //------------------------------------------------------------
+
+    //-----------------------Bajos del mapa-----------------------
+    {
+        ifstream archivo;
+        string coorde,numero,int1,int2,int3,int4,digi;
+        int ente1,ente2,ente3,ente4,len,conta;
+        archivo.open(PATH_BAJOS_LVL3, ios::in);
+        while(!archivo.eof())
+        {
+            if (archivo.eof())
+                break;
+            getline(archivo,coorde);
+            len=coorde.length();
+            conta=0;
+            for (int i=0; i<=len;i++)
+            {
+                digi=coorde[i];
+                if (digi!="," and digi[0]!='\000' )
+                {
+                    numero+=digi;
+                }
+                else
+                {
+                    conta+=1;
+                    if(conta==1)
+                        int1+=numero;
+                    else if(conta==2)
+                        int2+=numero;
+                    else if(conta==3)
+                        int3+=numero;
+                    else if(conta==4)
+                        int4+=numero;
+                    numero.erase();
+                }
+            }
+            ente1=atoi(int1.c_str());
+            ente2=atoi(int2.c_str());
+            ente3=atoi(int3.c_str());
+            ente4=atoi(int4.c_str());
+            int1.erase();
+            int2.erase();
+            int3.erase();
+            int4.erase();
+            bajos_lvl3.append(new plataforma(ente1,ente2,ente3,ente4,2));
+            level_three->addItem(bajos_lvl3.back());
         }
         archivo.close();
     }
@@ -1222,6 +1375,13 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)//revisa las
                     return 1;
                 }
             }
+            for(it=bajos_lvl1.begin();it!=bajos_lvl1.end();it++)
+            {
+                if(personaje->collidesWithItem(*it))
+                {
+                    return 2;
+                }
+            }
         }break;
         case 2:
         {
@@ -1232,6 +1392,13 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)//revisa las
                     return 1;
                 }
             }
+            for(it=bajos_lvl2.begin();it!=bajos_lvl2.end();it++)
+            {
+                if(personaje->collidesWithItem(*it))
+                {
+                    return 2;
+                }
+            }
         }break;
         case 3:
         {
@@ -1240,6 +1407,13 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)//revisa las
                 if(personaje->collidesWithItem(*it))
                 {
                     return 1;
+                }
+            }
+            for(it=bajos_lvl3.begin();it!=bajos_lvl3.end();it++)
+            {
+                if(personaje->collidesWithItem(*it))
+                {
+                    return 2;
                 }
             }
         }break;

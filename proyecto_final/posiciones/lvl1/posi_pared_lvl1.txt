@@ -1,19 +1,40 @@
 -1,0,1,700//limites
 2500,0,1,700
 
-0,625,1,25//piso inicial
-749,625,1,25
-
 150,535,1,1//Bloquecito inicio
 174,535,1,1
-
 250,535,1,1//plataforma larga 1
 449,535,1,1
-
 300,460,1,1//plataforma corta 1
 399,460,1,1
 
 750,585,1,1//escalera corta 1
-
 825,535,1,1//escalera larga 1
-825,535,1,1
+899,535,1,150
+
+1149,585,1,1//escalera corta 2
+1000,535,1,150//escalera larga 2
+1074,535,1,1
+
+1400,535,1,1//plataforma baja 1
+1599,535,1,1
+1300,435,1,1//plataforma media izq 1
+1399,435,1,1
+1600,435,1,1//plataforma media der 1
+1699,435,1,1
+1425,335,1,1//plataforma alta 1
+1574,335,1,1
+
+1700,335,1,1//plataforma central
+1999,335,1,1
+1750,260,1,1//plataforma central alta
+1949,260,1,1
+
+2100,535,1,1//plataforma baja 2
+2299,535,1,1
+2000,435,1,1//plataforma media izq 2
+2099,435,1,1
+2300,435,1,1//plataforma media der 2
+2399,435,1,1
+2125,335,1,1//plataforma alta 2
+2274,335,1,1

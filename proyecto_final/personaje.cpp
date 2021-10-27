@@ -72,6 +72,11 @@ void personaje::resetVY()
     vy=60;
 }
 
+void personaje::zeroVY()
+{
+    vy=0;
+}
+
 void personaje::resetVY2()
 {
     vy2=0;

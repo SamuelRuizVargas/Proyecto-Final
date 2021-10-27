@@ -18,5 +18,6 @@
         <file>imagenes/bloque.png</file>
         <file>imagenes/proyectil.png</file>
         <file>imagenes/proyectil2.png</file>
+        <file>imagenes/bloque_hitbox.png</file>
     </qresource>
 </RCC>

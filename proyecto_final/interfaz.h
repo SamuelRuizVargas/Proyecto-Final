@@ -28,18 +28,21 @@ using namespace std;
 #define PATH_PARED_LVL1 "../proyecto_final/posiciones/lvl1/posi_pared_lvl1.txt"
 #define PATH_ENE_LVL1 "../proyecto_final/posiciones/lvl1/posi_ene_lvl1.txt"
 #define PATH_LIMITS_LVL1 "../proyecto_final/posiciones/lvl1/posi_limit_ene_lvl1.txt"
+#define PATH_BAJOS_LVL1 "../proyecto_final/posiciones/lvl1/posi_bajos_lvl1.txt"
 //--------------------------------------
 //-----------Rutas nivel 2--------------
 #define PATH_BASE_LVL2 "../proyecto_final/posiciones/lvl2/posi_base_lvl2.txt"
 #define PATH_PARED_LVL2 "../proyecto_final/posiciones/lvl2/posi_pared_lvl2.txt"
 #define PATH_ENE_LVL2 "../proyecto_final/posiciones/lvl2/posi_ene_lvl2.txt"
 #define PATH_LIMITS_LVL2 "../proyecto_final/posiciones/lvl2/posi_limit_ene_lvl2.txt"
+#define PATH_BAJOS_LVL2 "../proyecto_final/posiciones/lvl2/posi_bajos_lvl2.txt"
 //--------------------------------------
 //-----------Rutas nivel 3--------------
 #define PATH_BASE_LVL3 "../proyecto_final/posiciones/lvl3/posi_base_lvl3.txt"
 #define PATH_PARED_LVL3 "../proyecto_final/posiciones/lvl3/posi_pared_lvl3.txt"
 #define PATH_ENE_LVL3 "../proyecto_final/posiciones/lvl3/posi_ene_lvl3.txt"
 #define PATH_LIMITS_LVL3 "../proyecto_final/posiciones/lvl3/posi_limit_ene_lvl3.txt"
+#define PATH_BAJOS_LVL3 "../proyecto_final/posiciones/lvl3/posi_bajos_lvl3.txt"
 //--------------------------------------
 
 QT_BEGIN_NAMESPACE
@@ -94,18 +97,21 @@ private:
                 //LVL 1
     QList<plataforma*> base_lvl1;
     QList<plataforma*> pared_lvl1;
+    QList<plataforma*> bajos_lvl1;
     QList<plataforma*> limites_lvl1;
     QList<Imagenes*> imagenes_lvl1;
     QList<enemigo*> enemigos_lvl1;
                 //LVL 2
     QList<plataforma*> base_lvl2;
     QList<plataforma*> pared_lvl2;
+    QList<plataforma*> bajos_lvl2;
     QList<plataforma*> limites_lvl2;
     QList<Imagenes*> imagenes_lvl2;
     QList<enemigo*> enemigos_lvl2;
                 //LVL 3
     QList<plataforma*> base_lvl3;
     QList<plataforma*> pared_lvl3;
+    QList<plataforma*> bajos_lvl3;
     QList<plataforma*> limites_lvl3;
     QList<Imagenes*> imagenes_lvl3;
     QList<enemigo*> enemigos_lvl3;
