@@ -1408,7 +1408,7 @@ QString Interfaz::letra(QString x)
     return letra[0];
 }
 
-void Interfaz::keyPressEvent(QKeyEvent *i)
+void Interfaz::keyPressEvent(QKeyEvent *i)//Evento de tecla presionada
 {
     //----------------Movimiento--------------------------
     if(teclas==true)
