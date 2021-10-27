@@ -7,6 +7,7 @@
 #define PATH_BASE_ENE ":/imagenes/Enemigos/enemigo_base.png"
 #define PATH_TIRA_ENE ":/imagenes/Enemigos/enemigo_distancia.png"
 #define PATH_VOLA_ENE ":/imagenes/Enemigos/enemigo_volador.png"
+#define PATH_BOSS_ENE ":/imagenes/Enemigos/boss.png"
 
 class enemigo : public QGraphicsItem
 {

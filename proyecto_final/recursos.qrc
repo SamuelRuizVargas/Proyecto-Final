@@ -19,5 +19,6 @@
         <file>imagenes/proyectil.png</file>
         <file>imagenes/proyectil2.png</file>
         <file>imagenes/bloque_hitbox.png</file>
+        <file>imagenes/Enemigos/boss.png</file>
     </qresource>
 </RCC>

@@ -30,9 +30,9 @@ void proyectil::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         {
             pixmap.load(PATH_PROY);
         }break;
-        case 3:
+        case 3://Boss
         {
-            //
+            pixmap.load(PATH_PROY2);
         }break;
     }
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
@@ -51,6 +51,10 @@ void proyectil::disparo(float dt)
         case 2://linea recta
         {
             posx+=vx;
+        }break;
+        case 3://Boss
+        {
+
         }break;
     }
     t1 = clock();

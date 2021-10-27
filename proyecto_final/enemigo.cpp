@@ -32,6 +32,10 @@ void enemigo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
         {
             pixmap.load(PATH_VOLA_ENE);
         }break;
+        case 4:
+        {
+            pixmap.load(PATH_BOSS_ENE);
+        }break;
     }
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }

@@ -1,0 +1,10 @@
+-1,0,1,700//limite izquierdo
+2500,0,1,700//limite derecho
+
+
+50,535,1,1//plataforma larga 1
+249,535,1,1
+350,535,1,1//plataforma larga 2
+549,535,1,1
+650,535,1,1//plataforma larga 3
+849,535,1,1
