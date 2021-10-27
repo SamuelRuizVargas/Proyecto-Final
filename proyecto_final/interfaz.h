@@ -18,14 +18,22 @@
 #include "plataforma.h"
 #include "personaje.h"
 #include "enemigo.h"
+#include "validacion.h"
+#include "proyectil.h"
 
 using namespace std;
 
 //-----------Rutas nivel 1--------------
 #define PATH_BASE_LVL1 "../proyecto_final/posiciones/lvl1/posi_base_lvl1.txt"
+#define PATH_PARED_LVL1 "../proyecto_final/posiciones/lvl1/posi_pared_lvl1.txt"
+#define PATH_ENE_LVL1 "../proyecto_final/posiciones/lvl1/posi_ene_lvl1.txt"
+#define PATH_LIMITS_LVL1 "../proyecto_final/posiciones/lvl1/posi_limit_ene_lvl1.txt"
 //--------------------------------------
 //-----------Rutas nivel 2--------------
 #define PATH_BASE_LVL2 "../proyecto_final/posiciones/lvl2/posi_base_lvl2.txt"
+#define PATH_PARED_LVL2 "../proyecto_final/posiciones/lvl2/posi_pared_lvl2.txt"
+#define PATH_ENE_LVL2 "../proyecto_final/posiciones/lvl2/posi_ene_lvl2.txt"
+#define PATH_LIMITS_LVL2 "../proyecto_final/posiciones/lvl2/posi_limit_ene_lvl2.txt"
 //--------------------------------------
 //-----------Rutas nivel 3--------------
 #define PATH_BASE_LVL3 "../proyecto_final/posiciones/lvl3/posi_base_lvl3.txt"
@@ -69,10 +77,7 @@ private:
 
     //--------OBJETOS------------
             //MENU
-    QMainWindow *ven2;
-
-    QMediaPlayer *fondo;
-    QVideoWidget *vw;
+    validacion *pass;
             //LVL 1
             //LVL 2
             //LVL 3
@@ -80,6 +85,8 @@ private:
             //OTROS
     personaje *jugador1;
     enemigo *enemigo_act;
+    bool teclas=false;
+    bool izquierda_map=true;
     //---------------------------
 
     //-----------Listas---------
@@ -88,10 +95,16 @@ private:
     QList<botones*> buttons;
                 //LVL 1
     QList<plataforma*> base_lvl1;
+    QList<plataforma*> pared_lvl1;
+    QList<plataforma*> limites_lvl1;
     QList<Imagenes*> imagenes_lvl1;
+    QList<enemigo*> enemigos_lvl1;
                 //LVL 2
     QList<plataforma*> base_lvl2;
+    QList<plataforma*> pared_lvl2;
+    QList<plataforma*> limites_lvl2;
     QList<Imagenes*> imagenes_lvl2;
+    QList<enemigo*> enemigos_lvl2;
                 //LVL 3
     QList<plataforma*> base_lvl3;
     QList<plataforma*> pared_lvl3;
@@ -99,6 +112,9 @@ private:
     QList<Imagenes*> imagenes_lvl3;
     QList<enemigo*> enemigos_lvl3;
                 //BOSSFIGHT
+                //OTROS
+    QList<proyectil*> balas_jugador1;
+    QList<proyectil*> balas_enemigos;
     //--------------------------
 
     //----------Metodos---------
@@ -116,6 +132,9 @@ private:
     bool evaluarColisionJugador(personaje *personaje, int lista);
     bool evaluarColisionEnemies(int lista);
     int evaluarColisionSalto(personaje *personaje, int lista);
+    bool evaluarColisionBullet(proyectil *bala, int lista);
+    void changeTeclas();
+    void changeMapLocation();
     void validacion();
     int cont=0; // borrar
     //--------------------------

@@ -69,7 +69,7 @@ void personaje::resetVX()
 
 void personaje::resetVY()
 {
-    vy=80;
+    vy=60;
 }
 
 void personaje::resetVY2()
@@ -81,6 +81,16 @@ void personaje::changedown()
 {
     if(caida)caida = false;
     else caida = true;
+}
+
+void personaje::setside(bool lado)
+{
+    derecha=lado;
+}
+
+bool personaje::getSide()
+{
+    return derecha;
 }
 
 bool personaje::getcaida()

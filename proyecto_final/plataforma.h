@@ -4,7 +4,7 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-#define PATH_TEXTURA_PRUEBA ":/imagenes/LVLS/lvl1/bloque.png"
+#define PATH_TEXTURA ":/imagenes/bloque.png"
 
 class plataforma : public QGraphicsItem
 {
