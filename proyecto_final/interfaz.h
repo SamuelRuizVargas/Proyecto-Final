@@ -66,7 +66,6 @@ private:
     QGraphicsScene *level_one;
     QGraphicsScene *level_two;
     QGraphicsScene *level_three;
-    QGraphicsScene *bossfight;
     QGraphicsScene *scene2;
     //---------------------------
 
@@ -81,7 +80,6 @@ private:
             //LVL 1
             //LVL 2
             //LVL 3
-            //BOSSFIGHT
             //OTROS
     personaje *jugador1;
     enemigo *enemigo_act;
@@ -111,7 +109,6 @@ private:
     QList<plataforma*> limites_lvl3;
     QList<Imagenes*> imagenes_lvl3;
     QList<enemigo*> enemigos_lvl3;
-                //BOSSFIGHT
                 //OTROS
     QList<proyectil*> balas_jugador1;
     QList<proyectil*> balas_enemigos;
@@ -126,7 +123,6 @@ private:
     void crearLevelTwo();
                 //LVL 3
     void crearLevelThree();
-                //BOSSFIGHT
                 //OTROS
     QString letra(QString x);
     bool evaluarColisionJugador(personaje *personaje, int lista);

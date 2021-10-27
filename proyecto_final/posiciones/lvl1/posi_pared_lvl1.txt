@@ -1,0 +1,19 @@
+-1,0,1,700//limites
+2500,0,1,700
+
+0,625,1,25//piso inicial
+749,625,1,25
+
+150,535,1,1//Bloquecito inicio
+174,535,1,1
+
+250,535,1,1//plataforma larga 1
+449,535,1,1
+
+300,460,1,1//plataforma corta 1
+399,460,1,1
+
+750,585,1,1//escalera corta 1
+
+825,535,1,1//escalera larga 1
+825,535,1,1

@@ -18,8 +18,6 @@ Interfaz::Interfaz(QWidget *parent)
     level_two = new QGraphicsScene;
             //Nivel 3
     level_three = new QGraphicsScene;
-            //BossFight
-    bossfight = new QGraphicsScene;
     //----------------------------
 
     //----Crear objetos en escenas-----
@@ -1456,7 +1454,7 @@ void Interfaz::keyPressEvent(QKeyEvent *i)//Evento de tecla presionada
             jugador1->resetVX();
             timer->start(16);
         }
-        else if(i->key() == Qt::Key_Space)
+        else if(i->key() == Qt::Key_S)
         {
             if(balas_jugador1.count()<5)
             {
