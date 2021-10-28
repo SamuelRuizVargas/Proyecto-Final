@@ -45,6 +45,10 @@ void Imagenes::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         {
             pixmap.load(PATH_BACK_3);
         }break;
+        case 6:
+        {
+            pixmap.load(PATH_BACK_MULT);
+        }break;
     }
 
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
