@@ -1885,6 +1885,7 @@ void Interfaz::nextMap()
             ui->lcdTiempo->show();
             ui->lcdVidas->show();
             ui->lcdTiempo->display(90);
+            vidas+=1;
             ui->lcdVidas->display(vidas);
             ui->lcdEnemigos->display(enemigos_lvl2.count());
             timer_standard->start(20);
@@ -1905,6 +1906,7 @@ void Interfaz::nextMap()
             ui->lcdTiempo->show();
             ui->lcdVidas->show();
             ui->lcdTiempo->display(100);
+            vidas+=1;
             ui->lcdVidas->display(vidas);
             ui->lcdEnemigos->display(1);
             ui->VidaBoss->show();
@@ -1942,8 +1944,6 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
     if(buttons.at(3)->get_Pressed())
     {
         nextMap();
-        menu_princi->removeItem(buttons.at(2));
-        menu_princi->removeItem(buttons.at(3));
         changeTeclas();
         buttons.at(3)->changePressed();
     }
