@@ -23,7 +23,7 @@ enemigo::enemigo(int x, int y, int _an, int _h, int _tipo)
         }break;
         case 4:
         {
-            lives=250;
+            lives=160;
         }break;
     }
     setPos(posx,posy);
