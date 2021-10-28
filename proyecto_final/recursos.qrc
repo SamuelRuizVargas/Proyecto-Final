@@ -20,5 +20,7 @@
         <file>imagenes/proyectil2.png</file>
         <file>imagenes/bloque_hitbox.png</file>
         <file>imagenes/Enemigos/boss.png</file>
+        <file>imagenes/player2.png</file>
+        <file>imagenes/LVLS/multijugador/background.jpg</file>
     </qresource>
 </RCC>
