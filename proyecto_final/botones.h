@@ -20,6 +20,7 @@ public:
     botones(int x,int y,int ancho,int alto, int textura);
     bool Pressed;
     bool get_Pressed();
+    void changePressed();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
 
