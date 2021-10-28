@@ -1,9 +1,10 @@
 #include "personaje.h"
 
-personaje::personaje(int x, int y)
+personaje::personaje(int x, int y, int _tipo)
 {
     posx=x;
     posy=y;
+    tipo=_tipo;
     setPos(posx,posy);
 }
 
@@ -41,7 +42,17 @@ void personaje::moveUp()
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPixmap pixmap;
-    pixmap.load(PATH_P1);
+    switch (tipo)
+    {
+    case 1:
+    {
+        pixmap.load(PATH_P1);
+    }break;
+    case 2:
+    {
+        pixmap.load(PATH_P2);
+    }break;
+    }
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
