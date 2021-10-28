@@ -2542,7 +2542,7 @@ void Interfaz::volverMenu()//esconde los elementos graficos y vuelve al menu ini
     timer_standard->stop();
 }
 
-void Interfaz::validacion()//FALTA
+void Interfaz::validacion()//HACER
 {
 
 }
