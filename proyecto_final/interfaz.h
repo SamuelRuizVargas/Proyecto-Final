@@ -45,6 +45,11 @@ using namespace std;
 #define PATH_LIMITS_LVL3 "../proyecto_final/posiciones/lvl3/posi_limit_ene_lvl3.txt"
 #define PATH_BAJOS_LVL3 "../proyecto_final/posiciones/lvl3/posi_bajos_lvl3.txt"
 //--------------------------------------
+//---------Rutas Multijugador-----------
+#define PATH_BASE_MULT "../proyecto_final/posiciones/multijugador/posi_base_multi.txt"
+#define PATH_PARED_MULT "../proyecto_final/posiciones/multijugador/posi_pared_multi.txt"
+#define PATH_BAJOS_MULT "../proyecto_final/posiciones/multijugador/posi_bajos_multi.txt"
+//--------------------------------------
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Interfaz; }
@@ -70,6 +75,7 @@ private:
     QGraphicsScene *level_one;
     QGraphicsScene *level_two;
     QGraphicsScene *level_three;
+    QGraphicsScene *level_multi;
     QGraphicsScene *scene2;
     //---------------------------
 
@@ -81,11 +87,9 @@ private:
     //--------OBJETOS------------
             //MENU
     validacion *pass;
-            //LVL 1
-            //LVL 2
-            //LVL 3
             //OTROS
     personaje *jugador1;
+    personaje *jugador2;
     enemigo *enemigo_act;
     bool teclas=false;
     bool izquierda_map=true;
@@ -116,14 +120,21 @@ private:
     QList<plataforma*> limites_lvl3;
     QList<Imagenes*> imagenes_lvl3;
     QList<enemigo*> enemigos_lvl3;
+                //MULTI
+    QList<plataforma*> base_multi;
+    QList<plataforma*> pared_multi;
+    QList<plataforma*> bajos_multi;
+    QList<Imagenes*> imagenes_multi;
                 //OTROS
     QList<proyectil*> balas_jugador1;
+    QList<proyectil*> balas_jugador2;
     QList<proyectil*> balas_enemigos;
     //--------------------------
 
     //----------Metodos---------
                 //MENU
     void crearMenu();
+    void clearMenu();
                 //LVL 1
     void crearLevelOne();
     void clearLevelOne();
@@ -133,22 +144,27 @@ private:
                 //LVL 3
     void crearLevelThree();
     void clearLevelThree();
+                //MULTI
+    void crearMulti();
+    void clearMulti();
                 //OTROS
     QString letra(QString x);
     bool evaluarColisionJugador(personaje *personaje, int lista);
     bool evaluarColisionEnemies(int lista);
     int evaluarColisionSalto(personaje *personaje, int lista);
     bool evaluarColisionBullet(proyectil *bala, int lista);
+    bool evaluarColisionBullet2(proyectil *bala, int lista);
     bool evaluarColisionBulletEne(proyectil *bala, int lista);
     void changeTeclas();
     void changeMapLocation();
     void volverMenu();
     void validacion();
     void nextMap();
+    void cargarMulti();
     //--------------------------
 
 protected:
     void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *i);
-};
+}; 
 #endif // INTERFAZ_H
