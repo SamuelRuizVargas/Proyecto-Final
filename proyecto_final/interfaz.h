@@ -3,15 +3,16 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QMainWindow>
 #include <QFontDatabase>
 #include <QMediaPlayer>
 #include <QVideoWidget>
+#include <QMessageBox>
+#include <QMainWindow>
 #include <QKeyEvent>
 #include <iostream>
 #include <fstream>
-#include <QList>
 #include <QTimer>
+#include <QList>
 
 #include "imagenes.h"
 #include "botones.h"
@@ -125,10 +126,13 @@ private:
     void crearMenu();
                 //LVL 1
     void crearLevelOne();
+    void clearLevelOne();
                 //LVL 2
     void crearLevelTwo();
+    void clearLevelTwo();
                 //LVL 3
     void crearLevelThree();
+    void clearLevelThree();
                 //OTROS
     QString letra(QString x);
     bool evaluarColisionJugador(personaje *personaje, int lista);

@@ -68,6 +68,16 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
         {
             vidas-=1;
             ui->lcdVidas->display(vidas);
+            if(vidas==0)
+            {
+                timer_standard->stop();
+                QMessageBox::information(
+                    this,
+                    tr("GAME OVER"),
+                    tr("Ultima vida perdida por una caida."));
+                volverMenu();
+                timer->stop();
+            }
             switch (listabase)
             {
                 case 1:
@@ -111,6 +121,16 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
         {
             vidas-=1;
             ui->lcdVidas->display(vidas);
+            if(vidas==0)
+            {
+                timer_standard->stop();
+                QMessageBox::information(
+                    this,
+                    tr("GAME OVER"),
+                    tr("Ultima vida perdida por una caida."));
+                volverMenu();
+                timer->stop();
+            }
             switch (listabase)
             {
                 case 1:
@@ -152,7 +172,6 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
             jugador1->changedown();
         }
     }
-
 }
 
 int conta_1sec=0;
@@ -160,6 +179,7 @@ int conta_3sec=0;
 int tiempo_pasa=0;
 int conta_2sec=0;
 bool reiniciar_conta=false;
+bool seguirmoviendo=true;
 void Interfaz::standard()//se encarga de todo lo que necesite un timer
 {
     //---------------Mover enemigos---------------
@@ -172,35 +192,40 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                 int contador=0;
                 for(ite=enemigos_lvl1.begin();ite!=enemigos_lvl1.end();ite++)
                 {
-                    int taip=enemigos_lvl1[contador]->getTipo();
-                    if(taip==1 or taip==3)
+                    if(seguirmoviendo==true)
                     {
-                        enemigo_act=enemigos_lvl1[contador];
-                        bool moverse=enemigo_act->getMov();
-                        if(moverse==true)
+                        int taip=enemigos_lvl1[contador]->getTipo();
+                        if(taip==1 or taip==3)
                         {
-                            enemigo_act->moveLeft();
-                            if(evaluarColisionEnemies(listabase))
+                            enemigo_act=enemigos_lvl1[contador];
+                            bool moverse=enemigo_act->getMov();
+                            if(moverse==true)
                             {
-                                enemigos_lvl1[contador]->movOriginal();
-                                enemigos_lvl1[contador]->moveRight();
-                                enemigos_lvl1[contador]->moveRight();
-                            }
-                            enemigos_lvl1[contador]->moveLeft();
-                        }
-                        else
-                        {
-                            enemigo_act->moveRight();
-                            if(evaluarColisionEnemies(listabase))
-                            {
-                                enemigos_lvl1[contador]->movOriginal();
-                                enemigos_lvl1[contador]->moveLeft();
+                                enemigo_act->moveLeft();
+                                if(evaluarColisionEnemies(listabase))
+                                {
+                                    enemigos_lvl1[contador]->movOriginal();
+                                    enemigos_lvl1[contador]->moveRight();
+                                    enemigos_lvl1[contador]->moveRight();
+                                }
                                 enemigos_lvl1[contador]->moveLeft();
                             }
-                            enemigos_lvl1[contador]->moveRight();
+                            else
+                            {
+                                enemigo_act->moveRight();
+                                if(evaluarColisionEnemies(listabase))
+                                {
+                                    enemigos_lvl1[contador]->movOriginal();
+                                    enemigos_lvl1[contador]->moveLeft();
+                                    enemigos_lvl1[contador]->moveLeft();
+                                }
+                                enemigos_lvl1[contador]->moveRight();
+                            }
                         }
+                        contador++;
                     }
-                    contador++;
+                    else
+                        break;
                 }
             }break;
             case 2:
@@ -208,35 +233,40 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                 int contador=0;
                 for(ite=enemigos_lvl2.begin();ite!=enemigos_lvl2.end();ite++)
                 {
-                    int taip=enemigos_lvl2[contador]->getTipo();
-                    if(taip==1 or taip==3)
+                    if(seguirmoviendo==true)
                     {
-                        enemigo_act=enemigos_lvl2[contador];
-                        bool moverse=enemigo_act->getMov();
-                        if(moverse==true)
+                        int taip=enemigos_lvl2[contador]->getTipo();
+                        if(taip==1 or taip==3)
                         {
-                            enemigo_act->moveLeft();
-                            if(evaluarColisionEnemies(listabase))
+                            enemigo_act=enemigos_lvl2[contador];
+                            bool moverse=enemigo_act->getMov();
+                            if(moverse==true)
                             {
-                                enemigos_lvl2[contador]->movOriginal();
-                                enemigos_lvl2[contador]->moveRight();
-                                enemigos_lvl2[contador]->moveRight();
-                            }
-                            enemigos_lvl2[contador]->moveLeft();
-                        }
-                        else
-                        {
-                            enemigo_act->moveRight();
-                            if(evaluarColisionEnemies(listabase))
-                            {
-                                enemigos_lvl2[contador]->movOriginal();
-                                enemigos_lvl2[contador]->moveLeft();
+                                enemigo_act->moveLeft();
+                                if(evaluarColisionEnemies(listabase))
+                                {
+                                    enemigos_lvl2[contador]->movOriginal();
+                                    enemigos_lvl2[contador]->moveRight();
+                                    enemigos_lvl2[contador]->moveRight();
+                                }
                                 enemigos_lvl2[contador]->moveLeft();
                             }
-                            enemigos_lvl2[contador]->moveRight();
+                            else
+                            {
+                                enemigo_act->moveRight();
+                                if(evaluarColisionEnemies(listabase))
+                                {
+                                    enemigos_lvl2[contador]->movOriginal();
+                                    enemigos_lvl2[contador]->moveLeft();
+                                    enemigos_lvl2[contador]->moveLeft();
+                                }
+                                enemigos_lvl2[contador]->moveRight();
+                            }
                         }
+                        contador++;
                     }
-                    contador++;
+                    else
+                        break;
                 }
             }break;
             case 3:
@@ -244,35 +274,40 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                 int contador=0;
                 for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
                 {
-                    int taip=enemigos_lvl3[contador]->getTipo();
-                    if(taip==1 or taip==3)
+                    if(seguirmoviendo==true)
                     {
-                        enemigo_act=enemigos_lvl3[contador];
-                        bool moverse=enemigo_act->getMov();
-                        if(moverse==true)
+                        int taip=enemigos_lvl3[contador]->getTipo();
+                        if(taip==1 or taip==3)
                         {
-                            enemigo_act->moveLeft();
-                            if(evaluarColisionEnemies(listabase))
+                            enemigo_act=enemigos_lvl3[contador];
+                            bool moverse=enemigo_act->getMov();
+                            if(moverse==true)
                             {
-                                enemigos_lvl3[contador]->movOriginal();
-                                enemigos_lvl3[contador]->moveRight();
-                                enemigos_lvl3[contador]->moveRight();
-                            }
-                            enemigos_lvl3[contador]->moveLeft();
-                        }
-                        else
-                        {
-                            enemigo_act->moveRight();
-                            if(evaluarColisionEnemies(listabase))
-                            {
-                                enemigos_lvl3[contador]->movOriginal();
-                                enemigos_lvl3[contador]->moveLeft();
+                                enemigo_act->moveLeft();
+                                if(evaluarColisionEnemies(listabase))
+                                {
+                                    enemigos_lvl3[contador]->movOriginal();
+                                    enemigos_lvl3[contador]->moveRight();
+                                    enemigos_lvl3[contador]->moveRight();
+                                }
                                 enemigos_lvl3[contador]->moveLeft();
                             }
-                            enemigos_lvl3[contador]->moveRight();
+                            else
+                            {
+                                enemigo_act->moveRight();
+                                if(evaluarColisionEnemies(listabase))
+                                {
+                                    enemigos_lvl3[contador]->movOriginal();
+                                    enemigos_lvl3[contador]->moveLeft();
+                                    enemigos_lvl3[contador]->moveLeft();
+                                }
+                                enemigos_lvl3[contador]->moveRight();
+                            }
                         }
+                        contador++;
                     }
-                    contador++;
+                    else
+                        break;
                 }
             }break;
         }
@@ -539,8 +574,8 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                     conta=1;
                     reiniciar_conta=false;
                 }
-                ui->lcdTiempo->display(60-conta);
-                if(60-conta<=0)
+                ui->lcdTiempo->display(30-conta);
+                if(30-conta<=0)
                 {
                     ui->lcdTiempo->display(0);
                     if(tiempo_paso==false)
@@ -548,6 +583,14 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                         vidas-=1;
                         ui->lcdVidas->display(vidas);
                         tiempo_paso=true;
+                        if(vidas==0)
+                        {
+                            QMessageBox::information(
+                                this,
+                                tr("GAME OVER"),
+                                tr("Ultima vida perdida por el tiempo."));
+                                volverMenu();
+                        }
                     }
                 }
                 conta++;
@@ -561,8 +604,8 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                     conta=1;
                     reiniciar_conta=false;
                 }
-                ui->lcdTiempo->display(90-conta);
-                if(90-conta<=0)
+                ui->lcdTiempo->display(50-conta);
+                if(50-conta<=0)
                 {
                     ui->lcdTiempo->display(0);
                     if(tiempo_paso==false)
@@ -583,8 +626,8 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                     conta=1;
                     reiniciar_conta=false;
                 }
-                ui->lcdTiempo->display(100-conta);
-                if(100-conta<=0)
+                ui->lcdTiempo->display(60-conta);
+                if(60-conta<=0)
                 {
                     ui->lcdTiempo->display(0);
                     if(tiempo_paso==false)
@@ -912,6 +955,16 @@ void Interfaz::crearLevelOne()//Crea y agrega los elementos del nivel 1
     //------------------------------------------------------------
 }
 
+void Interfaz::clearLevelOne()
+{
+    base_lvl1.clear();
+    pared_lvl1.clear();
+    bajos_lvl1.clear();
+    limites_lvl1.clear();
+    imagenes_lvl1.clear();
+    enemigos_lvl1.clear();
+}
+
 void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
 {
 
@@ -1177,6 +1230,16 @@ void Interfaz::crearLevelTwo()//Crea y agrega los elementos del nivel 2
         archivo.close();
     }
     //------------------------------------------------------------
+}
+
+void Interfaz::clearLevelTwo()
+{
+    base_lvl2.clear();
+    pared_lvl2.clear();
+    bajos_lvl2.clear();
+    limites_lvl2.clear();
+    imagenes_lvl2.clear();
+    enemigos_lvl2.clear();
 }
 
 void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
@@ -1445,6 +1508,16 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
     //------------------------------------------------------------
 }
 
+void Interfaz::clearLevelThree()
+{
+    base_lvl3.clear();
+    pared_lvl3.clear();
+    bajos_lvl3.clear();
+    limites_lvl3.clear();
+    imagenes_lvl3.clear();
+    enemigos_lvl3.clear();
+}
+
 bool Interfaz::evaluarColisionJugador(personaje *personaje, int lista)//Evalua si el jugador choca caminando
 {
     QList<plataforma*>::iterator it;
@@ -1490,6 +1563,14 @@ bool Interfaz::evaluarColisionJugador(personaje *personaje, int lista)//Evalua s
                     ui->lcdVidas->display(vidas);
                     jugador1->cambiar();
                     cambiazo=true;
+                    if(vidas==0)
+                    {
+                        QMessageBox::information(
+                            this,
+                            tr("GAME OVER"),
+                            tr("Ultima vida perdida por el Boss Final."));
+                            volverMenu();
+                    }
                 }
                 return true;
             }
@@ -1522,6 +1603,17 @@ bool Interfaz::evaluarColisionEnemies(int lista)//Evalua las colisiones de los e
                     ui->lcdVidas->display(vidas);
                     jugador1->cambiar();
                     cambiazo=true;
+                    if(vidas==0)
+                    {
+                        timer->stop();
+                        timer_standard->stop();
+                        QMessageBox::information(
+                            this,
+                            tr("GAME OVER"),
+                            tr("Ultima vida perdida por un enemigo."));
+                        volverMenu();
+                        seguirmoviendo=false;
+                    }
                 }
             }
         }break;
@@ -1543,6 +1635,17 @@ bool Interfaz::evaluarColisionEnemies(int lista)//Evalua las colisiones de los e
                     ui->lcdVidas->display(vidas);
                     jugador1->cambiar();
                     cambiazo=true;
+                    if(vidas==0)
+                    {
+                        timer->stop();
+                        timer_standard->stop();
+                        QMessageBox::information(
+                            this,
+                            tr("GAME OVER"),
+                            tr("Ultima vida perdida por un enemigo."));
+                        volverMenu();
+                        seguirmoviendo=false;
+                    }
                 }
             }
         }break;
@@ -1564,6 +1667,17 @@ bool Interfaz::evaluarColisionEnemies(int lista)//Evalua las colisiones de los e
                     ui->lcdVidas->display(vidas);
                     jugador1->cambiar();
                     cambiazo=true;
+                    if(vidas==0)
+                    {
+                        timer->stop();
+                        timer_standard->stop();
+                        QMessageBox::information(
+                            this,
+                            tr("GAME OVER"),
+                            tr("Ultima vida perdida por un enemigo."));
+                        volverMenu();
+                        seguirmoviendo=false;
+                    }
                 }
             }
         }break;
@@ -1730,15 +1844,24 @@ bool Interfaz::evaluarColisionBullet(proyectil *bala, int lista)//revisa las col
                         {
                             puntaje+=5000;
                             ui->lcdEnemigos->display(0);
-                            changeTeclas();
-                            vidas=3;
-                            puntaje=-500;
-                            listabase=0;
+                            timer->stop();
+                            timer_standard->stop();
+                            QMessageBox::information(
+                                this,
+                                tr("FELICITACIONES!!!"),
+                                tr("Has logrado terminar el juego."));
+                            QMessageBox::information(this,
+                                tr("Julian"),
+                                tr("*Babeando su mesa*"),
+                                tr("-Eh? que paso, yo estaba... oh, solo fue un sueño."));
+                            QMessageBox::information(
+                                this,
+                                tr("Narrador"),
+                                tr("O quizás no lo fue?..."));
                             volverMenu();
                         }
                         level_three->removeItem(*ite);
                         enemigos_lvl3.removeAt(con);
-                        puntaje+=500;
                         ui->lcdPuntaje->display(puntaje);
                         ui->VidaBoss->hide();
                     }
@@ -1775,6 +1898,16 @@ bool Interfaz::evaluarColisionBulletEne(proyectil *bala, int lista)//revisa las 
                     ui->lcdVidas->display(vidas);
                     jugador1->cambiar();
                     cambiazo=true;
+                    if(vidas==0)
+                    {
+                        timer->stop();
+                        timer_standard->stop();
+                        QMessageBox::information(
+                            this,
+                            tr("GAME OVER"),
+                            tr("Ultima vida perdida por una bala enemiga."));
+                        volverMenu();
+                    }
                     return true;
                 }
             }
@@ -1797,6 +1930,16 @@ bool Interfaz::evaluarColisionBulletEne(proyectil *bala, int lista)//revisa las 
                     ui->lcdVidas->display(vidas);
                     jugador1->cambiar();
                     cambiazo=true;
+                    if(vidas==0)
+                    {
+                        timer->stop();
+                        timer_standard->stop();
+                        QMessageBox::information(
+                            this,
+                            tr("GAME OVER"),
+                            tr("Ultima vida perdida por una bala enemiga."));
+                        volverMenu();
+                    }
                     return true;
                 }
             }
@@ -1819,6 +1962,16 @@ bool Interfaz::evaluarColisionBulletEne(proyectil *bala, int lista)//revisa las 
                     ui->lcdVidas->display(vidas);
                     jugador1->cambiar();
                     cambiazo=true;
+                    if(vidas==0)
+                    {
+                        timer->stop();
+                        timer_standard->stop();
+                        QMessageBox::information(
+                            this,
+                            tr("GAME OVER"),
+                            tr("Ultima vida perdida por una bala enemiga."));
+                        volverMenu();
+                    }
                     return true;
                 }
             }
@@ -1886,12 +2039,19 @@ void Interfaz::volverMenu()//esconde los elementos graficos y vuelve al menu ini
     ui->labelPuntaje->hide();
     ui->labelTiempo->hide();
     ui->VidaBoss->hide();
-    timer_standard->stop();
+    changeTeclas();
+    puntaje=0;
+    vidas=3;
     reiniciar_conta=true;
+    clearLevelOne();
+    clearLevelTwo();
+    clearLevelThree();
     crearLevelOne();
     crearLevelTwo();
     crearLevelThree();
+    listabase=0;
     crearMenu();
+    timer_standard->stop();
 }
 
 void Interfaz::validacion()//FALTA
@@ -1906,6 +2066,11 @@ void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pa
     {
         case 1:
         {
+            timer->stop();
+            timer_standard->stop();
+            QMessageBox::information(this,
+                tr("El Comienzo..."),
+                tr("La historia comienza con un programador común y corriente llamado Julian, trabaja como desarrollador independiente; Un día mientras intenta corregir algunos bugs en su programa se queda mirando a su ventana pensando como seria un mundo futurista, mientras tenia la mente en las nubes pensando en cosas extraordinarias, sin darse cuenta, derrama su bebida sobre su computadora, pero...."));
             jugador1 = new personaje(35,585);
             level_one->setSceneRect(0,0,1281,651);
             level_one->addItem(jugador1);
@@ -1918,13 +2083,30 @@ void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pa
             ui->lcdPuntaje->show();
             ui->lcdTiempo->show();
             ui->lcdVidas->show();
-            ui->lcdTiempo->display(60);
+            ui->lcdTiempo->display(30);
             ui->lcdVidas->display(vidas);
             ui->lcdEnemigos->display(enemigos_lvl1.count());
+            timer->stop();
+            timer_standard->stop();
+            QMessageBox::information(this,
+                tr("Julian"),
+                tr("-¡Que pasa! no, NOOOO..."));
+            QMessageBox::information(this,
+                tr("Narrador"),
+                tr("Una fuerza extraña lo hace ingresar a su computadora y ahora tendrá que enfrentarse a los bugs y a su reina para poder regresar, lo se, una locura no?."));
+            seguirmoviendo=true;
+            tiempo_paso=false;
+            jugador1->cambiar();
+            cambiazo=true;
             timer_standard->start(20);
         }break;
         case 2:
         {
+            timer->stop();
+            timer_standard->stop();
+            QMessageBox::information(this,
+                tr("La Travesia"),
+                tr("Nuestro protagonista se encuentra cerca de hayar al bug y destruirlo. Sigue asi!!!"));
             jugador1 = new personaje(35,585);
             level_two->setSceneRect(0,0,1281,651);
             level_two->addItem(jugador1);
@@ -1937,13 +2119,16 @@ void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pa
             ui->lcdPuntaje->show();
             ui->lcdTiempo->show();
             ui->lcdVidas->show();
-            ui->lcdTiempo->display(90);
+            ui->lcdTiempo->display(50);
             puntaje+=vidas*100+1000;
             ui->lcdPuntaje->display(puntaje);
             vidas+=1;
             ui->lcdVidas->display(vidas);
             ui->lcdEnemigos->display(enemigos_lvl2.count());
+            jugador1->cambiar();
+            cambiazo=true;
             timer_standard->start(20);
+            tiempo_paso=false;
             listabase = 2;
         }break;
         case 3:
@@ -1960,14 +2145,22 @@ void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pa
             ui->lcdPuntaje->show();
             ui->lcdTiempo->show();
             ui->lcdVidas->show();
-            ui->lcdTiempo->display(100);
+            ui->lcdTiempo->display(60);
             puntaje+=vidas*100+1000;
             ui->lcdPuntaje->display(puntaje);
             vidas+=1;
             ui->lcdVidas->display(vidas);
             ui->lcdEnemigos->display(1);
             ui->VidaBoss->show();
+            timer->stop();
+            timer_standard->stop();
+            QMessageBox::information(this,
+                tr("La Batalla Final"),
+                tr("FINALEMENTE! ahi esta tu archienemigo, ve y derrotalo!"));
+            jugador1->cambiar();
+            cambiazo=true;
             timer_standard->start(20);
+            tiempo_paso=false;
             listabase = 3;
         }break;
     }
