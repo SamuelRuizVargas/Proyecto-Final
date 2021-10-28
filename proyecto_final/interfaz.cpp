@@ -1,6 +1,7 @@
 #include "interfaz.h"
 #include "ui_interfaz.h"
 
+int vidas=3;
 int listabase;
 Interfaz::Interfaz(QWidget *parent)
     : QMainWindow(parent)
@@ -33,6 +34,20 @@ Interfaz::Interfaz(QWidget *parent)
 
     timer_standard=new QTimer(this);
     connect(timer_standard,SIGNAL(timeout()),this,SLOT(standard()));
+    //---------------------------------
+
+    //--------Interfaz niveles---------
+//    ui->lcdTiempo->display(100);
+//    ui->lcdVidas->display(vidas);
+    ui->lcdEnemigos->hide();
+    ui->lcdVidas->hide();
+    ui->lcdTiempo->hide();
+    ui->lcdPuntaje->hide();
+    ui->labelEnemigos->hide();
+    ui->labelVidas->hide();
+    ui->labelPuntaje->hide();
+    ui->labelTiempo->hide();
+    ui->VidaBoss->hide();
     //---------------------------------
 
 }
@@ -93,8 +108,8 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
 
 }
 
-int conta_avispa=0;
-int conta_bombardero=0;
+int conta_1sec=0;
+int conta_3sec=0;
 void Interfaz::standard()//se encarga de todo lo que necesite un timer
 {
     //---------------Mover enemigos---------------
@@ -256,8 +271,8 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
 
     //------------Disparos enemigos---------------
     {
-        conta_avispa+=20;
-        if(conta_avispa==1000)
+        conta_1sec+=20;
+        if(conta_1sec==1000)
         {
             QList<enemigo*>::iterator ite;
 
@@ -284,7 +299,6 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                         }
                         contador++;
                     }
-                    conta_avispa=0;
                 }break;
                 case 2:
                 {
@@ -307,7 +321,6 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                         }
                         contador++;
                     }
-                    conta_avispa=0;
                 }break;
                 case 3:
                 {
@@ -330,13 +343,13 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                         }
                         contador++;
                     }
-                    conta_avispa=0;
                 }break;
             }
+            conta_1sec=0;
         }
 
-        conta_bombardero+=20;
-        if(conta_bombardero==3000)
+        conta_3sec+=20;
+        if(conta_3sec==3000)
         {
             QList<enemigo*>::iterator ite;
 
@@ -363,7 +376,6 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                         }
                         contador++;
                     }
-                    conta_bombardero=0;
                 }break;
                 case 2:
                 {
@@ -386,7 +398,6 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                         }
                         contador++;
                     }
-                    conta_bombardero=0;
                 }break;
                 case 3:
                 {
@@ -409,9 +420,20 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                         }
                         contador++;
                     }
-                    conta_bombardero=0;
+                    contador=0;
+                    for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+                    {
+                        if(enemigos_lvl3[contador]->getTipo()==4)
+                        {
+                            int postionx=enemigos_lvl3[contador]->getX(), postiony=enemigos_lvl3[contador]->getY();
+                            balas_enemigos.append(new proyectil(postionx-40,postiony+310,-5,0,35,35,3));
+                            level_three->addItem(balas_enemigos.back());
+                        }
+                        contador++;
+                    }
                 }break;
             }
+            conta_3sec=0;
         }
 
         QList<proyectil*>::iterator ite;
