@@ -5,4 +5,4 @@
 
 50,525,200,25//plataforma larga 1
 350,525,200,25//plataforma larga 2
-650,525,200,25//plataforma larga 3
+650,525,100,25//plataforma larga 3

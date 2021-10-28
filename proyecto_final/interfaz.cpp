@@ -2,7 +2,10 @@
 #include "ui_interfaz.h"
 
 int vidas=3;
+int puntaje=0;
 int listabase;
+bool tiempo_paso=false;
+bool cambiazo=false;
 Interfaz::Interfaz(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Interfaz)
@@ -37,8 +40,6 @@ Interfaz::Interfaz(QWidget *parent)
     //---------------------------------
 
     //--------Interfaz niveles---------
-//    ui->lcdTiempo->display(100);
-//    ui->lcdVidas->display(vidas);
     ui->lcdEnemigos->hide();
     ui->lcdVidas->hide();
     ui->lcdTiempo->hide();
@@ -63,7 +64,30 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
         int copy_y=jugador1->getY(),copy_x=jugador1->getX();
         jugador1->free(0.1f);
         jugador1->setPos(jugador1->getX(),jugador1->getY());
-        if(evaluarColisionSalto(jugador1, listabase)==1)
+        if(copy_y>=650)
+        {
+            vidas-=1;
+            ui->lcdVidas->display(vidas);
+            switch (listabase)
+            {
+                case 1:
+                {
+                    jugador1 = new personaje(35,585);
+                    level_one->addItem(jugador1);
+                }break;
+                case 2:
+                {
+                    jugador1 = new personaje(35,585);
+                    level_two->addItem(jugador1);
+                }break;
+                case 3:
+                {
+                    jugador1 = new personaje(35,585);
+                    level_three->addItem(jugador1);
+                }break;
+            }
+        }
+        else if(evaluarColisionSalto(jugador1, listabase)==1)
         {
             jugador1->resetVX();
             jugador1->setposis(copy_x,copy_y);
@@ -83,7 +107,30 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
         int copy_y=jugador1->getY(),copy_x=jugador1->getX();
         jugador1->jump(0.1f);
         jugador1->setPos(jugador1->getX(),jugador1->getY());
-        if(evaluarColisionSalto(jugador1, listabase)==1)
+        if(copy_y>=650)
+        {
+            vidas-=1;
+            ui->lcdVidas->display(vidas);
+            switch (listabase)
+            {
+                case 1:
+                {
+                    jugador1 = new personaje(35,585);
+                    level_one->addItem(jugador1);
+                }break;
+                case 2:
+                {
+                    jugador1 = new personaje(35,585);
+                    level_two->addItem(jugador1);
+                }break;
+                case 3:
+                {
+                    jugador1 = new personaje(35,585);
+                    level_three->addItem(jugador1);
+                }break;
+            }
+        }
+        else if(evaluarColisionSalto(jugador1, listabase)==1)
         {
             jugador1->resetVX();
             jugador1->setposis(copy_x,copy_y);
@@ -110,6 +157,8 @@ void Interfaz::actualizar()//se encarga de los movimientos del personaje
 
 int conta_1sec=0;
 int conta_3sec=0;
+int tiempo_pasa=0;
+int conta_2sec=0;
 void Interfaz::standard()//se encarga de todo lo que necesite un timer
 {
     //---------------Mover enemigos---------------
@@ -446,7 +495,7 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                 balas_enemigos[contador]->disparo();
                 balas_enemigos[contador]->setPos(balas_enemigos[contador]->getX(),balas_enemigos[contador]->getY());
                 double tiempo=balas_enemigos[contador]->getTempo();
-                bool colide=evaluarColisionBullet(balas_enemigos[contador],listabase);
+                bool colide=evaluarColisionBulletEne(balas_enemigos[contador],listabase);
                 if(tiempo>=5 or colide==true)
                 {
                     if(listabase==1)
@@ -470,6 +519,84 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                 }
                 contador++;
             }
+        }
+    }
+    //--------------------------------------------
+
+    //------------------tiempo--------------------
+    {
+        tiempo_pasa+=20;
+        if(tiempo_pasa==1000)
+        {
+            switch (listabase)
+            {
+            case 1:
+            {
+                static int conta=1;
+                ui->lcdTiempo->display(60-conta);
+                if(60-conta<=0)
+                {
+                    ui->lcdTiempo->display(0);
+                    if(tiempo_paso==false)
+                    {
+                        vidas-=1;
+                        ui->lcdVidas->display(vidas);
+                        tiempo_paso=true;
+                    }
+                }
+                conta++;
+                tiempo_pasa=0;
+            }break;
+            case 2:
+            {
+                static int conta=1;
+                ui->lcdTiempo->display(90-conta);
+                if(90-conta<=0)
+                {
+                    ui->lcdTiempo->display(0);
+                    if(tiempo_paso==false)
+                    {
+                        vidas-=1;
+                        ui->lcdVidas->display(vidas);
+                        tiempo_paso=true;
+                    }
+                }
+                conta++;
+                tiempo_pasa=0;
+            }break;
+            case 3:
+            {
+                static int conta=1;
+                ui->lcdTiempo->display(100-conta);
+                if(100-conta<=0)
+                {
+                    ui->lcdTiempo->display(0);
+                    if(tiempo_paso==false)
+                    {
+                        vidas-=1;
+                        ui->lcdVidas->display(vidas);
+                        tiempo_paso=true;
+                    }
+                }
+                conta++;
+                tiempo_pasa=0;
+            }break;
+            }
+        }
+    }
+    //--------------------------------------------
+
+    //---------------inmortalidad-----------------
+    {
+        conta_2sec+=20;
+        if(conta_2sec==2000)
+        {
+            if(cambiazo==true)
+            {
+                jugador1->cambiar();
+                cambiazo=false;
+            }
+            conta_2sec=0;
         }
     }
     //--------------------------------------------
@@ -1358,6 +1485,17 @@ bool Interfaz::evaluarColisionEnemies(int lista)//Evalua las colisiones de los e
                     return true;
                 }
             }
+            bool inmo=jugador1->getInmo();
+            if(enemigo_act->collidesWithItem(jugador1))
+            {
+                if(inmo==false)
+                {
+                    vidas-=1;
+                    ui->lcdVidas->display(vidas);
+                    jugador1->cambiar();
+                    cambiazo=true;
+                }
+            }
         }break;
         case 2:
         {
@@ -1368,6 +1506,17 @@ bool Interfaz::evaluarColisionEnemies(int lista)//Evalua las colisiones de los e
                     return true;
                 }
             }
+            bool inmo=jugador1->getInmo();
+            if(enemigo_act->collidesWithItem(jugador1))
+            {
+                if(inmo==false)
+                {
+                    vidas-=1;
+                    ui->lcdVidas->display(vidas);
+                    jugador1->cambiar();
+                    cambiazo=true;
+                }
+            }
         }break;
         case 3:
         {
@@ -1376,6 +1525,17 @@ bool Interfaz::evaluarColisionEnemies(int lista)//Evalua las colisiones de los e
                 if(enemigo_act->collidesWithItem(*it))
                 {
                     return true;
+                }
+            }
+            bool inmo=jugador1->getInmo();
+            if(enemigo_act->collidesWithItem(jugador1))
+            {
+                if(inmo==false)
+                {
+                    vidas-=1;
+                    ui->lcdVidas->display(vidas);
+                    jugador1->cambiar();
+                    cambiazo=true;
                 }
             }
         }break;
@@ -1445,6 +1605,108 @@ int Interfaz::evaluarColisionSalto(personaje *personaje , int lista)//revisa las
 }
 
 bool Interfaz::evaluarColisionBullet(proyectil *bala, int lista)//revisa las colisiones de los proyectiles
+{
+    QList<plataforma*>::iterator it;
+    QList<enemigo*>::iterator ite;
+
+    switch (lista)
+    {
+        case 1:
+        {
+            for(it=base_lvl1.begin();it!=base_lvl1.end();it++)
+            {
+                if(bala->collidesWithItem(*it))
+                {
+                    return true;
+                }
+            }
+            int con=0;
+            for(ite=enemigos_lvl1.begin();ite!=enemigos_lvl1.end();ite++)
+            {
+                if(bala->collidesWithItem(*ite))
+                {
+                    enemigos_lvl1[con]->minusLives();
+                    int vidillas=enemigos_lvl1[con]->getLives();
+                    if(vidillas==0)
+                    {
+                        level_one->removeItem(*ite);
+                        enemigos_lvl1.removeAt(con);
+                        puntaje+=500;
+                        ui->lcdPuntaje->display(puntaje);
+                    }
+                    return true;
+                }
+                con++;
+            }
+        }break;
+        case 2:
+        {
+            for(it=base_lvl2.begin();it!=base_lvl2.end();it++)
+            {
+                if(bala->collidesWithItem(*it))
+                {
+                    return true;
+                }
+            }
+            int con=0;
+            for(ite=enemigos_lvl2.begin();ite!=enemigos_lvl2.end();ite++)
+            {
+                if(bala->collidesWithItem(*ite))
+                {
+                    enemigos_lvl2[con]->minusLives();
+                    int vidillas=enemigos_lvl2[con]->getLives();
+                    if(vidillas==0)
+                    {
+                        level_two->removeItem(*ite);
+                        enemigos_lvl2.removeAt(con);
+                        puntaje+=500;
+                        ui->lcdPuntaje->display(puntaje);
+                    }
+                    return true;
+                }
+                con++;
+            }
+        }break;
+        case 3:
+        {
+            for(it=base_lvl3.begin();it!=base_lvl3.end();it++)
+            {
+                if(bala->collidesWithItem(*it))
+                {
+                    return true;
+                }
+            }
+            int con=0;
+            for(ite=enemigos_lvl3.begin();ite!=enemigos_lvl3.end();ite++)
+            {
+                if(bala->collidesWithItem(*ite))
+                {
+                    enemigos_lvl3[con]->minusLives();
+                    int vidillas=enemigos_lvl3[con]->getLives(), tipo=enemigos_lvl3[con]->getTipo();
+                    if(tipo==4)
+                    {
+                        ui->VidaBoss->setValue(vidillas);
+                    }
+                    if(vidillas==0)
+                    {
+                        if(tipo==4)
+                            puntaje+=5000;
+                        level_three->removeItem(*ite);
+                        enemigos_lvl3.removeAt(con);
+                        puntaje+=500;
+                        ui->lcdPuntaje->display(puntaje);
+                        ui->VidaBoss->hide();
+                    }
+                    return true;
+                }
+                con++;
+            }
+        }break;
+    }
+    return false;
+}
+
+bool Interfaz::evaluarColisionBulletEne(proyectil *bala, int lista)
 {
     QList<plataforma*>::iterator it;
 
@@ -1565,6 +1827,16 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         level_one->setSceneRect(0,0,1281,651);
         level_one->addItem(jugador1);
         ui->graphicsView->setScene(level_one); //cambio de escena para probar el lvl 1
+        ui->labelEnemigos->show();
+        ui->labelTiempo->show();
+        ui->labelVidas->show();
+        ui->labelPuntaje->show();
+        ui->lcdEnemigos->show();
+        ui->lcdPuntaje->show();
+        ui->lcdTiempo->show();
+        ui->lcdVidas->show();
+        ui->lcdTiempo->display(60);
+        ui->lcdVidas->display(vidas);
         timer_standard->start(20);
         listabase = 1;
         changeTeclas();
@@ -1575,6 +1847,16 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         level_two->setSceneRect(0,0,1281,651);
         level_two->addItem(jugador1);
         ui->graphicsView->setScene(level_two);//cambio de escena para probar el lvl 2
+        ui->labelEnemigos->show();
+        ui->labelTiempo->show();
+        ui->labelVidas->show();
+        ui->labelPuntaje->show();
+        ui->lcdEnemigos->show();
+        ui->lcdPuntaje->show();
+        ui->lcdTiempo->show();
+        ui->lcdVidas->show();
+        ui->lcdTiempo->display(90);
+        ui->lcdVidas->display(vidas);
         timer_standard->start(20);
         listabase = 2;
         changeTeclas();
@@ -1585,6 +1867,17 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         level_three->setSceneRect(0,0,1281,651);
         level_three->addItem(jugador1);
         ui->graphicsView->setScene(level_three);//cambio de escena para probar el lvl 3
+        ui->labelEnemigos->show();
+        ui->labelTiempo->show();
+        ui->labelVidas->show();
+        ui->labelPuntaje->show();
+        ui->lcdEnemigos->show();
+        ui->lcdPuntaje->show();
+        ui->lcdTiempo->show();
+        ui->lcdVidas->show();
+        ui->lcdTiempo->display(100);
+        ui->lcdVidas->display(vidas);
+        ui->VidaBoss->show();
         timer_standard->start(20);
         listabase = 3;
         changeTeclas();

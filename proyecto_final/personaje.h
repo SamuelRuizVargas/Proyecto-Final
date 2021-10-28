@@ -17,6 +17,7 @@ class personaje  : public QGraphicsItem
     float vy2=0;
     bool caida=true;
     bool derecha=true;
+    bool inmortal=false;
 
 public:
     personaje(int,int);
@@ -43,6 +44,8 @@ public:
     void moveLeft();
     void moveRight();
     void jump(float dt);
+    void cambiar();
+    bool getInmo();
 };
 
 

@@ -135,6 +135,7 @@ private:
     bool evaluarColisionEnemies(int lista);
     int evaluarColisionSalto(personaje *personaje, int lista);
     bool evaluarColisionBullet(proyectil *bala, int lista);
+    bool evaluarColisionBulletEne(proyectil *bala, int lista);
     void changeTeclas();
     void changeMapLocation();
     void validacion();

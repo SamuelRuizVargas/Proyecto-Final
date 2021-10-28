@@ -15,6 +15,7 @@ class enemigo : public QGraphicsItem
     int an;
     int posx;
     int posy;
+    int lives;
     int velocidad=1;
     bool movi_original=true;
     int tipo;
@@ -27,6 +28,8 @@ public:
     void moveLeft();
     void moveRight();
     int getTipo();
+    int getLives();
+    void minusLives();
     int getX();
     int getY();
     ~enemigo();

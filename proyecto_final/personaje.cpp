@@ -133,3 +133,16 @@ void personaje::jump(float dt)
     posy-=vy*dt+(g*dt*dt)/2.0f;
     vy=vy+g*dt;
 }
+
+void personaje::cambiar()
+{
+    if(inmortal==false)
+        inmortal=true;
+    else
+        inmortal=false;
+}
+
+bool personaje::getInmo()
+{
+    return inmortal;
+}

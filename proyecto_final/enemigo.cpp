@@ -7,6 +7,25 @@ enemigo::enemigo(int x, int y, int _an, int _h, int _tipo)
     tipo=_tipo;
     posx=x;
     posy=y;
+    switch(tipo)
+    {
+        case 1://Enemigos basicos
+        {
+            lives=1;
+        }break;
+        case 2://Enemigos a distancia
+        {
+            lives=3;
+        }break;
+        case 3://Enemigos voladores
+        {
+            lives=2;
+        }break;
+        case 4:
+        {
+            lives=250;
+        }break;
+    }
     setPos(posx,posy);
 }
 
@@ -68,6 +87,16 @@ void enemigo::moveRight()
 int enemigo::getTipo()
 {
     return tipo;
+}
+
+int enemigo::getLives()
+{
+    return lives;
+}
+
+void enemigo::minusLives()
+{
+    lives-=1;
 }
 
 int enemigo::getX()
