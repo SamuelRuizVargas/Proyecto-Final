@@ -1721,6 +1721,18 @@ bool Interfaz::evaluarColisionBulletEne(proyectil *bala, int lista)
                     return true;
                 }
             }
+            bool inmo=jugador1->getInmo();
+            if(bala->collidesWithItem(jugador1))
+            {
+                if(inmo==false)
+                {
+                    vidas-=1;
+                    ui->lcdVidas->display(vidas);
+                    jugador1->cambiar();
+                    cambiazo=true;
+                    return true;
+                }
+            }
         }break;
         case 2:
         {
@@ -1731,6 +1743,18 @@ bool Interfaz::evaluarColisionBulletEne(proyectil *bala, int lista)
                     return true;
                 }
             }
+            bool inmo=jugador1->getInmo();
+            if(bala->collidesWithItem(jugador1))
+            {
+                if(inmo==false)
+                {
+                    vidas-=1;
+                    ui->lcdVidas->display(vidas);
+                    jugador1->cambiar();
+                    cambiazo=true;
+                    return true;
+                }
+            }
         }break;
         case 3:
         {
@@ -1738,6 +1762,18 @@ bool Interfaz::evaluarColisionBulletEne(proyectil *bala, int lista)
             {
                 if(bala->collidesWithItem(*it))
                 {
+                    return true;
+                }
+            }
+            bool inmo=jugador1->getInmo();
+            if(bala->collidesWithItem(jugador1))
+            {
+                if(inmo==false)
+                {
+                    vidas-=1;
+                    ui->lcdVidas->display(vidas);
+                    jugador1->cambiar();
+                    cambiazo=true;
                     return true;
                 }
             }
@@ -1837,6 +1873,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         ui->lcdVidas->show();
         ui->lcdTiempo->display(60);
         ui->lcdVidas->display(vidas);
+        ui->lcdEnemigos->display(enemigos_lvl1.count());
         timer_standard->start(20);
         listabase = 1;
         changeTeclas();
@@ -1857,6 +1894,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         ui->lcdVidas->show();
         ui->lcdTiempo->display(90);
         ui->lcdVidas->display(vidas);
+        ui->lcdEnemigos->display(enemigos_lvl2.count());
         timer_standard->start(20);
         listabase = 2;
         changeTeclas();
@@ -1877,6 +1915,7 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         ui->lcdVidas->show();
         ui->lcdTiempo->display(100);
         ui->lcdVidas->display(vidas);
+        ui->lcdEnemigos->display(1);
         ui->VidaBoss->show();
         timer_standard->start(20);
         listabase = 3;
