@@ -1230,20 +1230,6 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
     }
     //------------------------------------------------------------
 
-    //---------------------------Imagenes-------------------------
-    {
-        imagenes_lvl3.append(new Imagenes(0,0,2500,681,5)); // Background
-
-        QList<Imagenes*>::iterator it;
-        int cont = 0;
-        for(it = imagenes_lvl3.begin(); it!= imagenes_lvl3.end(); it++)
-        {
-            level_three->addItem(imagenes_lvl3.at(cont));
-            cont++;
-        }
-    }
-    //------------------------------------------------------------
-
     //-----------------------Paredes del mapa---------------------
     {
         ifstream archivo;
@@ -1290,6 +1276,20 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
             level_three->addItem(pared_lvl3.back());
         }
         archivo.close();
+    }
+    //------------------------------------------------------------
+
+    //---------------------------Imagenes-------------------------
+    {
+        imagenes_lvl3.append(new Imagenes(0,0,2500,681,5)); // Background
+
+        QList<Imagenes*>::iterator it;
+        int cont = 0;
+        for(it = imagenes_lvl3.begin(); it!= imagenes_lvl3.end(); it++)
+        {
+            level_three->addItem(imagenes_lvl3.at(cont));
+            cont++;
+        }
     }
     //------------------------------------------------------------
 
@@ -1448,6 +1448,7 @@ void Interfaz::crearLevelThree()//Crea y agrega los elementos del nivel 3
 bool Interfaz::evaluarColisionJugador(personaje *personaje, int lista)//Evalua si el jugador choca caminando
 {
     QList<plataforma*>::iterator it;
+    QList<enemigo*>::iterator ite;
 
     switch (lista)
     {
@@ -1479,6 +1480,18 @@ bool Interfaz::evaluarColisionJugador(personaje *personaje, int lista)//Evalua s
                 {
                     return true;
                 }
+            }
+            bool inmo=jugador1->getInmo();
+            if(personaje->collidesWithItem(enemigos_lvl3.at(0)))
+            {
+                if(inmo==false)
+                {
+                    vidas-=1;
+                    ui->lcdVidas->display(vidas);
+                    jugador1->cambiar();
+                    cambiazo=true;
+                }
+                return true;
             }
         }break;
     }
@@ -1886,7 +1899,7 @@ void Interfaz::validacion()//FALTA
 
 }
 
-void Interfaz::nextMap()
+void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pasar de nivel
 {
     listabase++;
     switch (listabase)
