@@ -34,6 +34,10 @@ void proyectil::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         {
             pixmap.load(PATH_PROY2);
         }break;
+        case 4://Jugador 2
+        {
+            pixmap.load(PATH_PROY2);
+        }break;
     }
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
@@ -59,6 +63,10 @@ void proyectil::disparo(float dt)
             desplazamiento+=0.07f;
             posx+=radio*cos(tempo*2)-desplazamiento;
             posy-=radio*sin(tempo*2);
+        }break;
+        case 4://linea recta
+        {
+            posx+=vx;
         }break;
     }
 }
