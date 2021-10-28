@@ -139,7 +139,7 @@ private:
     void changeTeclas();
     void changeMapLocation();
     void validacion();
-    int cont=0; // borrar
+    void nextMap();
     //--------------------------
 
 protected:
