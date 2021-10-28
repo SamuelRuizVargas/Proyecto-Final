@@ -1,0 +1,8 @@
+250,549,200,1//plataforma baja 1
+550,549,200,1//plataforma baja 2
+850,549,200,1//plataforma baja 3
+
+425,449,150,1//plataforma media 1
+725,449,150,1//plataforma media 2
+
+500,349,300,1//plataforma alta
