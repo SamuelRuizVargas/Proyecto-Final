@@ -1,0 +1,20 @@
+49,0,1,700//limite izquierdo
+1225,0,1,700//limite derecho
+
+250,535,1,1//plataforma baja 1
+449,535,1,1
+
+550,535,1,1//plataforma baja 2
+749,535,1,1
+
+850,535,1,1//plataforma baja 3
+1049,535,1,1
+
+425,435,1,1//plataforma media 1
+574,435,1,1
+
+725,435,1,1//plataforma media 2
+874,435,1,1
+
+500,335,1,1//plataforma alta
+799,335,1,1

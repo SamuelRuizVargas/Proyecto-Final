@@ -13,8 +13,8 @@
 #define PATH_BACK_2 ":/imagenes/LVLS/lvl2/background.jpg"
                     //level 3
 #define PATH_BACK_3 ":/imagenes/LVLS/lvl3/background.jpg"
-                    //bossfight
-#define PATH_BACK_BOSS ":/imagenes/LVLS/bossfight/background.jpg"
+                //Multijugador
+#define PATH_BACK_MULT ":/imagenes/LVLS/multijugador/background.jpg"
 //---------------------------------------------------------
 
 class Imagenes : public QGraphicsItem

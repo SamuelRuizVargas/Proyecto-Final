@@ -16,6 +16,11 @@ bool botones::get_Pressed()
     return Pressed;
 }
 
+void botones::changePressed()
+{
+    Pressed=false;
+}
+
 QRectF botones::boundingRect() const
 {
     return QRectF(0, 0, an, h);

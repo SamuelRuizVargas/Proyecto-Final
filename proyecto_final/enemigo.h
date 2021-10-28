@@ -7,6 +7,7 @@
 #define PATH_BASE_ENE ":/imagenes/Enemigos/enemigo_base.png"
 #define PATH_TIRA_ENE ":/imagenes/Enemigos/enemigo_distancia.png"
 #define PATH_VOLA_ENE ":/imagenes/Enemigos/enemigo_volador.png"
+#define PATH_BOSS_ENE ":/imagenes/Enemigos/boss.png"
 
 class enemigo : public QGraphicsItem
 {
@@ -14,6 +15,7 @@ class enemigo : public QGraphicsItem
     int an;
     int posx;
     int posy;
+    int lives;
     int velocidad=1;
     bool movi_original=true;
     int tipo;
@@ -26,6 +28,8 @@ public:
     void moveLeft();
     void moveRight();
     int getTipo();
+    int getLives();
+    void minusLives();
     int getX();
     int getY();
     ~enemigo();

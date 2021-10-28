@@ -5,7 +5,6 @@
         <file>imagenes/Botones/Boton_multi.png</file>
         <file>imagenes/Menu/logo.png</file>
         <file>imagenes/Menu/menu_back.jpg</file>
-        <file>imagenes/LVLS/bossfight/background.jpg</file>
         <file>imagenes/player1.png</file>
         <file>imagenes/LVLS/lvl3/background.jpg</file>
         <file>imagenes/LVLS/lvl1/background.jpg</file>
@@ -19,5 +18,9 @@
         <file>imagenes/bloque.png</file>
         <file>imagenes/proyectil.png</file>
         <file>imagenes/proyectil2.png</file>
+        <file>imagenes/bloque_hitbox.png</file>
+        <file>imagenes/Enemigos/boss.png</file>
+        <file>imagenes/player2.png</file>
+        <file>imagenes/LVLS/multijugador/background.jpg</file>
     </qresource>
 </RCC>

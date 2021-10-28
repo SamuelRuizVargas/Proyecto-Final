@@ -1,0 +1,13 @@
+0,0,50,700//limite izquierdo
+1225,0,75,700//limite derecho
+
+0,625,1300,25//piso
+
+250,525,200,25//plataforma baja 1
+550,525,200,25//plataforma baja 2
+850,525,200,25//plataforma baja 3
+
+425,425,150,25//plataforma media 1
+725,425,150,25//plataforma media 2
+
+500,325,300,25//plataforma alta

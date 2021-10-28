@@ -1,0 +1,16 @@
+150,549,25,1//Bloquecito inicio
+250,549,200,1//plataforma larga 1
+300,474,100,1//plataforma corta 1
+
+1400,549,200,1//plataforma baja 1
+1300,449,100,1//plataforma media izq 1
+1600,449,100,1//plataforma media der 1
+1425,349,150,1//plataforma alta 1
+
+1700,349,300,1//plataforma central
+1750,274,200,1//plataforma central alta
+
+2100,549,200,1//plataforma baja 2
+2000,449,100,1//plataforma media izq 2
+2300,449,100,1//plataforma media der 2
+2125,349,150,1//plataforma alta 2

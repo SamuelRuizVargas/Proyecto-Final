@@ -30,9 +30,13 @@ void proyectil::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         {
             pixmap.load(PATH_PROY);
         }break;
-        case 3:
+        case 3://Boss
         {
-            //
+            pixmap.load(PATH_PROY2);
+        }break;
+        case 4://Jugador 2
+        {
+            pixmap.load(PATH_PROY2);
         }break;
     }
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
@@ -40,6 +44,8 @@ void proyectil::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 void proyectil::disparo(float dt)
 {
+    t1 = clock();
+    tempo=(double(t1-t0)/CLOCKS_PER_SEC);
     switch(tipo)
     {
         case 1://parabola
@@ -52,9 +58,17 @@ void proyectil::disparo(float dt)
         {
             posx+=vx;
         }break;
+        case 3://Circular
+        {
+            desplazamiento+=0.07f;
+            posx+=radio*cos(tempo*2)-desplazamiento;
+            posy-=radio*sin(tempo*2);
+        }break;
+        case 4://linea recta
+        {
+            posx+=vx;
+        }break;
     }
-    t1 = clock();
-    tempo=(double(t1-t0)/CLOCKS_PER_SEC);
 }
 
 int proyectil::getTipo()

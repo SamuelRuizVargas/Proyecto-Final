@@ -1,10 +1,32 @@
-0,625,300,25
-350,625,300,25
-700,575,300,300
-0,0,25,25
-0,100,25,25
-0,200,25,25
-0,300,25,25
-0,400,25,25
-0,500,25,25
-0,600,25,25
+-25,0,25,700//limite izquierdo
+2500,0,25,700//limite derecho
+
+0,625,300,25//piso 1
+
+350,540,200,25//plataforma 1
+600,450,150,25//plataforma 2
+800,370,150,25//plataforma 3
+750,250,100,25//plataforma 4
+250,150,475,25//plataforma alta
+
+600,625,300,25//piso 2
+
+900,540,300,25//base estructura
+1050,300,25,250//palo estructura
+1050,300,50,25//techo palo estructura
+1000,450,125,25//medio estructura
+1150,370,75,25//plataforma base derecha
+
+1200,625,100,25//piso 3
+
+1300,575,100,200//escalera corta
+1400,525,50,200//escalera alta
+
+1450,625,900,25//piso 4
+
+1550,550,250,25//plataforma baja
+1600,450,150,25//plataforma alta
+
+2000,550,25,75//tubo 1
+2325,550,25,75//tubo 2
+2400,500,100,25//plataforma final

@@ -1,2 +1,11 @@
-1000,500,1,300
-24,500,1,300
+-1,0,1,700//limite izquierdo
+2500,0,1,700//limite derecho
+
+50,535,1,1//plataforma larga 1
+249,535,1,1
+350,535,1,1//plataforma larga 2
+549,535,1,1
+650,535,1,1//plataforma larga 3
+749,535,1,1
+
+900,275,1,400//boss

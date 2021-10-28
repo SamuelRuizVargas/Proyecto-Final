@@ -1,11 +1,28 @@
--25,0,25,700
-2499,0,25,700
-0,625,300,25
-600,625,300,25
-1200,625,300,25
-1800,625,300,25
-2400,625,300,25
-300,560,300,25
-900,560,300,25
-1500,560,300,25
-2100,560,300,25
+-25,0,25,700//Limite izquierdo
+2500,0,25,700//Limite derecho
+
+0,625,750,25//piso inicial
+150,525,25,25//Bloquecito inicio
+250,525,200,25//plataforma larga 1
+300,450,100,25//plataforma corta 1
+
+750,575,75,100//escalera corta 1
+825,525,75,150//escalera larga 1
+
+1075,575,75,100//escalera corta 2
+1000,525,75,150//escalera larga 2
+
+1150,625,1400,25//piso final1
+
+1400,525,200,25//plataforma baja 1
+1300,425,100,25//plataforma media izq 1
+1600,425,100,25//plataforma media der 1
+1425,325,150,25//plataforma alta 1
+
+1700,325,300,25//plataforma central
+1750,250,200,25//plataforma central alta
+
+2100,525,200,25//plataforma baja 2
+2000,425,100,25//plataforma media izq 2
+2300,425,100,25//plataforma media der 2
+2125,325,150,25//plataforma alta 2

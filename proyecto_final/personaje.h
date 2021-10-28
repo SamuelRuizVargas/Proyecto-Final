@@ -5,7 +5,10 @@
 #include <QPainter>
 
 #define PATH_P1 ":/imagenes/player1.png"
+#define PATH_P2 ":/imagenes/player2.png"
+
 #define g -15.0f
+
 class personaje  : public QGraphicsItem
 {
     int h=40;
@@ -17,9 +20,11 @@ class personaje  : public QGraphicsItem
     float vy2=0;
     bool caida=true;
     bool derecha=true;
+    bool inmortal=false;
+    int tipo;
 
 public:
-    personaje(int,int);
+    personaje(int, int, int _tipo);
     ~personaje();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
@@ -28,6 +33,7 @@ public:
     void free(float dt);
     void resetVX();
     void resetVY();
+    void zeroVY();
     void resetVY2();
     void changedown();
     void setside(bool lado);
@@ -42,6 +48,8 @@ public:
     void moveLeft();
     void moveRight();
     void jump(float dt);
+    void cambiar();
+    bool getInmo();
 };
 
 
