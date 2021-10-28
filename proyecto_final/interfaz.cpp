@@ -159,6 +159,7 @@ int conta_1sec=0;
 int conta_3sec=0;
 int tiempo_pasa=0;
 int conta_2sec=0;
+bool reiniciar_conta=false;
 void Interfaz::standard()//se encarga de todo lo que necesite un timer
 {
     //---------------Mover enemigos---------------
@@ -533,6 +534,11 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
             case 1:
             {
                 static int conta=1;
+                if(reiniciar_conta==true)
+                {
+                    conta=1;
+                    reiniciar_conta=false;
+                }
                 ui->lcdTiempo->display(60-conta);
                 if(60-conta<=0)
                 {
@@ -550,6 +556,11 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
             case 2:
             {
                 static int conta=1;
+                if(reiniciar_conta==true)
+                {
+                    conta=1;
+                    reiniciar_conta=false;
+                }
                 ui->lcdTiempo->display(90-conta);
                 if(90-conta<=0)
                 {
@@ -567,6 +578,11 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
             case 3:
             {
                 static int conta=1;
+                if(reiniciar_conta==true)
+                {
+                    conta=1;
+                    reiniciar_conta=false;
+                }
                 ui->lcdTiempo->display(100-conta);
                 if(100-conta<=0)
                 {
@@ -1701,6 +1717,11 @@ bool Interfaz::evaluarColisionBullet(proyectil *bala, int lista)//revisa las col
                         {
                             puntaje+=5000;
                             ui->lcdEnemigos->display(0);
+                            changeTeclas();
+                            vidas=3;
+                            puntaje=-500;
+                            listabase=0;
+                            volverMenu();
                         }
                         level_three->removeItem(*ite);
                         enemigos_lvl3.removeAt(con);
@@ -1841,6 +1862,25 @@ void Interfaz::changeMapLocation()//cambia el focus del mapa
     }
 }
 
+void Interfaz::volverMenu()//esconde los elementos graficos y vuelve al menu inicial
+{
+    ui->lcdEnemigos->hide();
+    ui->lcdVidas->hide();
+    ui->lcdTiempo->hide();
+    ui->lcdPuntaje->hide();
+    ui->labelEnemigos->hide();
+    ui->labelVidas->hide();
+    ui->labelPuntaje->hide();
+    ui->labelTiempo->hide();
+    ui->VidaBoss->hide();
+    timer_standard->stop();
+    reiniciar_conta=true;
+    crearLevelOne();
+    crearLevelTwo();
+    crearLevelThree();
+    crearMenu();
+}
+
 void Interfaz::validacion()//FALTA
 {
 
@@ -1885,6 +1925,8 @@ void Interfaz::nextMap()
             ui->lcdTiempo->show();
             ui->lcdVidas->show();
             ui->lcdTiempo->display(90);
+            puntaje+=vidas*100+1000;
+            ui->lcdPuntaje->display(puntaje);
             vidas+=1;
             ui->lcdVidas->display(vidas);
             ui->lcdEnemigos->display(enemigos_lvl2.count());
@@ -1906,6 +1948,8 @@ void Interfaz::nextMap()
             ui->lcdTiempo->show();
             ui->lcdVidas->show();
             ui->lcdTiempo->display(100);
+            puntaje+=vidas*100+1000;
+            ui->lcdPuntaje->display(puntaje);
             vidas+=1;
             ui->lcdVidas->display(vidas);
             ui->lcdEnemigos->display(1);
@@ -1939,10 +1983,14 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
     if(buttons.at(2)->get_Pressed())
     {
         //Revisar cargar partidas
+        menu_princi->removeItem(buttons.at(2));
+        menu_princi->removeItem(buttons.at(3));
         buttons.at(2)->changePressed();
     }
     if(buttons.at(3)->get_Pressed())
     {
+        menu_princi->removeItem(buttons.at(2));
+        menu_princi->removeItem(buttons.at(3));
         nextMap();
         changeTeclas();
         buttons.at(3)->changePressed();

@@ -138,6 +138,7 @@ private:
     bool evaluarColisionBulletEne(proyectil *bala, int lista);
     void changeTeclas();
     void changeMapLocation();
+    void volverMenu();
     void validacion();
     void nextMap();
     //--------------------------
