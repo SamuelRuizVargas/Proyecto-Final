@@ -824,6 +824,14 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                             vidas-=1;
                             ui->lcdVidas->display(vidas);
                             tiempo_paso=true;
+                            if(vidas==0)
+                            {
+                                QMessageBox::information(
+                                    this,
+                                    tr("GAME OVER"),
+                                    tr("Ultima vida perdida por el tiempo."));
+                                    volverMenu();
+                            }
                         }
                     }
                     conta++;
@@ -846,6 +854,14 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                             vidas-=1;
                             ui->lcdVidas->display(vidas);
                             tiempo_paso=true;
+                            if(vidas==0)
+                            {
+                                QMessageBox::information(
+                                    this,
+                                    tr("GAME OVER"),
+                                    tr("Ultima vida perdida por el tiempo."));
+                                    volverMenu();
+                            }
                         }
                     }
                     conta++;

@@ -55,15 +55,19 @@
    <widget class="QLabel" name="labelVidas">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>70</x>
       <y>20</y>
-      <width>51</width>
+      <width>71</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font:20pt &quot;Bebas Neue&quot;;
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>VIDAS</string>
@@ -72,15 +76,19 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="labelTiempo">
     <property name="geometry">
      <rect>
-      <x>770</x>
+      <x>760</x>
       <y>20</y>
-      <width>71</width>
+      <width>91</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font:20pt &quot;Bebas Neue&quot;;
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>TIEMPO</string>
@@ -89,15 +97,19 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="labelEnemigos">
     <property name="geometry">
      <rect>
-      <x>1100</x>
+      <x>1080</x>
       <y>20</y>
-      <width>91</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font:20pt &quot;Bebas Neue&quot;;
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>ENEMIGOS</string>
@@ -106,15 +118,19 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="labelPuntaje">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>320</x>
       <y>30</y>
-      <width>71</width>
+      <width>101</width>
       <height>21</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font:20pt &quot;Bebas Neue&quot;;
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>PUNTAJE</string>
@@ -182,15 +198,19 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="labelVidas_j1">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>20</y>
-      <width>71</width>
+      <x>120</x>
+      <y>50</y>
+      <width>101</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font:20pt &quot;Bebas Neue&quot;;
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>VIDAS J1</string>
@@ -199,15 +219,19 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="labelVidas_j2">
     <property name="geometry">
      <rect>
-      <x>1040</x>
-      <y>20</y>
-      <width>71</width>
+      <x>1110</x>
+      <y>50</y>
+      <width>101</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font:20pt &quot;Bebas Neue&quot;;
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>VIDAS J2</string>
@@ -267,15 +291,19 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="labelUsuarios">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>590</x>
       <y>200</y>
-      <width>71</width>
+      <width>101</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font:20pt &quot;Bebas Neue&quot;;
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>USUARIO</string>
@@ -284,15 +312,19 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="labelContra">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>570</x>
       <y>260</y>
-      <width>111</width>
+      <width>151</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font:20pt &quot;Bebas Neue&quot;;
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>CONTRASEÑA</string>
