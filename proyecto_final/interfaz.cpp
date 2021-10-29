@@ -21,6 +21,13 @@ Interfaz::Interfaz(QWidget *parent)
 {
     ui->setupUi(this);
 
+    sound = new QSoundEffect;
+    QUrl dir("qrc:/audio/sce.wav");
+    sound->setSource(dir);
+    sound->setVolume(0.5);
+    sound->setLoopCount(4);
+    sound->play();
+
     //----------Escenas----------
             //Principal
     menu_princi = new QGraphicsScene;
