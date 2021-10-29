@@ -5,7 +5,7 @@
 #include <QGraphicsView>
 #include <QFontDatabase>
 #include <QMediaPlayer>
-#include <QVideoWidget>
+#include <QMediaPlaylist>
 #include <QMessageBox>
 #include <QMainWindow>
 #include <QKeyEvent>
@@ -93,6 +93,8 @@ private:
     bool izquierda_map=true;
     QString nombre;
     QString contra;
+    QMediaPlaylist *playlist;
+    QMediaPlayer *player;
     //---------------------------
 
     //-----------Listas---------

@@ -21,6 +21,18 @@ Interfaz::Interfaz(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //----------Musica-----------
+    playlist = new QMediaPlaylist();
+    player = new QMediaPlayer(this);
+
+    playlist->addMedia(QUrl("qrc:/audio/musica.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+
+    player->setPlaylist(playlist);
+    player->setVolume(3);
+    player->play();
+    //---------------------------
+
     //----------Escenas----------
             //Principal
     menu_princi = new QGraphicsScene;
@@ -812,6 +824,14 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                             vidas-=1;
                             ui->lcdVidas->display(vidas);
                             tiempo_paso=true;
+                            if(vidas==0)
+                            {
+                                QMessageBox::information(
+                                    this,
+                                    tr("GAME OVER"),
+                                    tr("Ultima vida perdida por el tiempo."));
+                                    volverMenu();
+                            }
                         }
                     }
                     conta++;
@@ -834,6 +854,14 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                             vidas-=1;
                             ui->lcdVidas->display(vidas);
                             tiempo_paso=true;
+                            if(vidas==0)
+                            {
+                                QMessageBox::information(
+                                    this,
+                                    tr("GAME OVER"),
+                                    tr("Ultima vida perdida por el tiempo."));
+                                    volverMenu();
+                            }
                         }
                     }
                     conta++;
@@ -2563,7 +2591,7 @@ void Interfaz::guardar()
     escritura.close();
 }
 
-void Interfaz::validacion(string nombre, string contrasenha)//HACER
+void Interfaz::validacion(string nombre, string contrasenha)//Valida que el usuario y contraseña sean correctos y llama al cargado de la partida
 {
     ifstream archivo;
     string line,digi,texto,name,contras,nivel,lifes,score;
