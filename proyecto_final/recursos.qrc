@@ -24,6 +24,6 @@
         <file>imagenes/player2_izq.png</file>
         <file>imagenes/Enemigos/enemigo_base_izq.png</file>
         <file>imagenes/Enemigos/enemigo_distancia.png</file>
-        <file>audio/sce.wav</file>
+        <file>audio/musica.mp3</file>
     </qresource>
 </RCC>

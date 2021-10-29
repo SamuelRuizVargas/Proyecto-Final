@@ -13,7 +13,6 @@
 #include <fstream>
 #include <QTimer>
 #include <QList>
-#include <QSoundEffect>
 
 #include "imagenes.h"
 #include "botones.h"
@@ -94,7 +93,6 @@ private:
     bool izquierda_map=true;
     QString nombre;
     QString contra;
-    QSoundEffect *sound;
     //---------------------------
 
     //-----------Listas---------
