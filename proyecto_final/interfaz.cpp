@@ -2563,7 +2563,7 @@ void Interfaz::guardar()
     escritura.close();
 }
 
-void Interfaz::validacion(string nombre, string contrasenha)//HACER
+void Interfaz::validacion(string nombre, string contrasenha)//Valida que el usuario y contraseña sean correctos y llama al cargado de la partida
 {
     ifstream archivo;
     string line,digi,texto,name,contras,nivel,lifes,score;
