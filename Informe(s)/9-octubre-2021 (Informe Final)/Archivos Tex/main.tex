@@ -60,8 +60,8 @@
 \newpage
 
 \section{Introducción}
-    HACER CUANDO TERMINEMOS EL INFORME 
-
+    El informe presente trata el tema del desarrollo del proyecto final, el cual constaba de realizar un juego que cumpliera requisitos que fueron dictaminados por el profesor del curso, esto con el objetivo de afianzar todos los conocimientos adquiridos en el curso y sus respectivos laboratorios. El informe tiene la misión de darle contexto a nuestro trabajo, así como llevar un registro de nuestros avances y experiencias. En este informe encontraras todo lo relacionado al proyecto final, desde la forma en la que la planeamos y los avances diarios hasta las estructuras de los códigos.
+    
 \section{Planificación y Diseño}
     \subsection{Cronograma}
         Iniciamos identificando nuestras tareas, una vez hecho esto comenzamos a dividir nuestro trabajo de manera que, pudiéramos trabajar eficientemente, para ello cada uno escogió las tareas con la que se sintiera más cómodo. Posteriormente realizamos un cronograma basándonos en la importancia y el tiempo requerido para cada tarea. El plan fue seguir el cronograma lo más fiel posible sin embargo siempre estuvo sujeto a cambios. 
@@ -74,6 +74,8 @@
         
         \subsection{Idea General}
         Para el diseño decidimos utilizar un estilo similar a Mario Bros en cuanto al apartado jugabilidad, haciendo uso de una pantalla principal en la cual se podrán escoger opciones tales como 1 jugador, multijugador, cargar partidas, nueva partida, etc. Posteriormente se iniciara el juego con una corta y simple historia enfocada en la informática con estética cyberpunk/digital, El juego constara de 3 niveles de plataformas comunes en los cuales se enfrentara a enemigos con distintas clases de ataques, además de ir desbloqueando las habilidades básicas con cada nivel completado, finalmente se enfrentara al Boss final del juego, lo cual le dará la conclusión a la historia.
+        
+    \newpage
         
         \subsection{Boceto del Guión}
         La historia comienza con un programador común y corriente llamado "nombre por decidir", trabaja como desarrollador independiente; Un día mientras intenta corregir algunos bugs en su programa se queda mirando a su ventana pensando como seria un mundo futurista, mientras tenia la mente en las nubes pensando en cosas extraordinarias, sin darse cuenta, derrama su bebida sobre su computadora, pero...
@@ -120,6 +122,8 @@
     \subsection{Botones}
     Luego de una investigación descubrimos como configurar un QGraphicsItem para que funciones como un botón, para ello usamos los métodos mousePressEvent y mouseReleaseEvent, dichos métodos nos dan la posibilidad de realizar acciones cuando uno de estos sea presionado sumado les agregamos texturas al botón según lo requerido. 
     
+\newpage
+    
     \subsection{Plataforma}
     Esta clase nació de la necesidad de darle una forma a las plataformas, tanto para sus colisiones como para darles textura y posición. Esta clase consta con atributos de posición y de ancho y alto, al igual que las imágenes, sin embargo estas, además de que pueden interactuar con el personaje de la manera implementada en la interfaz, tiene la capacidad de cambiar su textura según sea requerido.
     
@@ -134,8 +138,11 @@
     
         
 \section{Estructura del Código}
-    \subsection{POR HACER}
-    HACER CUANDO TENGAMOS EL CÓDIGO COMPLETO
+    \subsection{MainWindow (Interfaz)}
+    Aquí se hace la mayoría del trabajo, puesto que es la interfaz sobre la cual se definirán y mostraran todos los elementos gráficos, en esta parte del código se realizan los métodos que serán usados para el movimiento (timers), para verificación de colisiones, eventos de clic y de teclas, se crean las escenas con sus elementos, etc; El objetivo final de las clases que creamos era que fueran implementadas en esta parte en algún punto.
+    
+    \subsection{Clases}
+    Todas las clases fueron creadas con propósitos específicos, sus nombres describen bastante bien el papel que jugaran dentro del programa, sus atributos y métodos están todos pensándolos para que funcionen en el MainWindow de manera satisfactoria, para esto implementamos maneras en las que siempre tuviéramos la información pertinente de cada objeto para poder usar dicha información en el código principal. Todas las clases interactúan de manera armónica e interaccionan unas con otras para complementarse usando su propia información y así lograr una ejecución exitosa. 
     
 \section{Avances Regulares}
     \subsection{9/10/2021}
@@ -180,8 +187,13 @@
     \subsection{26/10/2021}
     Nos concentramos en el modelamiento del proyectil para el jugador  y enemigos, teniendo en cuenta las físicas para cada de personaje planteado. Para esto tuvimos en cuenta las habilidades ya planteadas, al igual que probamos diferentes proyectiles para los enemigos y personajes. También evaluamos algunas condiciones para las colisiones de los proyectiles con el entorno, esto nos genero algún contratiempo pero luego de analizarlo un tiempo encontramos una solución. Comenzamos a plantear el entorno y los limites para el nivel uno y la interacción con el jugador. 
     
+\newpage
+    
     \subsection{27/10/2021}
-    En este día se dedico la mayor parte del tiempo en construir los niveles correspondientes, mejorar la jugabilidad y la interacción con el ambiente, también se estuvo modificando los respectivos ataques de los enemigos como los del enemigo final \cite{video_circular} y como afectan al jugador, lo que a su vez se suma el conteo de la vidas y el conteo de puntos. Además se verifico las diversas muertes del jugador. Finalmente agregamos el temporizador, que aun no tenemos planteado un "Gameover", ya que dejaremos para su respectiva evaluación, cuando estemos finalizando con el proceso de desarrollo.  
+    En este día se dedico la mayor parte del tiempo en construir los niveles correspondientes, mejorar la jugabilidad y la interacción con el ambiente, también se estuvo modificando los respectivos ataques de los enemigos como los del enemigo final \cite{video_circular} y como afectan al jugador, lo que a su vez se suma el conteo de la vidas y el conteo de puntos. Además se verifico las diversas muertes del jugador. Finalmente agregamos el temporizador, que aun no tenemos planteado un "Gameover", ya que dejaremos para su respectiva evaluación, cuando estemos finalizando con el proceso de desarrollo.
+    
+    \subsection{28/10/2021}
+    Hemos culminado el proceso de desarrollo. En este día el tiempo nos estaba oprimiendo a tal punto que nuestras esperanzas de ver el juego, tal como lo teníamos planeado se veía cada vez más opaco, pero nos adecuamos a las circunstancias de tal manera que jugamos a su favor. Esta vez nos concentramos más en el Gameplay y en la experiencia del jugador, ajustando algunos cambios en el funcionamiento de los botones, la interacción con los enemigos (incluye el sistema de vidas, puntaje y mejoras en la mecánica) y el seguimiento de la historia. También incluimos el requisito de validar usuarios de tal manera que nos permite el ingreso a nivel correspondiente. A su vez añadimos el modo mutlijugador el cual es de tipo de PvP ( Jugador 1 vs Jugador 2 ), acá se tuvo en cuenta el diseño del nivel y la mecánica de daño entre jugadores. 
     
 \section{Problemas Presentados}
     \subsection{9/10/2021}
@@ -225,6 +237,14 @@
     
     \subsection{27/10/2021}
     Este día fue una jornada exageradamente larga de trabajo en la cual nos centramos en mejorar el gameplay, conteo de vidas, colisiones, posiciones, etc. En este proceso no hubieron muchos inconvenientes en cuanto al código pero el tiempo ahora mismo juega en nuestra contra; Debemos utilizar nuestro siguiente día con eficiencia para poder lograr nuestros objetivos y los requisitos a tiempo.
+    
+    \subsection{28/10/2021}
+    Finalmente para este día el proceso de desarrollo se vio un poco limitado, ya que tuvimos varios inconvenientes en el proceso del "Gameover", por alguna razón no tomaba los parámetros correctos para realizar el cambio de escena correspondiente, logramos superar este inconveniente sin tanta dificultad pero si nos detuvo un buen tiempo, ya que requiera que lo analizáramos y tomáramos la decisión más acertada. Sumando a esto tuvimos algunos tropiezos a la hora de validar y guardar la información de los usuarios, luego de recordar los temas de algunas sesiones de laboratorio pudimos sacar adelante este contratiempo, teniendo en cuenta  la variación del entorno y los posibles cambios que ocurren durante toda la ejecución. 
+
+    \vspace*{2.5cm}
+
+    \section{Conclusiones}
+    Este proyecto nos ayudo a entender muchas cosas, entre ellas como podemos unir todo el conocimiento que nos fue dado a lo largo de curso en un solo proyecto. También aprendimos muchas cosas en el proceso, desde cosas necesarias para hacer funcionar las cosas como nosotros queríamos, hasta descubrir como es a grandes rasgos un proceso de desarrollo; Y aunque no hicimos todo como nos hubiera gustado debido a muchos factores que no pudimos controlar, fue una experiencia enriquecedora la cual nos aporto mucho para el futuro.
     
 \vfill
 \vspace*{0.5cm}
