@@ -21,6 +21,18 @@ Interfaz::Interfaz(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //----------Musica-----------
+    playlist = new QMediaPlaylist();
+    player = new QMediaPlayer(this);
+
+    playlist->addMedia(QUrl("qrc:/audio/musica.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+
+    player->setPlaylist(playlist);
+    player->setVolume(3);
+    player->play();
+    //---------------------------
+
     //----------Escenas----------
             //Principal
     menu_princi = new QGraphicsScene;
