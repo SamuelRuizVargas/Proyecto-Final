@@ -9,6 +9,12 @@ bool tiempo_paso=false;
 bool cambiazo=false;
 bool cambiazo2=false;
 bool multijugador=false;
+
+//variables de guardado
+int vidas_save;
+int puntaje_save;
+int nivel_save;
+
 Interfaz::Interfaz(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Interfaz)
@@ -59,8 +65,12 @@ Interfaz::Interfaz(QWidget *parent)
     ui->labelVidas_j1->hide();
     ui->labelVidas_j2->hide();
     ui->lcdVidas_J2->hide();
-    //---------------------------------
 
+    ui->textUsuario->hide();
+    ui->textContra->hide();
+    ui->labelUsuarios->hide();
+    ui->labelContra->hide();
+    //---------------------------------
 }
 
 Interfaz::~Interfaz()
@@ -336,7 +346,7 @@ void Interfaz::standard()//se encarga de todo lo que necesite un timer
                     balas_jugador2[contador]->disparo();
                     balas_jugador2[contador]->setPos(balas_jugador2[contador]->getX(),balas_jugador2[contador]->getY());
                     double tiempo=balas_jugador2[contador]->getTempo();
-                    bool colide=evaluarColisionBullet2(balas_jugador2[contador],listabase);
+                    bool colide=evaluarColisionBullet2(balas_jugador2[contador]);
                     if(tiempo>=2.5f or colide==true)
                     {
                         level_multi->removeItem(balas_jugador2.at(contador));
@@ -871,6 +881,7 @@ void Interfaz::crearMenu()//Crea y agrega los elementos del menu inicial
     buttons.append(new botones(525,350,225,75,2));
     buttons.append(new botones(525,275,225,75,4));
     buttons.append(new botones(525,350,225,75,3));
+    buttons.append(new botones(575,330,120,40,4));
 
     menu_princi->addItem(buttons.at(0));
     menu_princi->addItem(buttons.at(1));
@@ -2316,7 +2327,7 @@ bool Interfaz::evaluarColisionBullet(proyectil *bala, int lista)//revisa las col
     return false;
 }
 
-bool Interfaz::evaluarColisionBullet2(proyectil *bala, int lista)
+bool Interfaz::evaluarColisionBullet2(proyectil *bala)
 {
     QList<plataforma*>::iterator it;
     for(it=base_multi.begin();it!=base_multi.end();it++)
@@ -2542,9 +2553,202 @@ void Interfaz::volverMenu()//esconde los elementos graficos y vuelve al menu ini
     timer_standard->stop();
 }
 
-void Interfaz::validacion()//FALTA
+void Interfaz::guardar()
 {
+    ofstream escritura;
+    string name="jugador",contras="12345",niv=to_string(nivel_save),lif=to_string(vidas_save),sco=to_string(puntaje_save);
+    string texto=name+","+contras+","+niv+","+lif+","+sco+",";
+    escritura.open("../proyecto_final/guardado/partida_guardada.txt");// Crear o abrir un archivo para escritura
+    escritura<<texto;
+    escritura.close();
+}
 
+void Interfaz::validacion(string nombre, string contrasenha)//HACER
+{
+    ifstream archivo;
+    string line,digi,texto,name,contras,nivel,lifes,score;
+    int niv,lif,sco,len,conta;
+    archivo.open(PATH_GUARDADO, ios::in);
+    if(archivo.fail())
+    {
+        QMessageBox::information(
+            this,
+            tr("ERROR"),
+            tr("No se encontro ningun archivo de guardado."));
+    }
+    getline(archivo,line);
+    len=line.length();
+    conta=0;
+    for (int i=0; i<=len;i++)
+    {
+        digi=line[i];
+        if(digi!=",")
+            texto+=digi;
+        else
+        {
+            conta++;
+            switch (conta)
+            {
+                case 1:
+                {
+                    name=texto;
+                }break;
+                case 2:
+                {
+                    contras=texto;
+                }break;
+                case 3:
+                {
+                    nivel=texto;
+                }break;
+                case 4:
+                {
+                    lifes=texto;
+                }break;
+                case 5:
+                {
+                    score=texto;
+                }break;
+            }
+            texto.erase();
+        }
+    }
+    niv=atoi(nivel.c_str());
+    lif=atoi(lifes.c_str());
+    sco=atoi(score.c_str());
+    archivo.close();
+    if(nombre!=name)
+    {
+        QMessageBox::information(
+            this,
+            tr("ERROR"),
+            tr("Nombre erroneo."));
+    }
+    else if(contrasenha!=contras)
+    {
+        QMessageBox::information(
+            this,
+            tr("ERROR"),
+            tr("Contraseña erroneo."));
+    }
+    else
+    {
+        listabase=niv;
+        vidas=lif;
+        puntaje=sco;
+        cargar();
+        ui->textUsuario->hide();
+        ui->textContra->hide();
+        ui->labelUsuarios->hide();
+        ui->labelContra->hide();
+        menu_princi->removeItem(buttons.at(4));
+    }
+}
+
+void Interfaz::cargar()
+{
+    switch (listabase)
+    {
+        case 1:
+        {
+            timer->stop();
+            timer_standard->stop();
+            QMessageBox::information(this,
+                tr("El Comienzo..."),
+                tr("La historia comienza con un programador común y corriente llamado Julian, trabaja como desarrollador independiente; Un día mientras intenta corregir algunos bugs en su programa se queda mirando a su ventana pensando como seria un mundo futurista, mientras tenia la mente en las nubes pensando en cosas extraordinarias, sin darse cuenta, derrama su bebida sobre su computadora, pero...."));
+            jugador1 = new personaje(35,585,1);
+            level_one->setSceneRect(0,0,1281,651);
+            level_one->addItem(jugador1);
+            ui->graphicsView->setScene(level_one);
+            ui->labelEnemigos->show();
+            ui->labelTiempo->show();
+            ui->labelVidas->show();
+            ui->labelPuntaje->show();
+            ui->lcdEnemigos->show();
+            ui->lcdPuntaje->show();
+            ui->lcdPuntaje->display(puntaje);
+            ui->lcdTiempo->show();
+            ui->lcdVidas->show();
+            ui->lcdTiempo->display(30);
+            ui->lcdVidas->display(vidas);
+            ui->lcdEnemigos->display(enemigos_lvl1.count());
+            timer->stop();
+            timer_standard->stop();
+            QMessageBox::information(this,
+                tr("Julian"),
+                tr("-¡Que pasa! no, NOOOO..."));
+            QMessageBox::information(this,
+                tr("Narrador"),
+                tr("Una fuerza extraña lo hace ingresar a su computadora y ahora tendrá que enfrentarse a los bugs y a su reina para poder regresar, lo se, una locura no?."));
+            seguirmoviendo=true;
+            tiempo_paso=false;
+            jugador1->cambiar();
+            cambiazo=true;
+            changeTeclas();
+            timer_standard->start(20);
+        }break;
+        case 2:
+        {
+            timer->stop();
+            timer_standard->stop();
+            QMessageBox::information(this,
+                tr("La Travesia"),
+                tr("Nuestro protagonista se encuentra cerca de hayar al bug y destruirlo. Sigue asi!!!"));
+            jugador1 = new personaje(35,585,1);
+            level_two->setSceneRect(0,0,1281,651);
+            level_two->addItem(jugador1);
+            ui->graphicsView->setScene(level_two);
+            ui->labelEnemigos->show();
+            ui->labelTiempo->show();
+            ui->labelVidas->show();
+            ui->labelPuntaje->show();
+            ui->lcdEnemigos->show();
+            ui->lcdPuntaje->show();
+            ui->lcdPuntaje->display(puntaje);
+            ui->lcdTiempo->show();
+            ui->lcdVidas->show();
+            ui->lcdTiempo->display(50);
+            ui->lcdVidas->display(vidas);
+            ui->lcdEnemigos->display(enemigos_lvl2.count());
+            jugador1->cambiar();
+            cambiazo=true;
+            changeTeclas();
+            timer_standard->start(20);
+            tiempo_paso=false;
+            listabase = 2;
+        }break;
+        case 3:
+        {
+            jugador1 = new personaje(35,585,1);
+            level_three->setSceneRect(0,0,1281,651);
+            level_three->addItem(jugador1);
+            ui->graphicsView->setScene(level_three);
+            ui->labelEnemigos->show();
+            ui->labelTiempo->show();
+            ui->labelVidas->show();
+            ui->labelPuntaje->show();
+            ui->lcdPuntaje->display(puntaje);
+            ui->lcdEnemigos->show();
+            ui->lcdPuntaje->show();
+            ui->lcdTiempo->show();
+            ui->lcdVidas->show();
+            ui->lcdTiempo->display(60);
+            ui->lcdVidas->display(vidas);
+            ui->lcdEnemigos->display(1);
+            ui->VidaBoss->show();
+            timer->stop();
+            timer_standard->stop();
+            QMessageBox::information(this,
+                tr("La Batalla Final"),
+                tr("FINALEMENTE! ahi esta tu archienemigo, ve y derrotalo!"));
+            jugador1->cambiar();
+            cambiazo=true;
+            changeTeclas();
+            timer_standard->start(20);
+            tiempo_paso=false;
+            listabase = 3;
+        }break;
+    }
 }
 
 void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pasar de nivel
@@ -2554,6 +2758,10 @@ void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pa
     {
         case 1:
         {
+            nivel_save=listabase;
+            vidas_save=vidas;
+            puntaje_save=puntaje;
+            guardar();
             timer->stop();
             timer_standard->stop();
             QMessageBox::information(this,
@@ -2590,6 +2798,7 @@ void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pa
         }break;
         case 2:
         {
+            nivel_save=listabase;
             timer->stop();
             timer_standard->stop();
             QMessageBox::information(this,
@@ -2611,6 +2820,11 @@ void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pa
             puntaje+=vidas*100+1000;
             ui->lcdPuntaje->display(puntaje);
             vidas+=1;
+            //guardar
+            vidas_save=vidas;
+            puntaje_save=puntaje;
+            guardar();
+            //------
             ui->lcdVidas->display(vidas);
             ui->lcdEnemigos->display(enemigos_lvl2.count());
             jugador1->cambiar();
@@ -2621,6 +2835,7 @@ void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pa
         }break;
         case 3:
         {
+            nivel_save=listabase;
             jugador1 = new personaje(35,585,1);
             level_three->setSceneRect(0,0,1281,651);
             level_three->addItem(jugador1);
@@ -2637,6 +2852,11 @@ void Interfaz::nextMap()//cambia el mapa cada que se cumple la condicion para pa
             puntaje+=vidas*100+1000;
             ui->lcdPuntaje->display(puntaje);
             vidas+=1;
+            //guardar
+            vidas_save=vidas;
+            puntaje_save=puntaje;
+            guardar();
+            //------
             ui->lcdVidas->display(vidas);
             ui->lcdEnemigos->display(1);
             ui->VidaBoss->show();
@@ -2712,6 +2932,11 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         //Revisar cargar partidas
         menu_princi->removeItem(buttons.at(2));
         menu_princi->removeItem(buttons.at(3));
+        ui->textContra->show();
+        ui->textUsuario->show();
+        ui->labelUsuarios->show();
+        ui->labelContra->show();
+        menu_princi->addItem(buttons.at(4));
         buttons.at(2)->changePressed();
     }
                 //Nueva partida
@@ -2723,18 +2948,16 @@ void Interfaz::mousePressEvent(QMouseEvent *event)//Evento de clic con mouse
         changeTeclas();
         buttons.at(3)->changePressed();
     }
+                //Cargar partida
+    if(buttons.at(4)->get_Pressed())
+    {
+        nombre = ui->textUsuario->toPlainText();
+        contra = ui->textContra->toPlainText();
+        string nombrex=nombre.toStdString(),contrax=contra.toStdString();
+        validacion(nombrex,contrax);
+        buttons.at(4)->changePressed();
+    }
     //-------------------------------------------
-}
-
-QString Interfaz::letra(QString x)
-{
-    int id;
-    id = QFontDatabase::addApplicationFont(x);
-
-    QStringList letra = QFontDatabase::applicationFontFamilies(id);
-    letra = letra.takeLast().split('.');
-
-    return letra[0];
 }
 
 void Interfaz::keyPressEvent(QKeyEvent *i)//Evento de tecla presionada
@@ -2967,4 +3190,3 @@ void Interfaz::keyPressEvent(QKeyEvent *i)//Evento de tecla presionada
     }
     //----------------------------------------------------
 }
-

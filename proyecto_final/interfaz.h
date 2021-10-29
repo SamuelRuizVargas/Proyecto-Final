@@ -19,7 +19,6 @@
 #include "plataforma.h"
 #include "personaje.h"
 #include "enemigo.h"
-#include "validacion.h"
 #include "proyectil.h"
 
 using namespace std;
@@ -50,6 +49,8 @@ using namespace std;
 #define PATH_PARED_MULT "../proyecto_final/posiciones/multijugador/posi_pared_multi.txt"
 #define PATH_BAJOS_MULT "../proyecto_final/posiciones/multijugador/posi_bajos_multi.txt"
 //--------------------------------------
+
+#define PATH_GUARDADO "../proyecto_final/guardado/partida_guardada.txt"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Interfaz; }
@@ -85,14 +86,13 @@ private:
     //---------------------------
 
     //--------OBJETOS------------
-            //MENU
-    validacion *pass;
-            //OTROS
     personaje *jugador1;
     personaje *jugador2;
     enemigo *enemigo_act;
     bool teclas=false;
     bool izquierda_map=true;
+    QString nombre;
+    QString contra;
     //---------------------------
 
     //-----------Listas---------
@@ -153,12 +153,14 @@ private:
     bool evaluarColisionEnemies(int lista);
     int evaluarColisionSalto(personaje *personaje, int lista);
     bool evaluarColisionBullet(proyectil *bala, int lista);
-    bool evaluarColisionBullet2(proyectil *bala, int lista);
+    bool evaluarColisionBullet2(proyectil *bala);
     bool evaluarColisionBulletEne(proyectil *bala, int lista);
     void changeTeclas();
     void changeMapLocation();
     void volverMenu();
-    void validacion();
+    void guardar();
+    void validacion(string nombre, string contrasenha);
+    void cargar();
     void nextMap();
     void cargarMulti();
     //--------------------------
@@ -166,5 +168,5 @@ private:
 protected:
     void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *i);
-}; 
+};
 #endif // INTERFAZ_H

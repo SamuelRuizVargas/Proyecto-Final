@@ -46,11 +46,17 @@ void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     {
     case 1:
     {
-        pixmap.load(PATH_P1);
+        if(derecha==true)
+            pixmap.load(PATH_P1);
+        else
+            pixmap.load(PATH_P1_IZQ);
     }break;
     case 2:
     {
-        pixmap.load(PATH_P2);
+        if(derecha==true)
+            pixmap.load(PATH_P2);
+        else
+            pixmap.load(PATH_P2_IZQ);
     }break;
     }
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
@@ -102,6 +108,7 @@ void personaje::changedown()
 void personaje::setside(bool lado)
 {
     derecha=lado;
+    update();
 }
 
 bool personaje::getSide()
