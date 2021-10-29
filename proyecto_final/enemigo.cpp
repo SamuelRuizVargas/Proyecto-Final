@@ -41,7 +41,10 @@ void enemigo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     {
         case 1://Enemigos basicos
         {
-            pixmap.load(PATH_BASE_ENE);
+            if(movi_original==true)
+                pixmap.load(PATH_BASE_ENE_IZQ);
+            else
+                pixmap.load(PATH_BASE_ENE);
         }break;
         case 2://Enemigos a distancia
         {
@@ -65,6 +68,7 @@ void enemigo::movOriginal()
         movi_original=false;
     else if(movi_original==false)
         movi_original=true;
+    update();
 }
 
 bool enemigo::getMov()

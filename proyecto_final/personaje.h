@@ -5,7 +5,9 @@
 #include <QPainter>
 
 #define PATH_P1 ":/imagenes/player1.png"
+#define PATH_P1_IZQ ":/imagenes/player1_izq.png"
 #define PATH_P2 ":/imagenes/player2.png"
+#define PATH_P2_IZQ ":/imagenes/player2_izq.png"
 
 #define g -15.0f
 

@@ -16,8 +16,7 @@ SOURCES += \
     interfaz.cpp \
     personaje.cpp \
     plataforma.cpp \
-    proyectil.cpp \
-    validacion.cpp
+    proyectil.cpp
 
 HEADERS += \
     botones.h \
@@ -26,12 +25,10 @@ HEADERS += \
     interfaz.h \
     personaje.h \
     plataforma.h \
-    proyectil.h \
-    validacion.h
+    proyectil.h
 
 FORMS += \
-    interfaz.ui \
-    validacion.ui
+    interfaz.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

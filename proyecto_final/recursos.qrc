@@ -11,10 +11,8 @@
         <file>imagenes/LVLS/lvl2/background.jpg</file>
         <file>imagenes/Botones/Boton_cargar.png</file>
         <file>imagenes/Botones/Boton_nueva.png</file>
-        <file>imagenes/bug.ttf</file>
         <file>imagenes/Enemigos/enemigo_base.png</file>
         <file>imagenes/Enemigos/enemigo_volador.png</file>
-        <file>imagenes/Enemigos/enemigo_distancia.png</file>
         <file>imagenes/bloque.png</file>
         <file>imagenes/proyectil.png</file>
         <file>imagenes/proyectil2.png</file>
@@ -22,5 +20,9 @@
         <file>imagenes/Enemigos/boss.png</file>
         <file>imagenes/player2.png</file>
         <file>imagenes/LVLS/multijugador/background.jpg</file>
+        <file>imagenes/player1_izq.png</file>
+        <file>imagenes/player2_izq.png</file>
+        <file>imagenes/Enemigos/enemigo_base_izq.png</file>
+        <file>imagenes/Enemigos/enemigo_distancia.png</file>
     </qresource>
 </RCC>
